@@ -1,0 +1,280 @@
+@font-face {
+	font-family: "montserrat";
+	src: url("../fonts/montserrat.ttf");
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-decoration: none;
+}
+
+html,body {
+	min-height: 100%;
+	background: #f8f8f8;
+}
+
+body {
+	font-family: "montserrat";
+}
+
+header {
+	height: 4rem;
+	background: #efefef;
+	border-bottom: 1px solid #222;
+	padding: 16px 2rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+main {
+	width: 100%;
+	min-height: calc(100dvh - 4rem);
+}
+
+nav {
+	display: flex;
+	flex-direction: row;
+	gap: 16px;
+}
+
+nav a {
+	position: relative;
+	cursor: default;
+	color: #222;
+	opacity: 0.7;
+	transition: all .2s;
+}
+
+nav a::before {
+	content: "";
+	position: absolute;
+	bottom: -4px;
+	width: 0%;
+	height: 1px;
+	background: #222;
+	transition: all .2s;
+}
+
+nav a:hover {
+	opacity: 1;
+}
+
+nav a:hover::before {
+	width: 100%;
+}
+
+details * {
+	background: #efefef;
+	padding: 2rem 1rem;
+}
+
+details summary {
+	background: #fff;
+	padding: 1rem;
+	border-bottom: 1px solid black;
+}
+
+footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 2%;
+	background: #222;
+	color: #fff;
+}
+
+footer a {
+	color: #fff;
+}
+
+footer a:hover:before {
+	background: #fff;
+}
+
+footer i {
+	font-size: 25px;
+}
+
+.container {
+	width: 100%;
+	padding: 4%;
+}
+
+.container,main section {
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+}
+
+.grid-flex {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 40px;
+}
+
+.grid-flex>* {
+	flex: 1;
+}
+
+.card {
+	border-radius: 7px;
+	padding: 8% 4%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 20px;
+	box-shadow: 0 0 8px #0005;
+}
+
+.card li {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.flex-1 {
+	display: flex;
+	flex: 1;
+}
+
+.flex-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+
+.flex-row {
+	flex-direction: row;
+}
+
+.gap-0 {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+}
+
+.gap-1 {
+	display: flex;
+	flex-direction: column;
+	gap: 48px;
+}
+
+.btn {
+	cursor: default;
+	border: 1px solid #222;
+	background: transparent;
+	color: #222;
+	display: block;
+	padding: 16px 2rem;
+	width: max-content;
+	border-radius: 3px;
+	margin: auto;
+	font-weight: bold;
+	transition: all .2s;
+}
+
+.btn:hover {
+	background: #222;
+	color: #fff;
+}
+
+.box-shadow {
+	box-shadow: 0 0 8px #0005;
+}
+
+.border-radius {
+	border-radius: 7px;
+	overflow: hidden;
+}
+
+.big-text {
+	font-size: 50px;
+}
+
+.box-default {
+	padding: 2% 4%;
+	border-radius: 7px;
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+	border: 1px solid #222;
+	background-color: #efefef;
+}
+
+
+.input-box {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.input-box>input {
+	width: 100%;
+	padding: 8px;
+	border-radius: 7px;
+	border: 1px solid #222;
+	background-color: transparent;
+}
+
+.input-check {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 12px;
+}
+
+.input-check>input[type=radio], .input-check>input[type=checkbox] {
+	appearance: none;
+	width: 20px;
+	height: 20px;
+	border: 1px solid #222;
+	border-radius: 3px;
+	transition: all .2s;
+	position: relative;
+}
+
+.input-check>input[type=radio]:checked,.input-check>input[type=checkbox]:checked {
+	background: #222;
+}
+
+.input-check>input[type=radio]:checked::before, .input-check>input[type=checkbox]:checked::before {
+	content: "";
+	display: block;
+	width: 10px;
+	height: 4px;
+	border: 2px solid #fff;
+	border-right: none;
+	border-top: none;
+	rotate: -45deg;
+	position: absolute;
+	top: 15%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+
+.error{
+	color: #f44;
+}
+
+a.error:hover::before {
+	background-color: #f44;
+}
+
+.w-100 {
+	width: 100%;
+}

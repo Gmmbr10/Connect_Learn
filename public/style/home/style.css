@@ -1,0 +1,49 @@
+header {
+	width: 96%;
+	margin: 0 2%;
+	border-radius: 100px;
+	position: fixed;
+	border: 1px solid #222;
+	top: 2%;
+}
+
+main>section:nth-child(1) {
+	height: calc(100dvh);
+	display: grid;
+	place-content: center;
+	font-size: 32px;
+}
+
+details {
+	width: 50vw;
+}
+
+.card i {
+	font-size: 30px;
+}
+
+.card.promotion {
+	padding: 4% 4% 8%;
+}
+
+.promotion .month {
+	display: flex;
+	gap: 0;
+	color: #79f;
+}
+
+.promotion .month>p {
+	font-size: 30px;
+}
+
+.promotion li {
+	list-style: none;
+}
+
+.promotion i {
+	color: #79f ;
+}
+
+.w-50 {
+	width: 50vw;
+}
