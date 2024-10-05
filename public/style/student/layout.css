@@ -1,0 +1,38 @@
+.navbar {
+	width: 300px;
+	height: calc(100% - 4rem);
+	position: absolute;
+	top: 4rem;
+	left: -500px;
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+	background: #efefef;
+	border-right: 1px solid #222;
+	transition: all .2s;
+}
+
+.navbar a {
+	display: block;
+	padding: 1rem 2rem;
+}
+
+.navbar a:hover {
+	background: #ddd;
+}
+
+.navbar a::before {
+	visibility: hidden;
+}
+
+main {
+	transition: all .2s;
+}
+
+main.open_navbar {
+	padding-left: 300px;
+}
+
+.navbar.open {
+	left: 0;
+}

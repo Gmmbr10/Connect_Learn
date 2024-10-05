@@ -29,20 +29,22 @@
 		
 		<section class="flex-1 flex-center grid-flex">
 			
-			<form class="box-default">
+			<form class="box-default" method="POST" id="login_form">
 				
 				<h2>Entrar</h2>
 
+				<span class="error"><?php if ( isset($data["usuario"]) ) { echo $data["usuario"]; } ?></span>
+
 				<section class="input-box">
-					<label for="#">Email:</label>
-					<input type="email" name="#" id="#">
-					<span class="error" id="error_#"></span>
+					<label for="input_email">Email:</label>
+					<input type="email" name="email" id="input_email">
+					<span class="error" id="error_input_email"><?php if ( isset($data["email"]) ) { echo $data["email"]; } ?></span>
 				</section>
 
 				<section class="input-box">
-					<label for="#">Senha:</label>
-					<input type="password" name="#" id="#">
-					<span class="error" id="error_#"></span>
+					<label for="input_senha">Senha:</label>
+					<input type="password" name="senha" id="input_senha">
+					<span class="error" id="error_input_senha"><?php if ( isset($data["senha"]) ) { echo $data["senha"]; } ?></span>
 				</section>
 
 				<button class="btn w-100">Entrar</button>
@@ -59,30 +61,9 @@
 
 	</main>
 
-	<footer>
-		
-		<p>logo</p>
+	<?php require_once __DIR__ . "/./template_footer.php"; ?>
 
-		<nav>
-			
-			<a href="#">Link</a>
-			<a href="#">Link</a>
-			<a href="#">Link</a>
-
-		</nav>
-
-		<nav>
-
-			<a href="#">
-				<i class="fa-brands fa-instagram"></i>
-			</a>
-			<a href="#">
-				<i class="fa-solid fa-envelope"></i>
-			</a>
-			
-		</nav>
-
-	</footer>
+	<script src="<?php echo INCLUDE_PATH?>public/script/login_verify.js"></script>
 
 </body>
 </html>

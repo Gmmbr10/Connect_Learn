@@ -6,16 +6,27 @@ class StudentController extends Controller
 	public function __construct()
 	{
 
-		$url = explode( "/" , strtolower( $_GET["url"] ) );
+		$url = explode( "/" , str_replace("student/","",strtolower( $_GET["url"]) ) );
 
-		array_splice($url, 0,1);
+		$this->routes($url);
+		
+	}
 
-		if ( $url[0] == "home" ) {
+	private function routes($url_model)
+	{
+
+		if ( empty($url_model[0]) ) {
+
+			header("location: ./home");
+
+		}
+
+		if ( $url_model[0] == "home" ) {
 
 			$this->view("student.home");
 
 		}
-		
+
 	}
 
 }

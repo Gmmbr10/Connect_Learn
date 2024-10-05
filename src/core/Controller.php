@@ -2,7 +2,7 @@
 
 class Controller {
 
-	public function view($filename)
+	public function view($filename, $data = [])
 	{
 
 		$filename = str_replace(".", "/", $filename);

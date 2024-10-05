@@ -4,7 +4,7 @@ header {
 	border-radius: 100px;
 	position: fixed;
 	border: 1px solid #222;
-	top: 2%;
+	top: 2rem;
 }
 
 main>section:nth-child(1) {
@@ -23,7 +23,7 @@ details {
 }
 
 .card.promotion {
-	padding: 4% 4% 8%;
+	padding: 6rem 6rem 8rem;
 }
 
 .promotion .month {
