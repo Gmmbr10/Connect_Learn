@@ -1,31 +1,33 @@
-.navbar {
+.navbar-student {
 	width: 300px;
-	height: calc(100% - 4rem);
+	height: 100%;
 	position: absolute;
-	top: 4rem;
 	left: -500px;
 	display: flex;
 	flex-direction: column;
 	gap: 0;
-	background: #efefef;
-	border-right: 1px solid #222;
+	border-right: 2px solid var(--purple-primary);
+	background-color: #fff;
 	transition: all .2s;
 }
 
-.navbar a {
+.navbar-student a {
 	display: block;
 	padding: 1rem 2rem;
+	transition: all .2s;
 }
 
-.navbar a:hover {
-	background: #ddd;
+.navbar-student a:hover {
+	background: var(--purple-primary);
+	color: var(--text-contrast);
 }
 
-.navbar a::before {
+.navbar-student a::before {
 	visibility: hidden;
 }
 
 main {
+	position: relative;
 	transition: all .2s;
 }
 
@@ -33,6 +35,18 @@ main.open_navbar {
 	padding-left: 300px;
 }
 
-.navbar.open {
+.navbar-student.open {
 	left: 0;
+}
+
+@media (max-width: 800px) {
+	main.open_navbar {
+		padding: inherit;
+	}
+	.navbar-student {
+		border: none;
+	}
+	.navbar-student.open{
+		width: 100%;
+	}
 }

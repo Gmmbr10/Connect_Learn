@@ -11,11 +11,11 @@
 </head>
 <body>
 
-	<header>
+	<header class="container row space-between align-center">
 		
 		<p>logo</p>
 
-		<nav>
+		<nav class="navbar">
 			
 			<a href="./home">Home</a>
 			<a href="./login">Entrar</a>
@@ -25,11 +25,11 @@
 
 	</header>
 
-	<main class="container">
+	<main class="container justify-center">
 		
-		<section class="flex-1 flex-center grid-flex">
+		<section class="grid-flex flex-center column-reverse">
 			
-			<form class="box-default" method="POST" id="login_form">
+			<form class="box" method="POST" id="login_form">
 				
 				<h2>Entrar</h2>
 
@@ -37,13 +37,13 @@
 
 				<section class="input-box">
 					<label for="input_email">Email:</label>
-					<input type="email" name="email" id="input_email">
+					<input class="input" type="email" name="email" id="input_email">
 					<span class="error" id="error_input_email"><?php if ( isset($data["email"]) ) { echo $data["email"]; } ?></span>
 				</section>
 
 				<section class="input-box">
 					<label for="input_senha">Senha:</label>
-					<input type="password" name="senha" id="input_senha">
+					<input class="input" type="password" name="senha" id="input_senha">
 					<span class="error" id="error_input_senha"><?php if ( isset($data["senha"]) ) { echo $data["senha"]; } ?></span>
 				</section>
 

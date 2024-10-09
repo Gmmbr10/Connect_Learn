@@ -15,15 +15,29 @@ class StudentController extends Controller
 	private function routes($url_model)
 	{
 
+		if ( $url_model[0] == "student" ) {
+
+			header("location: ./student/home");
+			
+		}
+
 		if ( empty($url_model[0]) ) {
 
 			header("location: ./home");
 
 		}
 
+		if ( $url_model[0] == "duvidas" ) {
+
+			$this->view("student.duvidas");
+			return;
+
+		}
+
 		if ( $url_model[0] == "home" ) {
 
 			$this->view("student.home");
+			return;
 
 		}
 
