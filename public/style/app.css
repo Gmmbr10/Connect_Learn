@@ -227,6 +227,7 @@ header.container, footer.container {
   background-color: transparent;
   padding: 1rem 4rem;
   border: 2px solid var(--purple-primary);
+  text-align: center;
   border-radius: 7px;
   font-size: 15px;
 	font-weight: bold;
@@ -297,6 +298,11 @@ form .btn {
   transform: translate(-50%,-50%);
 }
 
+textarea {
+  height: 150px;
+  resize: none;
+}
+
 dialog::backdrop {
   background-color: #2225;
 }
@@ -307,6 +313,7 @@ dialog {
   margin: auto;
   border: none;
   border-radius: 7px;
+  grid-template-rows: auto 1fr auto;
 }
 
 dialog>header,dialog>main,dialog>footer {
@@ -318,6 +325,7 @@ dialog>header {
   color: #fff;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 dialog>footer {
@@ -366,8 +374,13 @@ section>details:last-child {
 }
 
 .scroll-x {
+  min-height: 150px;
   overflow-x: auto;
-  padding: 1rem 0;
+  padding: 0 0 1rem;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 300px;
+  gap: 1rem;
 }
 
 .question {
@@ -376,6 +389,7 @@ section>details:last-child {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--purple-secondary);
+  font-size: 14px;
 }
 
 .question>* {
@@ -483,4 +497,48 @@ section>details:last-child {
 
 .user-profile:hover::before {
   display: none;
+}
+
+.cursor,a,.btn {
+  cursor: pointer;
+}
+
+.challenge {
+  height: 250px;
+  border: 2px solid var(--purple-secondary);
+  padding: 2rem;
+  display: grid;
+  grid-template-rows: 3fr 1fr;
+  gap: .5rem;
+  align-items: center;
+  border-radius: 7px;
+  color: var(--text-color);
+  transition: all .2s;
+}
+
+.challenge img {
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  background-color: var(--purple-secondary);
+}
+
+.challenge:hover {
+  background-color: #efefef;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.video {
+  width: 100%;
+  height: 350px;
+  border-radius: 7px;
+}
+
+@media (max-width: 800px) {
+  .video {
+    height: 200px;
+  }
 }

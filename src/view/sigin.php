@@ -87,7 +87,7 @@
 				<section class="input-box">
 					<section class="input-box-checkbox">
 						<input class="checkbox" type="checkbox" name="termos_uso" id="input_termos_uso">
-						<label for="input_termos_uso">Li e aceito os <span class="link" id="open_termos_uso">termos de uso</span></label>
+						<label for="input_termos_uso">Li e aceito os </label><span class="cursor text-primary" id="open_termos_uso">termos de uso</span>
 					</section>
 					<span class="error" id="error_termos_uso"></span>
 				</section>

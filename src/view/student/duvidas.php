@@ -26,181 +26,189 @@
 
         <h2>Dúvidas</h2>
 
-        <a href="#" class="btn">Mandar dúvida</a>
+        <span id="open_duvida" class="btn">Mandar dúvida</span>
 
       </section>
 
       <section class="column gap">
 
-        <h2>Suas dúvidas</h2>
+        <p class="bold">Suas dúvidas</p>
 
         <section class="flex-1 column w-100">
           <section class="scroll-x">
-              <section class="row gap-small">
 
-                <section class="question">
+            <section class="question">
 
-                  <header>
+              <header>
 
-                    <div class="user-profile"></div>
+                <i class="fa-solid fa-user user-profile"></i>
 
-                    <p>nome usuário</p>
-                    
-                  </header>
+                <p>Nome usuário</p>
 
-                  <main>
+              </header>
 
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur, doloribus.</p>
-                  
-                  </main>
-                
-                </section>
+              <main>
 
-                <section class="question">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam nostrum nihil facere, modi ipsa corrupti earum perspiciatis ea accusamus minima, sapiente et corporis eaque! Iste deserunt cumque iusto nesciunt pariatur.
+                </p>
 
-                  <header>
+              </main>
 
-                    <div class="user-profile"></div>
+            </section>
+            <section class="question">
 
-                    <p>nome usuário</p>
-                    
-                  </header>
+              <header>
 
-                  <main>
+                <i class="fa-solid fa-user user-profile"></i>
 
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur, doloribus.</p>
-                  
-                  </main>
-                
-                </section>
+                <p>Nome usuário</p>
 
-                <section class="question">
+              </header>
 
-                  <header>
+              <main>
 
-                    <div class="user-profile"></div>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam nostrum nihil facere, modi ipsa corrupti earum perspiciatis ea accusamus minima, sapiente et corporis eaque! Iste deserunt cumque iusto nesciunt pariatur.
+                </p>
 
-                    <p>nome usuário</p>
-                    
-                  </header>
+              </main>
 
-                  <main>
+            </section>
+            <section class="question">
 
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur, doloribus.</p>
-                  
-                  </main>
-                
-                </section>
+              <header>
 
-                <section class="question">
+                <i class="fa-solid fa-user user-profile"></i>
 
-                  <header>
+                <p>Nome usuário</p>
 
-                    <div class="user-profile"></div>
+              </header>
 
-                    <p>nome usuário</p>
-                    
-                  </header>
+              <main>
 
-                  <main>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam nostrum nihil facere, modi ipsa corrupti earum perspiciatis ea accusamus minima, sapiente et corporis eaque! Iste deserunt cumque iusto nesciunt pariatur.
+                </p>
 
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur, doloribus.</p>
-                  
-                  </main>
-                
-                </section>
+              </main>
 
-                <section class="question">
+            </section>
+            <section class="question">
 
-                  <header>
+              <header>
 
-                    <div class="user-profile"></div>
+                <i class="fa-solid fa-user user-profile"></i>
 
-                    <p>nome usuário</p>
-                    
-                  </header>
+                <p>Nome usuário</p>
 
-                  <main>
+              </header>
 
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur, doloribus.</p>
-                  
-                  </main>
-                
-                </section>
+              <main>
 
-                <section class="question">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam nostrum nihil facere, modi ipsa corrupti earum perspiciatis ea accusamus minima, sapiente et corporis eaque! Iste deserunt cumque iusto nesciunt pariatur.
+                </p>
 
-                  <header>
+              </main>
 
-                    <div class="user-profile"></div>
+            </section>
+            <section class="question">
 
-                    <p>nome usuário</p>
-                    
-                  </header>
+              <header>
 
-                  <main>
+                <i class="fa-solid fa-user user-profile"></i>
 
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur, doloribus.</p>
-                  
-                  </main>
-                
-                </section>
+                <p>Nome usuário</p>
 
-                <section class="question">
+              </header>
 
-                  <header>
+              <main>
 
-                    <div class="user-profile"></div>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam nostrum nihil facere, modi ipsa corrupti earum perspiciatis ea accusamus minima, sapiente et corporis eaque! Iste deserunt cumque iusto nesciunt pariatur.
+                </p>
 
-                    <p>nome usuário</p>
-                    
-                  </header>
+              </main>
 
-                  <main>
+            </section>
+            <section class="question">
 
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur, doloribus.</p>
-                  
-                  </main>
-                
-                </section>
+              <header>
 
-                <section class="question">
+                <i class="fa-solid fa-user user-profile"></i>
 
-                  <header>
+                <p>Nome usuário</p>
 
-                    <div class="user-profile"></div>
+              </header>
 
-                    <p>nome usuário</p>
-                    
-                  </header>
+              <main>
 
-                  <main>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam nostrum nihil facere, modi ipsa corrupti earum perspiciatis ea accusamus minima, sapiente et corporis eaque! Iste deserunt cumque iusto nesciunt pariatur.
+                </p>
 
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur, doloribus.</p>
-                  
-                  </main>
-                
-                </section>
+              </main>
 
-                <section class="question">
+            </section>
+            <section class="question">
 
-                  <header>
+              <header>
 
-                    <div class="user-profile"></div>
+                <i class="fa-solid fa-user user-profile"></i>
 
-                    <p>nome usuário</p>
-                    
-                  </header>
+                <p>Nome usuário</p>
 
-                  <main>
+              </header>
 
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur, doloribus.</p>
-                  
-                  </main>
-                
-                </section>
+              <main>
 
-              </section>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam nostrum nihil facere, modi ipsa corrupti earum perspiciatis ea accusamus minima, sapiente et corporis eaque! Iste deserunt cumque iusto nesciunt pariatur.
+                </p>
+
+              </main>
+
+            </section>
+            <section class="question">
+
+              <header>
+
+                <i class="fa-solid fa-user user-profile"></i>
+
+                <p>Nome usuário</p>
+
+              </header>
+
+              <main>
+
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam nostrum nihil facere, modi ipsa corrupti earum perspiciatis ea accusamus minima, sapiente et corporis eaque! Iste deserunt cumque iusto nesciunt pariatur.
+                </p>
+
+              </main>
+
+            </section>
+            <section class="question">
+
+              <header>
+
+                <i class="fa-solid fa-user user-profile"></i>
+
+                <p>Nome usuário</p>
+
+              </header>
+
+              <main>
+
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam nostrum nihil facere, modi ipsa corrupti earum perspiciatis ea accusamus minima, sapiente et corporis eaque! Iste deserunt cumque iusto nesciunt pariatur.
+                </p>
+
+              </main>
+
+            </section>
+
           </section>
         </section>
 
@@ -208,19 +216,29 @@
 
       <section class="column gap">
 
-        <h2>Dúvidas de outros estudantes</h2>
+        <p class="bold">Dúvidas de outros estudantes</p>
 
         <section class="grid">
 
-          <div class="box">
-            <p>conteúdo</p>
-          </div>
-          <div class="box">
-            <p>conteúdo</p>
-          </div>
-          <div class="box">
-            <p>conteúdo</p>
-          </div>
+          <section class="question">
+
+            <header>
+
+              <i class="fa-solid fa-user user-profile"></i>
+
+              <p>Nome usuário</p>
+
+            </header>
+
+            <main>
+
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam nostrum nihil facere, modi ipsa corrupti earum perspiciatis ea accusamus minima, sapiente et corporis eaque! Iste deserunt cumque iusto nesciunt pariatur.
+              </p>
+
+            </main>
+
+          </section>
 
         </section>
 
@@ -232,7 +250,40 @@
 
   <?php require_once __DIR__ . "/../template_footer.php"; ?>
 
+  <form action="#" method="POST" id="duvida_form">
+
+    <dialog id="modal_duvida">
+      <header>
+
+        <h2>Registrar uma dúvida</h2>
+        <i class="fa-solid fa-close close_duvida"></i>
+
+      </header>
+      <main>
+
+        <section class="input-box">
+
+          <label for="duvida">Dúvida</label>
+          <textarea name="duvida" id="input_duvida" class="input"></textarea>
+          <span class="error" id="error_duvida"></span>
+        
+        </section>
+
+      </main>
+
+      <footer>
+
+        <button type="submit" class="btn">Registrar</button>
+        <span class="btn close_duvida text-center">Fechar</span>
+      
+      </footer>
+    </dialog>
+
+  </form>
+
   <script src="<?php echo INCLUDE_PATH ?>public/script/navbar.js"></script>
+  <script src="<?php echo INCLUDE_PATH ?>public/script/duvida_modal.js"></script>
+  <script src="<?php echo INCLUDE_PATH ?>public/script/duvida_verify.js"></script>
 
 </body>
 
