@@ -87,6 +87,12 @@ header.container, footer.container {
   gap: 2rem;
 }
 
+.col-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
 .gap {
   display: flex;
   gap: 2rem;
@@ -416,6 +422,10 @@ section>details:last-child {
     padding: 2rem 1rem;
   }
 
+  .col-2 {
+    grid-template-columns: 1fr;
+  }
+
   header.container {
     padding: 2rem 1rem;
   }
@@ -541,4 +551,8 @@ section>details:last-child {
   .video {
     height: 200px;
   }
+}
+
+.hidden {
+  display: none;
 }

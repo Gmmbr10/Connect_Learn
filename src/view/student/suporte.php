@@ -22,7 +22,7 @@
 
     <section class="container">
 
-      <section class="grid-flex">
+      <section class="col-2">
 
         <section class="column gap">
           <h2>Suporte</h2>
