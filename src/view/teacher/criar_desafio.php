@@ -10,6 +10,9 @@
   <link rel="stylesheet" type="text/css" href="<?php echo INCLUDE_PATH ?>public/fontawesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="<?php echo INCLUDE_PATH ?>public/style/app.css">
   <link rel="stylesheet" type="text/css" href="<?php echo INCLUDE_PATH ?>public/style/student/layout.css">
+  <!-- editor de texto -->
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
 </head>
 
 <body>
@@ -22,22 +25,32 @@
 
     <section class="container">
 
-      <a href="<?= INCLUDE_PATH ?>teacher/conteudos"><i class="fa-solid fa-arrow-left"></i> Voltar para a página conteúdos</a>
+      <a href="<?= INCLUDE_PATH ?>teacher/desafios"><i class="fa-solid fa-arrow-left"></i> Voltar para a página desafios</a>
 
-      <h2>Adicionar lista de conteúdo</h2>
+      <h2>Criar desafio</h2>
 
       <section class="col-2">
         <form action="#" method="POST" id="form_conteudo" class="column gap">
 
           <section class="input-box">
 
-            <label for="#">Nome do curso:</label>
+            <label for="#">Nome do desafio:</label>
             <input type="text" name="#" id="input_#" class="input">
             <span class="error" id="error_#"></span>
 
           </section>
 
-          <button class="btn">Enviar</button>
+          <section class="input-box">
+
+            <label for="#">Descrição:</label>
+            <section>
+              <section name="#" id="editor" style="height: auto;"></section>
+            </section>
+            <span class="error" id="error_#"></span>
+
+          </section>
+
+          <button class="btn">Desafiar</button>
 
         </form>
       </section>
@@ -49,7 +62,12 @@
   <?php require_once __DIR__ . "/../template_footer.php"; ?>
 
   <script src="<?php echo INCLUDE_PATH ?>public/script/navbar.js"></script>
-
+  <!-- editor de texto -->
+  <script>
+    const quill = new Quill('#editor', {
+      theme: 'snow'
+    });
+  </script>
 </body>
 
 </html>

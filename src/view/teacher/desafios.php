@@ -22,24 +22,24 @@
 
     <section class="container">
 
-      <a href="<?= INCLUDE_PATH ?>teacher/conteudos"><i class="fa-solid fa-arrow-left"></i> Voltar para a página conteúdos</a>
+      <section class="row space-between align-center">
 
-      <h2>Adicionar lista de conteúdo</h2>
+        <h2>Desafios</h2>
 
-      <section class="col-2">
-        <form action="#" method="POST" id="form_conteudo" class="column gap">
+        <span class="btn" onclick="window.location.href = './desafios/criar_desafio'">Criar um desafio</span>
 
-          <section class="input-box">
+      </section>
 
-            <label for="#">Nome do curso:</label>
-            <input type="text" name="#" id="input_#" class="input">
-            <span class="error" id="error_#"></span>
+      <section class="flex gap">
 
-          </section>
+      </section>
 
-          <button class="btn">Enviar</button>
+      <h2>Aqui estão os seus desafios</h2>
 
-        </form>
+      <section class="grid-flex">
+        
+
+
       </section>
 
     </section>

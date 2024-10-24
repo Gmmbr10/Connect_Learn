@@ -18,6 +18,10 @@
 	transition: all .2s;
 }
 
+main a {
+	color: var(--purple-primary);
+}
+
 .navbar-student a:hover {
 	background: var(--purple-primary);
 	color: var(--text-contrast);

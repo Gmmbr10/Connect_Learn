@@ -28,9 +28,21 @@ class TeacherController extends Controller
 
 			if (!empty($url_model[1])) {
 
-				if ($url_model[1] == "criar") {
+				if ($url_model[1] == "criar_curso") {
 
 					$this->view("teacher.criar_lista_conteudo");
+					return;
+				}
+
+				if ($url_model[1] == "criar_modulo") {
+
+					$this->view("teacher.adicionar_modulo");
+					return;
+				}
+
+				if ($url_model[1] == "criar_aula") {
+
+					$this->view("teacher.adicionar_conteudo");
 					return;
 				}
 			}
@@ -49,6 +61,14 @@ class TeacherController extends Controller
 		}
 
 		if ($url_model[0] == "desafios") {
+			if (!empty($url_model[1])) {
+
+				if ($url_model[1] == "criar_desafio") {
+
+					$this->view("teacher.criar_desafio");
+					return;
+				}
+			}
 
 			$this->view("teacher.desafios");
 			return;

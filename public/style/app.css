@@ -197,7 +197,7 @@ header.container, footer.container {
   gap: 2rem;
 }
 
-.navbar a {
+.navbar a, {
   opacity: 0.7;
   position: relative;
   color: var(--text-color);
@@ -249,10 +249,10 @@ form .btn {
   color: var(--text-contrast);
 }
 
-.input {
+.input,select {
   padding: 1rem;
   background-color: transparent;
-  border: 2px solid var(--black-primary);
+  border: 1px solid var(--black-primary);
   border-radius: 7px;
   font-size: 13px;
 }
@@ -275,7 +275,7 @@ form .btn {
   width: 30px;
   height: 30px;
   background-color: transparent;
-  border: 2px solid var(--black-primary);
+  border: 1px solid var(--black-primary);
   border-radius: 4px;
   position: relative;
   transition: all .2s;
@@ -336,7 +336,7 @@ dialog>header {
 
 dialog>footer {
   background-color: #fff;
-  border-top: 2px solid var(--black-primary);
+  border-top: 1px solid var(--black-primary);
   display: flex;
   justify-content: end;
   gap: 1rem;
@@ -355,7 +355,7 @@ dialog .btn {
 details {
   width: 800px;
   background-color: #fff;
-  border-bottom: 2px solid var(--black-primary);
+  border-bottom: 1px solid var(--black-primary);
 }
 
 details>summary {
@@ -493,7 +493,7 @@ section>details:last-child {
 }
 
 .border {
-	border: 2px solid var(--black-primary);
+	border: 1px solid var(--black-primary);
 }
 
 .user-profile {
@@ -515,7 +515,7 @@ section>details:last-child {
 
 .challenge {
   height: 250px;
-  border: 2px solid var(--purple-secondary);
+  border: 1px solid var(--purple-secondary);
   padding: 2rem;
   display: grid;
   grid-template-rows: 3fr 1fr;

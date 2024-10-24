@@ -26,8 +26,5 @@ form.addEventListener("submit",(e)=>{
   if ( error == false ) {
     form.submit();
   }
-
-  document.getElementById("modal_suporte").showModal();
-  document.getElementById("modal_suporte").style.display = "grid";
   
 });

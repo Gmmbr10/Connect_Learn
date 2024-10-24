@@ -10,6 +10,9 @@
   <link rel="stylesheet" type="text/css" href="<?php echo INCLUDE_PATH ?>public/fontawesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="<?php echo INCLUDE_PATH ?>public/style/app.css">
   <link rel="stylesheet" type="text/css" href="<?php echo INCLUDE_PATH ?>public/style/student/layout.css">
+  <!-- editor de texto -->
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
 </head>
 
 <body>
@@ -263,10 +266,12 @@
 
         <section class="input-box">
 
-          <label for="duvida">Dúvida</label>
-          <textarea name="duvida" id="input_duvida" class="input"></textarea>
-          <span class="error" id="error_duvida"></span>
-        
+          <label for="#">Escreva sua dúvida:</label>
+          <section>
+            <section name="#" id="editor" style="height: auto;"></section>
+          </section>
+          <span class="error" id="error_#"></span>
+
         </section>
 
       </main>
@@ -284,6 +289,12 @@
   <script src="<?php echo INCLUDE_PATH ?>public/script/navbar.js"></script>
   <script src="<?php echo INCLUDE_PATH ?>public/script/duvida_modal.js"></script>
   <script src="<?php echo INCLUDE_PATH ?>public/script/duvida_verify.js"></script>
+  <!-- editor de texto -->
+  <script>
+    const quill = new Quill('#editor', {
+      theme: 'snow'
+    });
+  </script>
 
 </body>
 

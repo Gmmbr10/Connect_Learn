@@ -22,19 +22,32 @@
 
     <section class="container">
 
-      <h2>Conteúdos</h2>
+      <h2>Cadastre um conteúdo</h2>
 
       <section class="flex gap">
 
-        <section class="btn w-100 row gap flex-center" onclick="window.location.href = './conteudos/criar'">
+        <section class="btn w-100 row gap flex-center" onclick="window.location.href = './conteudos/criar_curso'">
           <i class="fa-solid fa-newspaper"></i>
-          <p>Adicionar uma lista de conteúdos</p>
+          <p>Adicionar um curso</p>
         </section>
 
-        <section class="btn w-100 row gap flex-center">
-          <i class="fa-solid fa-calculator"></i>
-          <p>Exatas</p>
+        <section class="btn w-100 row gap flex-center" onclick="window.location.href = './conteudos/criar_modulo'">
+          <i class="fa-solid fa-folder"></i>
+          <p>Adicionar um módulo</p>
         </section>
+
+        <section class="btn w-100 row gap flex-center" onclick="window.location.href = './conteudos/criar_aula'">
+          <i class="fa-solid fa-file-lines"></i>
+          <p>Adicione o conteúdo</p>
+        </section>
+
+      </section>
+
+      <h2>Aqui estão os seus conteúdos</h2>
+
+      <section class="grid-flex">
+        
+
 
       </section>
 
