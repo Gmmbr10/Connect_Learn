@@ -1,0 +1,107 @@
+<header class="container bg-primary p-2 row justify-between align-center">
+
+  <section class="flex gap-1 align-center">
+    <i class="fa-solid fa-bars cursor display-4" id="open_sidebar"></i>
+    <img src="{logo_header}" alt="logo">
+  </section>
+
+  <nav class="navbar">
+
+    <a class="bg-secondary profile">
+      <i class="fa-solid fa-user"></i>
+    </a>
+
+  </nav>
+
+</header>
+
+<main id="content">
+
+  <nav class="sidebar" id="sidebar">
+
+    {navbar}
+
+  </nav>
+
+  <section class="container p-3">
+
+    <nav class="row gap-1 align-center">
+
+      <a href="{include_path}student/desafios" class="row gap-1 align-center">Desafios</a>
+
+      <span class="row gap-1 align-center">
+        <i class="fa-solid fa-angle-right display-5"></i>Título do desafio
+      </span>
+
+    </nav>
+
+    <h2>Desafio</h2>
+
+    <section class="row gap-2">
+
+      <section class="col column gap-2">
+
+        <section class="box p-4"></section>
+
+      </section>
+
+      <section class="col column gap-2">
+
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. In, repellendus? Maiores nesciunt, illo aspernatur
+          omnis deleniti laudantium facilis necessitatibus! Iure.
+        </p>
+
+      </section>
+
+    </section>
+
+    <section class="row gap-2">
+
+      <a href="{include_path}student/desafios?action=criar equipe&desafio={id_desafio}" class="btn col text-center">Criar equipe</a>
+
+      <a href="{include_path}student/desafios?action=juntar equipe&desafio={id_desafio}" class="btn col text-center">Juntar a uma equipe</a>
+
+    </section>
+
+  </section>
+
+</main>
+
+<footer class="container p-2 row justify-between align-center">
+
+  <img src="#" alt="logo">
+
+  <nav class="navbar">
+
+    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#"><i class="fa-solid fa-envelope"></i></a>
+
+  </nav>
+
+</footer>
+
+<script>
+
+  const open_sidebar = document.getElementById("open_sidebar");
+  const sidebar = document.getElementById("sidebar");
+
+  open_sidebar.addEventListener("click", () => {
+    sidebar.classList.toggle("left-0");
+  });
+
+  const quill = new Quill('#editor', {
+    theme: 'snow'
+  });
+
+  const conteudo = document.getElementById("input_conteudo");
+
+  function atualizarTextarea() {
+
+    const html = quill.root.innerHTML;
+    conteudo.value = html;
+    console.log("atualizando");
+
+  }
+
+</script>

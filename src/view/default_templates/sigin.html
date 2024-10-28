@@ -1,0 +1,198 @@
+<header class="container bg-primary p-2 row justify-between">
+
+  <img src="#" alt="logo">
+
+  <nav class="navbar">
+
+    <a href="{include_path}home">Home</a>
+    <a href="{include_path}login">Login</a>
+    <a href="{include_path}sigin">Cadastro</a>
+
+  </nav>
+
+</header>
+
+<main class="container p-3 column justify-center">
+
+  <section class="row row-reverse gap-2">
+
+    <section class="col column gap-2">
+
+      <h2 class="text-center">Cadastre-se</h2>
+      
+      <form action="#" method="POST" class="column gap-2">
+
+        <section class="row gap-2">
+
+          <section class="input-box col">
+
+            <label for="#">Nome</label>
+  
+            <input type="text" name="#" id="input_#">
+  
+            <span class="error" id="error_#"></span>
+  
+          </section>
+          <section class="input-box col">
+
+            <label for="#">Sobrenome</label>
+  
+            <input type="text" name="#" id="input_#">
+  
+            <span class="error" id="error_#"></span>
+  
+          </section>
+          
+        </section>
+        <section class="column gap-05">
+          <section class="row gap-2">
+
+            <section class="input-box-checkbox col">
+  
+              <input type="radio" name="checkbox" id="input_estudante">
+              
+              <label for="input_estudante">Estudante</label>
+  
+            </section>
+  
+            <section class="input-box-checkbox col">
+  
+              <input type="radio" name="checkbox" id="input_professor">
+              
+              <label for="input_professor">Professor</label>
+  
+            </section>
+            
+          </section>
+          <span class="error" id="error_#"></span>
+        </section>
+        <section class="input-box">
+
+          <label for="#">Email</label>
+
+          <input type="email" name="#" id="input_#">
+
+          <span class="error" id="error_#"></span>
+
+        </section>
+        <section class="input-box">
+
+          <label for="#">Telefone</label>
+
+          <input type="tel" name="#" id="input_#">
+
+          <span class="error" id="error_#"></span>
+
+        </section>
+        <section class="input-box">
+
+          <label for="#">Senha</label>
+
+          <input type="password" name="#" id="input_#">
+
+          <span class="error" id="error_#"></span>
+
+        </section>
+        <section class="input-box">
+
+          <label for="#">Confirmar senha</label>
+
+          <input type="password" name="#" id="input_#">
+
+          <span class="error" id="error_#"></span>
+
+        </section>
+        <section class="column gap-05">
+          <section class="input-box-checkbox">
+  
+            <input type="checkbox" name="termos" id="input_termos">
+            
+            <p>
+              <label for="input_termos">Eu li e concordo com os</label>
+              <span class="destaque cursor" id="open_termos_modal">Termos de uso</span>
+            </p>
+  
+          </section>
+          <span class="error" id="error_#"></span>
+        </section>
+
+        <input type="submit" value="Entrar" class="btn">
+        
+      </form>
+    
+    </section>
+
+    <section class="col column justify-center align-center">
+
+      <img src="#" alt="logo">
+      
+    </section>
+    
+  </section>
+  
+</main>
+
+<footer class="container p-2 row justify-between align-center">
+
+  <img src="#" alt="logo">
+
+  <nav class="navbar">
+
+    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#"><i class="fa-solid fa-envelope"></i></a>
+
+  </nav>
+
+</footer>
+
+<dialog id="termos_modal">
+
+  <header class="row justify-between align-center bg-primary p-2">
+
+    <h2>Termos de uso</h2>
+
+    <span class="close_termos_modal cursor">
+      <i class="fa-solid fa-close"></i>
+    </span>
+    
+  </header>
+
+  <main class="p-2">
+
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, ut beatae! Dignissimos nam praesentium sunt, nisi debitis doloremque repellendus id recusandae quisquam odit voluptas excepturi, facere, ipsa beatae alias iste incidunt dolor optio nobis cupiditate. Laudantium saepe rem nostrum quidem, odit beatae nam eaque quo sint, voluptate placeat exercitationem architecto quisquam minus fugiat? Illum earum tempore quisquam? Iste illum provident earum totam nam cumque sed odio praesentium corporis repudiandae accusamus magni debitis, incidunt, eos ducimus eveniet qui quisquam quos dolor tempora quod quaerat rerum? Atque, ipsa temporibus possimus nam nulla ipsum corrupti explicabo iusto placeat impedit, molestiae, libero sunt deleniti.
+    </p>
+    
+  </main>
+
+  <footer class="p-2 row justify-end">
+
+    <span class="close_termos_modal btn cursor">
+      Fechar
+    </span>
+    
+  </footer>
+  
+</dialog>
+
+<script>
+
+  const open_termos = document.getElementById("open_termos_modal");
+  const termos_modal = document.getElementById("termos_modal");
+  const close_termos = document.getElementsByClassName("close_termos_modal");
+
+  open_termos.addEventListener("click",()=>{
+    termos_modal.showModal();
+    termos_modal.style.display = "grid";
+  })
+
+  for ( let i = 0 ; i < close_termos.length ; i++ ) {
+
+    close_termos[i].addEventListener("click",()=>{
+      termos_modal.style.display = "none";
+      termos_modal.close();
+    });
+
+  }
+  
+</script>

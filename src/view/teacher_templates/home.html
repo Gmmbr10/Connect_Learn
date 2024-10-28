@@ -1,0 +1,120 @@
+<header class="container bg-primary p-2 row justify-between align-center">
+
+  <section class="flex gap-1 align-center">
+    <i class="fa-solid fa-bars cursor display-4" id="open_sidebar"></i>
+    <img src="{logo_header}" alt="logo">
+  </section>
+
+  <nav class="navbar">
+
+    <a class="bg-secondary profile">
+      <i class="fa-solid fa-user"></i>
+    </a>
+
+  </nav>
+
+</header>
+
+<main id="content">
+
+  <nav class="sidebar" id="sidebar">
+
+    {navbar}
+    
+  </nav>
+
+  <section class="container bg-secondary row p-3">
+
+    <section class="col box"></section>
+
+    <section class="col-2 column gap-1">
+
+      <h2>Título</h2>
+
+      <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore architecto placeat delectus saepe accusamus, quasi quisquam magni adipisci recusandae nemo vero, aliquid doloremque? Quidem enim adipisci deleniti vero sequi quos sit, corrupti, dolorum vitae distinctio itaque excepturi ea, voluptate odit recusandae sed mollitia maxime aperiam! Similique officiis numquam nam illum odio. Doloribus ducimus fugit soluta possimus culpa? Deserunt odit numquam, dolorum optio possimus eum debitis? Ipsam optio ad, ducimus reprehenderit voluptates unde natus doloribus officiis esse placeat, eum iste aliquid praesentium minus error magni dolorum dolorem est libero temporibus dolores sint hic! Facilis reprehenderit cupiditate facere quidem voluptatum voluptas eveniet.
+      </p>
+      
+    </section>
+    
+  </section>
+
+  <section class="container p-3">
+
+    <h2>Atividade recente</h2>
+
+    <section class="row gap-1">
+
+      <section class="col column box rounded">
+
+        <a>Link</a>
+        <a>Link</a>
+        <a>Link</a>
+        
+      </section>
+      <section class="col column box rounded">
+
+        <a>Link</a>
+        <a>Link</a>
+        <a>Link</a>
+        
+      </section>
+      <section class="col column box rounded">
+
+        <a>Link</a>
+        <a>Link</a>
+        <a>Link</a>
+        
+      </section>
+      
+    </section>
+    
+  </section>
+
+  <section class="container p-3 bg-secondary row">
+
+    <section class="col box">
+
+    </section>
+
+    <section class="col column gap-1 align-center">
+
+      <h2>Título</h2>
+
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, tempora! Adipisci, quod beatae. Iste a sit voluptatum? Vitae, labore nisi.
+      </p>
+
+      <span>
+        <a class="btn">Link</a>
+      </span>
+      
+    </section>
+    
+  </section>
+
+</main>
+
+<footer class="container p-2 row justify-between align-center">
+
+  <img src="#" alt="logo">
+
+  <nav class="navbar">
+
+    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#"><i class="fa-solid fa-envelope"></i></a>
+
+  </nav>
+
+</footer>
+
+<script>
+
+  const open_sidebar = document.getElementById("open_sidebar");
+  const sidebar = document.getElementById("sidebar");
+
+  open_sidebar.addEventListener("click",()=>{
+    sidebar.classList.toggle("left-0");
+  });
+  
+</script>

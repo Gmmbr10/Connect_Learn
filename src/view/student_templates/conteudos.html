@@ -1,0 +1,95 @@
+<header class="container bg-primary p-2 row justify-between align-center">
+
+  <section class="flex gap-1 align-center">
+    <i class="fa-solid fa-bars cursor display-4" id="open_sidebar"></i>
+    <img src="{logo_header}" alt="logo">
+  </section>
+
+  <nav class="navbar">
+
+    <a class="bg-secondary profile">
+      <i class="fa-solid fa-user"></i>
+    </a>
+
+  </nav>
+
+</header>
+
+<main id="content">
+
+  <nav class="sidebar" id="sidebar">
+
+    {navbar}
+    
+  </nav>
+
+  <section class="container p-3">
+
+    <h2>Conteúdos</h2>
+
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius numquam incidunt cum exercitationem quos a magni magnam eveniet, provident ea.
+    </p>
+
+    <p class="bold">Núcleos</p>
+
+    <section class="row">
+
+      <a href="{include_path}student/conteudos?action=lista&nucleo=exatas" class="col btn">
+        <section class="flex gap-2 align-center justify-center">
+          <i class="fa-solid fa-calculator"></i>
+          Exatas
+        </section>
+      </a>
+      <a href="{include_path}student/conteudos?action=lista&nucleo=humanas" class="col btn">
+        <section class="flex gap-2 align-center justify-center">
+          <i class="fa-solid fa-book"></i>
+          Humanas
+        </section>
+      </a>
+      <a href="{include_path}student/conteudos?action=lista&nucleo=biológicas" class="col btn">
+        <section class="flex gap-2 align-center justify-center">
+          <i class="fa-solid fa-dna"></i>
+          Biológicas
+        </section>
+      </a>
+      
+    </section>
+
+    <p class="bold">Dicas de estudo</p>
+
+    <section class="row">
+
+      <iframe class="col rounded" height="315px" src="https://www.youtube.com/embed/Y5gCFOzV6so?si=0ehCqcOeZxWIr3Ap" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <iframe class="col rounded" height="315px" src="https://www.youtube.com/embed/Y5gCFOzV6so?si=0ehCqcOeZxWIr3Ap" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <iframe class="col rounded" height="315px" src="https://www.youtube.com/embed/Y5gCFOzV6so?si=0ehCqcOeZxWIr3Ap" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    </section>
+    
+  </section>
+
+</main>
+
+<footer class="container p-2 row justify-between align-center">
+
+  <img src="#" alt="logo">
+
+  <nav class="navbar">
+
+    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#"><i class="fa-solid fa-envelope"></i></a>
+
+  </nav>
+
+</footer>
+
+<script>
+
+  const open_sidebar = document.getElementById("open_sidebar");
+  const sidebar = document.getElementById("sidebar");
+
+  open_sidebar.addEventListener("click",()=>{
+    sidebar.classList.toggle("left-0");
+  });
+  
+</script>

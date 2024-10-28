@@ -1,0 +1,160 @@
+<header class="container bg-primary p-2 row justify-between align-center">
+
+  <section class="flex gap-1 align-center">
+    <i class="fa-solid fa-bars cursor display-4" id="open_sidebar"></i>
+    <img src="{logo_header}" alt="logo">
+  </section>
+
+  <nav class="navbar">
+
+    <a class="bg-secondary profile">
+      <i class="fa-solid fa-user"></i>
+    </a>
+
+  </nav>
+
+</header>
+
+<main id="content">
+
+  <nav class="sidebar" id="sidebar">
+
+    {navbar}
+
+  </nav>
+
+  <section class="container p-3">
+
+    <nav class="row gap-1 align-center">
+
+      <a href="{include_path}student/desafios" class="row gap-1 align-center">Desafios</a>
+
+      <i class="fa-solid fa-angle-right display-5"></i>
+
+      <a href="{include_path}student/desafios?action=visualizar&desafio={id_desafio}" class="row gap-1 align-center">
+        Título do desafio
+      </a>
+
+      <i class="fa-solid fa-angle-right display-5"></i>
+      
+      <span class="row gap-1 align-center">
+        Juntar a uma equipe
+      </span>
+      
+    </nav>
+    
+    <h2>Título do desafio - Juntar a uma equipe</h2>
+
+    <section class="col-3">
+
+      <section class="box">
+        <section class="row align-center justify-between">
+          <p class="bold">
+            Nome da equipe
+          </p>
+  
+          <a class="btn">Juntar</a>
+        </section>
+      </section>
+      <section class="box">
+        <section class="row align-center justify-between">
+          <p class="bold">
+            Nome da equipe
+          </p>
+  
+          <a class="btn">Juntar</a>
+        </section>
+      </section>
+      <section class="box">
+        <section class="row align-center justify-between">
+          <p class="bold">
+            Nome da equipe
+          </p>
+  
+          <a class="btn">Juntar</a>
+        </section>
+      </section>
+      <section class="box">
+        <section class="row align-center justify-between">
+          <p class="bold">
+            Nome da equipe
+          </p>
+  
+          <a class="btn">Juntar</a>
+        </section>
+      </section>
+      <section class="box">
+        <section class="row align-center justify-between">
+          <p class="bold">
+            Nome da equipe
+          </p>
+  
+          <a class="btn">Juntar</a>
+        </section>
+      </section>
+      <section class="box">
+        <section class="row align-center justify-between">
+          <p class="bold">
+            Nome da equipe
+          </p>
+  
+          <a class="btn">Juntar</a>
+        </section>
+      </section>
+      <section class="box">
+        <section class="row align-center justify-between">
+          <p class="bold">
+            Nome da equipe
+          </p>
+  
+          <a class="btn">Juntar</a>
+        </section>
+      </section>
+      <section class="box">
+        <section class="row align-center justify-between">
+          <p class="bold">
+            Nome da equipe
+          </p>
+  
+          <a class="btn">Juntar</a>
+        </section>
+      </section>
+      <section class="box">
+        <section class="row align-center justify-between">
+          <p class="bold">
+            Nome da equipe
+          </p>
+  
+          <a class="btn">Juntar</a>
+        </section>
+      </section>
+
+    </section>
+
+  </section>
+
+</main>
+
+<footer class="container p-2 row justify-between align-center">
+
+  <img src="#" alt="logo">
+
+  <nav class="navbar">
+
+    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#"><i class="fa-solid fa-envelope"></i></a>
+
+  </nav>
+
+</footer>
+
+<script>
+
+  const open_sidebar = document.getElementById("open_sidebar");
+  const sidebar = document.getElementById("sidebar");
+
+  open_sidebar.addEventListener("click", () => {
+    sidebar.classList.toggle("left-0");
+  });
+
+</script>

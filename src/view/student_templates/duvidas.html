@@ -1,0 +1,215 @@
+<header class="container bg-primary p-2 row justify-between align-center">
+
+  <section class="flex gap-1 align-center">
+    <i class="fa-solid fa-bars cursor display-4" id="open_sidebar"></i>
+    <img src="{logo_header}" alt="logo">
+  </section>
+
+  <nav class="navbar">
+
+    <a class="bg-secondary profile">
+      <i class="fa-solid fa-user"></i>
+    </a>
+
+  </nav>
+
+</header>
+
+<main id="content">
+
+  <nav class="sidebar" id="sidebar">
+
+    {navbar}
+
+  </nav>
+
+  <section class="container p-3">
+
+    <section class="row justify-between align-center">
+
+      <h2>Dúvidas</h2>
+
+      <a href="{include_path}student/duvidas?action=escrever" class="btn">Mandar dúvida</a>
+
+    </section>
+
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius numquam incidunt cum exercitationem quos a magni
+      magnam eveniet, provident ea.
+    </p>
+
+    <p class="bold">Suas dúvidas</p>
+
+    <section class="scroll-x">
+
+      <section class="box">
+
+        <header>
+          <p>
+            <span class="bold">Respostas:</span>
+            10
+          </p>
+        </header>
+
+        <main>
+
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, quos?
+          </p>
+
+        </main>
+
+      </section>
+      <section class="box">
+
+        <header>
+          <p>
+            <span class="bold">Respostas:</span>
+            10
+          </p>
+        </header>
+
+        <main>
+
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, quos?
+          </p>
+
+        </main>
+
+      </section>
+      <section class="box">
+
+        <header>
+          <p>
+            <span class="bold">Respostas:</span>
+            10
+          </p>
+        </header>
+
+        <main>
+
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, quos?
+          </p>
+
+        </main>
+
+      </section>
+
+
+    </section>
+    <p class="bold">Dúvidas de outros</p>
+
+    <section class="col-3">
+
+      <section class="box">
+
+        <header class="row gap-1 align-center">
+          <i class="fa-solid fa-user profile"></i>
+          <p class="bold">nome usuário</p>
+        </header>
+
+        <main>
+
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, quos?
+          </p>
+
+        </main>
+
+      </section>
+      <section class="box">
+
+        <header class="row gap-1 align-center">
+          <i class="fa-solid fa-user profile"></i>
+          <p class="bold">nome usuário</p>
+        </header>
+
+        <main>
+
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, quos?
+          </p>
+
+        </main>
+
+      </section>
+      <section class="box">
+
+        <header class="row gap-1 align-center">
+          <i class="fa-solid fa-user profile"></i>
+          <p class="bold">nome usuário</p>
+        </header>
+
+        <main>
+
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, quos?
+          </p>
+
+        </main>
+
+      </section>
+      <section class="box">
+
+        <header class="row gap-1 align-center">
+          <i class="fa-solid fa-user profile"></i>
+          <p class="bold">nome usuário</p>
+        </header>
+
+        <main>
+
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, quos?
+          </p>
+
+        </main>
+
+      </section>
+      <section class="box">
+
+        <header class="row gap-1 align-center">
+          <i class="fa-solid fa-user profile"></i>
+          <p class="bold">nome usuário</p>
+        </header>
+
+        <main>
+
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, quos?
+          </p>
+
+        </main>
+
+      </section>
+
+    </section>
+
+  </section>
+
+</main>
+
+<footer class="container p-2 row justify-between align-center">
+
+  <img src="#" alt="logo">
+
+  <nav class="navbar">
+
+    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#"><i class="fa-solid fa-envelope"></i></a>
+
+  </nav>
+
+</footer>
+
+<script>
+
+  const open_sidebar = document.getElementById("open_sidebar");
+  const sidebar = document.getElementById("sidebar");
+
+  open_sidebar.addEventListener("click", () => {
+    sidebar.classList.toggle("left-0");
+  });
+
+</script>
