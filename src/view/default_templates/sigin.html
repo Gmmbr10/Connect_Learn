@@ -20,26 +20,26 @@
 
       <h2 class="text-center">Cadastre-se</h2>
       
-      <form action="#" method="POST" class="column gap-2">
+      <form action="#" method="POST" id="form_sigin" class="column gap-2">
 
         <section class="row gap-2">
 
           <section class="input-box col">
 
-            <label for="#">Nome</label>
+            <label for="nome">Nome</label>
   
-            <input type="text" name="#" id="input_#">
+            <input type="text" name="nome" id="input_nome">
   
-            <span class="error" id="error_#"></span>
+            <span class="error" id="error_nome"></span>
   
           </section>
           <section class="input-box col">
 
-            <label for="#">Sobrenome</label>
+            <label for="sobrenome">Sobrenome</label>
   
-            <input type="text" name="#" id="input_#">
+            <input type="text" name="sobrenome" id="input_sobrenome">
   
-            <span class="error" id="error_#"></span>
+            <span class="error" id="error_sobrenome"></span>
   
           </section>
           
@@ -49,7 +49,7 @@
 
             <section class="input-box-checkbox col">
   
-              <input type="radio" name="checkbox" id="input_estudante">
+              <input type="radio" value="estudante" name="tipo_usuario" id="input_estudante">
               
               <label for="input_estudante">Estudante</label>
   
@@ -57,49 +57,49 @@
   
             <section class="input-box-checkbox col">
   
-              <input type="radio" name="checkbox" id="input_professor">
+              <input type="radio" value="professor" name="tipo_usuario" id="input_professor">
               
               <label for="input_professor">Professor</label>
   
             </section>
             
           </section>
-          <span class="error" id="error_#"></span>
+          <span class="error" id="error_tipo_usuario"></span>
         </section>
         <section class="input-box">
 
-          <label for="#">Email</label>
+          <label for="email">Email</label>
 
-          <input type="email" name="#" id="input_#">
+          <input type="email" name="email" id="input_email">
 
-          <span class="error" id="error_#"></span>
-
-        </section>
-        <section class="input-box">
-
-          <label for="#">Telefone</label>
-
-          <input type="tel" name="#" id="input_#">
-
-          <span class="error" id="error_#"></span>
+          <span class="error" id="error_email"></span>
 
         </section>
         <section class="input-box">
 
-          <label for="#">Senha</label>
+          <label for="telefone">Telefone (opcional)</label>
 
-          <input type="password" name="#" id="input_#">
+          <input type="text" id="phone" oninput="formatPhone(this)">
 
-          <span class="error" id="error_#"></span>
+          <span class="error" id="error_telefone"></span>
 
         </section>
         <section class="input-box">
 
-          <label for="#">Confirmar senha</label>
+          <label for="senha">Senha</label>
 
-          <input type="password" name="#" id="input_#">
+          <input type="password" name="senha" id="input_senha">
 
-          <span class="error" id="error_#"></span>
+          <span class="error" id="error_senha"></span>
+
+        </section>
+        <section class="input-box">
+
+          <label for="confirmar_senha">Confirmar senha</label>
+
+          <input type="password" name="confirmar_senha" id="input_confirmar_senha">
+
+          <span class="error" id="error_confirmar_senha"></span>
 
         </section>
         <section class="column gap-05">
@@ -113,7 +113,7 @@
             </p>
   
           </section>
-          <span class="error" id="error_#"></span>
+          <span class="error" id="error_termos"></span>
         </section>
 
         <input type="submit" value="Entrar" class="btn">
@@ -194,5 +194,106 @@
     });
 
   }
+  
+  const form = document.getElementById("form_sigin");
+
+  form.addEventListener("submit",(e)=>{
+    e.preventDefault();
+
+    let errors = 0;
+    
+    const nome = document.getElementById("input_nome").value;
+    const error_nome = document.getElementById("error_nome");
+
+    if (!nome) {
+      error_nome.innerText = "Preencha o campo nome!";
+      errors++;
+    }
+    
+    const sobrenome = document.getElementById("input_sobrenome").value;
+    const error_sobrenome = document.getElementById("error_sobrenome");
+    
+    if (!sobrenome) {
+      error_sobrenome.innerText = "Preencha o campo sobrenome!";
+      errors++;
+    }
+    
+    const email = document.getElementById("input_email").value;
+    const error_email = document.getElementById("error_email");
+    
+    if (!email) {
+      error_email.innerText = "Preencha o campo email!";
+      errors++;
+    }
+    
+    const senha = document.getElementById("input_senha").value;
+    const error_senha = document.getElementById("error_senha");
+    
+    if (!senha) {
+      error_senha.innerText = "Preencha o campo senha!";
+      errors++;
+    }
+    
+    const confirmar_senha = document.getElementById("input_confirmar_senha").value;
+    const error_confirmar_senha = document.getElementById("error_confirmar_senha");
+    
+    if (!confirmar_senha) {
+      error_confirmar_senha.innerText = "Preencha o campo confirmar senha!";
+      errors++;
+    }
+
+    const termos = document.getElementById("input_termos").checked;
+    const error_termos = document.getElementById("error_termos");
+    
+    if (!termos) {
+      error_termos.innerText = "Aceite os termos para proseguir!";
+      errors++;
+    }
+
+    const tipo_usuario = document.getElementsByName("tipo_usuario");
+    const error_tipo_usuario = document.getElementById("error_tipo_usuario");
+    let tipo_usuario_value;
+
+    for (const caixa of tipo_usuario) {
+      if (caixa.checked) {
+        tipo_usuario_value = caixa.value;
+        break;
+      }
+    }
+    
+    if (!tipo_usuario_value) {
+      error_tipo_usuario.innerText = "Selecione um tipo de usuario para proseguir!";
+      errors++;
+    } else {
+      console.log(tipo_usuario_value);
+    }
+
+    if ( errors > 0 ) {
+
+      setTimeout(()=>{
+        error_nome.innerText = "";
+        error_sobrenome.innerText = "";
+        error_email.innerText = "";
+        error_senha.innerText = "";
+        error_confirmar_senha.innerText = "";
+        error_termos.innerText = "";
+        error_tipo_usuario.innerText = "";
+      },5000);
+      return;
+    }
+
+    form.submit();
+    
+  });
+
+  function formatPhone(input) {
+    let value = input.value
+        .replace(/\D/g, '') // Remove todos os caracteres não numéricos
+        .replace(/^(\d{2})(\d)/, '($1) $2') // Formata o DDD
+        .replace(/(\d{5})(\d)/, '$1-$2') // Adiciona o hífen
+        .substring(0, 15); // Limita o tamanho
+
+    input.value = value;
+}
   
 </script>

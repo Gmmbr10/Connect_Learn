@@ -19,42 +19,42 @@
     <section class="col column gap-4">
 
       <h2 class="text-center">Entrar</h2>
-      
-      <form action="#" method="POST" class="column gap-2">
+
+      <form action="#" method="POST" id="form_login" class="column gap-2">
 
         <section class="input-box">
 
-          <label for="#">Email</label>
+          <label for="email">Email</label>
 
-          <input type="email" name="#" id="input_#">
+          <input type="email" name="email" id="input_email">
 
-          <span class="error" id="error_#"></span>
+          <span class="error" id="error_email"></span>
 
         </section>
         <section class="input-box">
 
-          <label for="#">Senha</label>
+          <label for="senha">Senha</label>
 
-          <input type="password" name="#" id="input_#">
+          <input type="password" name="senha" id="input_senha">
 
-          <span class="error" id="error_#"></span>
+          <span class="error" id="error_senha"></span>
 
         </section>
 
         <input type="submit" value="Entrar" class="btn">
-        
+
       </form>
-    
+
     </section>
 
     <section class="col column justify-center align-center">
 
       <img src="#" alt="logo">
-      
+
     </section>
-    
+
   </section>
-  
+
 </main>
 
 <footer class="container p-2 row justify-between align-center">
@@ -69,3 +69,44 @@
   </nav>
 
 </footer>
+
+<script>
+
+  const form = document.getElementById("form_login");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let errors = 0;
+
+    const email = document.getElementById("input_email").value;
+    const error_email = document.getElementById("error_email");
+
+    if (!email) {
+      error_email.innerText = "Preencha o campo email!";
+      errors++;
+    }
+
+    const senha = document.getElementById("input_senha").value;
+    const error_senha = document.getElementById("error_senha");
+
+    if (!senha) {
+      error_senha.innerText = "Preencha o campo senha!";
+      errors++;
+    }
+
+    if (errors > 0) {
+
+      setTimeout(() => {
+        error_email.innerText = "";
+        error_senha.innerText = "";
+      }, 5000);
+
+      return;
+    }
+
+    form.submit();
+
+  });
+
+</script>
