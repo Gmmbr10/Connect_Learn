@@ -20,11 +20,11 @@
   <nav class="sidebar" id="sidebar">
 
     {navbar}
-    
+
   </nav>
 
   <section class="container p-3">
-    
+
     <nav class="row gap-1 align-center">
 
       <a href="{include_path}student/duvidas" class="row gap-1 align-center">Dúvidas</a>
@@ -32,9 +32,9 @@
       <span class="row gap-1 align-center">
         <i class="fa-solid fa-angle-right display-5"></i>Enviar dúvida
       </span>
-      
+
     </nav>
-    
+
     <h2>Dúvida</h2>
 
     <p>
@@ -43,28 +43,26 @@
 
     <section class="row">
 
-      <form action="#" method="POST" class="col column gap-2">
+      <form action="#" method="POST" id="form_duvida" class="col column gap-2">
 
         <section class="input-box">
 
           <label for="conteudo">Escreva sua dúvida</label>
 
           <section>
-            <section id="editor"></section>
+            <textarea name="conteudo" id="editor"></textarea>
           </section>
 
-          <textarea name="conteudo" id="input_conteudo" style="display: none;"></textarea>
+          <span class="error" id="error_conteudo"></span>
 
-          <span class="erro" id="error_conteudo"></span>
-          
         </section>
 
         <button type="submit" class="btn">Enviar</button>
-        
+
       </form>
 
       <span class="col"></span>
-      
+
     </section>
 
   </section>
@@ -89,13 +87,60 @@
   const open_sidebar = document.getElementById("open_sidebar");
   const sidebar = document.getElementById("sidebar");
 
-  open_sidebar.addEventListener("click",()=>{
+  open_sidebar.addEventListener("click", () => {
     sidebar.classList.toggle("left-0");
   });
-  
-</script>
-<script>
-  const quill = new Quill('#editor', {
-    theme: 'snow'
+
+  const form = document.getElementById("form_duvida");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let error = 0;
+
+    let conteudo;
+    const error_conteudo = document.getElementById("error_conteudo");
+    setTimeout(() => {
+      conteudo = document.getElementById("editor");
+      if (!conteudo.value) {
+
+        error_conteudo.innerText = "Escreva sua dúvida!";
+        error++;
+
+      }
+
+      if (error > 0) {
+
+        setTimeout(() => {
+          error_conteudo.innerText = "";
+        }, 5000);
+        return;
+      }
+      form.submit();
+    }, 200);
+
+
   });
+
+</script>
+<script type="module">
+  import {
+    ClassicEditor,
+    Essentials,
+    Bold,
+    Italic,
+    Font,
+    Paragraph
+  } from 'ckeditor5';
+
+  ClassicEditor
+    .create(document.querySelector('#editor'), {
+      plugins: [Essentials, Bold, Italic, Font, Paragraph],
+      toolbar: [
+        'bold', 'italic', '|',
+        'fontColor', 'fontBackgroundColor'
+      ]
+    })
+    .then( /* ... */)
+    .catch( /* ... */);
 </script>

@@ -60,17 +60,15 @@
           </section>
 
         </section>
-        <form action="#" method="POST" class="column gap-2">
+        <form action="#" method="POST" id="form_resposta" class="column gap-2">
 
           <section class="input-box">
 
             <label for="editor">Monte sua resposta</label>
 
             <section>
-              <section id="editor" onkeypress="atualizarTextarea()"></section>
+              <textarea name="conteudo" id="editor"></textarea>
             </section>
-
-            <textarea name="conteudo" id="input_conteudo" style="display: none;"></textarea>
 
             <span class="error" id="error_conteudo"></span>
 
@@ -120,18 +118,56 @@
     sidebar.classList.toggle("left-0");
   });
 
-  const quill = new Quill('#editor', {
-    theme: 'snow'
-  });
+  const form = document.getElementById("form_resposta");
 
-  const conteudo = document.getElementById("input_conteudo");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let error = 0;
+
+    let conteudo;
+    const error_conteudo = document.getElementById("error_conteudo");
+    setTimeout(() => {
+      conteudo = document.getElementById("editor");
+      if (!conteudo.value) {
+
+        error_conteudo.innerText = "Escreva sua resposta!";
+        error++;
+
+      }
+
+      if (error > 0) {
+
+        setTimeout(() => {
+          error_conteudo.innerText = "";
+        }, 5000);
+        return;
+      }
+      form.submit();
+    }, 200);
+
+
+  });
   
-  function atualizarTextarea() {
-    
-    const html = quill.root.innerHTML;
-    conteudo.value = html;
-    console.log("atualizando");
-    
-  }
-  
+</script>
+<script type="module">
+  import {
+      ClassicEditor,
+      Essentials,
+      Bold,
+      Italic,
+      Font,
+      Paragraph
+  } from 'ckeditor5';
+
+  ClassicEditor
+      .create( document.querySelector( '#editor' ), {
+          plugins: [ Essentials, Bold, Italic, Font, Paragraph ],
+          toolbar: [
+              'bold', 'italic', '|',
+              'fontColor', 'fontBackgroundColor'
+          ]
+      } )
+      .then( /* ... */ )
+      .catch( /* ... */ );
 </script>

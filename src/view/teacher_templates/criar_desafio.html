@@ -60,10 +60,8 @@
           <label for="conteudo">Escreva sobre o desafio</label>
 
           <section>
-            <section id="editor"></section>
+            <textarea name="conteudo" id="editor"></textarea>
           </section>
-
-          <textarea name="conteudo" id="input_conteudo" style="display: none;"></textarea>
 
           <span class="erro" id="error_conteudo"></span>
           
@@ -104,8 +102,24 @@
   });
   
 </script>
-<script>
-  const quill = new Quill('#editor', {
-    theme: 'snow'
-  });
+<script type="module">
+  import {
+      ClassicEditor,
+      Essentials,
+      Bold,
+      Italic,
+      Font,
+      Paragraph
+  } from 'ckeditor5';
+
+  ClassicEditor
+      .create( document.querySelector( '#editor' ), {
+          plugins: [ Essentials, Bold, Italic, Font, Paragraph ],
+          toolbar: [
+              'bold', 'italic', '|',
+              'fontColor', 'fontBackgroundColor'
+          ]
+      } )
+      .then( /* ... */ )
+      .catch( /* ... */ );
 </script>

@@ -40,26 +40,15 @@
           </p>
 
         </section>
-        <form action="#" method="POST" class="column gap-2">
+        <form action="#" method="POST" id="form_suporte" class="column gap-2">
 
           <section class="input-box">
 
-            <label for="#">label</label>
-
-            <input type="text" name="#" id="input_#">
-
-            <span class="error" id="error_#"></span>
-
-          </section>
-          <section class="input-box">
-
-            <label for="editor">label</label>
+            <label for="editor">Mande suas dificuldades</label>
 
             <section>
-              <section id="editor" onkeypress="atualizarTextarea()"></section>
+              <textarea name="conteudo" id="editor"></textarea>
             </section>
-
-            <textarea name="conteudo" id="input_conteudo" style="display: none;"></textarea>
 
             <span class="error" id="error_conteudo"></span>
 
@@ -109,18 +98,37 @@
     sidebar.classList.toggle("left-0");
   });
 
-  const quill = new Quill('#editor', {
-    theme: 'snow'
-  });
+  const form = document.getElementById("form_suporte");
 
-  const conteudo = document.getElementById("input_conteudo");
-  
-  function atualizarTextarea() {
+  form.addEventListener("submit",(e)=>{
+    e.preventDefault();
+
+    const conteudo = document.getElementById("editor").value;
+    const error_conteudo = document.getElementById("error_conteudo");
+
+    console.log(conteudo);
     
-    const html = quill.root.innerHTML;
-    conteudo.value = html;
-    console.log("atualizando");
-    
-  }
+  });
   
+</script>
+<script type="module">
+  import {
+      ClassicEditor,
+      Essentials,
+      Bold,
+      Italic,
+      Font,
+      Paragraph
+  } from 'ckeditor5';
+
+  ClassicEditor
+      .create( document.querySelector( '#editor' ), {
+          plugins: [ Essentials, Bold, Italic, Font, Paragraph ],
+          toolbar: [
+              'bold', 'italic', '|',
+              'fontColor', 'fontBackgroundColor'
+          ]
+      } )
+      .then( /* ... */ )
+      .catch( /* ... */ );
 </script>
