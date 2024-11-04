@@ -100,14 +100,33 @@
 
   const form = document.getElementById("form_suporte");
 
-  form.addEventListener("submit",(e)=>{
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const conteudo = document.getElementById("editor").value;
-    const error_conteudo = document.getElementById("error_conteudo");
+    let error = 0;
 
-    console.log(conteudo);
-    
+    let conteudo;
+    const error_conteudo = document.getElementById("error_conteudo");
+    setTimeout(() => {
+      conteudo = document.getElementById("editor");
+      if (!conteudo.value) {
+
+        error_conteudo.innerText = "Escreva seu problema";
+        error++;
+
+      }
+
+      if (error > 0) {
+
+        setTimeout(() => {
+          error_conteudo.innerText = "";
+        }, 5000);
+        return;
+      }
+      form.submit();
+    }, 200);
+
+
   });
   
 </script>

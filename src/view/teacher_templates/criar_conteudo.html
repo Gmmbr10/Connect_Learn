@@ -47,17 +47,17 @@
       <section class="col column gap-2">
 
         <section>
-          <form action="#" method="POST" class="column gap-2">
+          <form action="#" method="POST" id="form_curso" class="column gap-2">
 
             <h2>Criar curso</h2>
 
             <section class="input-box">
 
-              <label for="#">Nome do curso</label>
+              <label for="curso">Nome do curso</label>
 
-              <input type="text" name="#" id="input_#">
+              <input type="text" name="curso" id="input_curso">
 
-              <span class="error" id="error_#"></span>
+              <span class="error" id="error_curso"></span>
 
             </section>
 
@@ -67,7 +67,7 @@
         </section>
 
         <section>
-          <form action="#" method="POST" class="column gap-2">
+          <form action="#" method="POST" id="form_modulo" class="column gap-2">
 
             <h2>Adicionar módulo</h2>
 
@@ -87,11 +87,11 @@
 
             <section class="input-box">
 
-              <label for="#">Nome do módulo</label>
+              <label for="modulo">Nome do módulo</label>
 
-              <input type="text" name="#" id="input_#">
+              <input type="text" name="modulo" id="input_modulo">
 
-              <span class="error" id="error_#"></span>
+              <span class="error" id="error_modulo"></span>
 
             </section>
 
@@ -104,36 +104,36 @@
       <section class="col column gap-2">
 
         <section class="col rounded">
-          <form action="#" method="POST" class="column gap-2">
+          <form action="#" method="POST" id="form_aula" class="column gap-2">
             <h2>Adicionar aula</h2>
 
             <section class="input-box">
 
-              <label for="#">Título</label>
+              <label for="titulo">Título</label>
 
-              <input type="text" name="#" id="input_#">
+              <input type="text" name="titulo" id="input_titulo">
 
-              <span class="error" id="error_#"></span>
+              <span class="error" id="error_titulo"></span>
 
             </section>
             <section class="input-box">
 
-              <label for="#">Conteúdo</label>
+              <label for="conteudo">Conteúdo</label>
 
               <section>
                 <textarea name="conteudo" id="editor"></textarea>
               </section>
 
-              <span class="error" id="error_#"></span>
+              <span class="error" id="error_conteudo"></span>
 
             </section>
             <section class="input-box">
 
-              <label for="#">Link do vídeo (opicional)</label>
+              <label for="video">Link do vídeo (opcional)</label>
 
-              <input type="url" name="#" id="input_#">
+              <input type="url" name="video" id="input_video">
 
-              <span class="error" id="error_#"></span>
+              <span class="error" id="error_video"></span>
 
             </section>
 
@@ -170,6 +170,102 @@
 
   open_sidebar.addEventListener("click", () => {
     sidebar.classList.toggle("left-0");
+  });
+
+  const form_curso = document.getElementById("form_curso");
+
+  form_curso.addEventListener("submit",(e)=>{
+    e.preventDefault();
+
+    let error = 0;
+    
+    const curso = document.getElementById("input_curso").value;
+    const error_curso = document.getElementById("error_curso");
+
+    if ( !curso ) {
+
+      error_curso.innerText = "Insira o nome do curso";
+      error++;
+    }
+
+    if ( error > 0 ) {
+
+      setTimeout(()=>{
+        error_curso.innerText = "";
+      },5000);
+      return;
+    }
+
+    form_curso.submit();
+    
+  });
+
+  const form_modulo = document.getElementById("form_modulo");
+
+  form_modulo.addEventListener("submit",(e)=>{
+    e.preventDefault();
+
+    let error = 0;
+    
+    const modulo = document.getElementById("input_modulo").value;
+    const error_modulo = document.getElementById("error_modulo");
+
+    if ( !modulo ) {
+
+      error_modulo.innerText = "Insira o nome do modulo";
+      error++;
+    }
+
+    if ( error > 0 ) {
+
+      setTimeout(()=>{
+        error_modulo.innerText = "";
+      },5000);
+      return;
+    }
+
+    form_modulo.submit();
+    
+  });
+
+  const form_aula = document.getElementById("form_aula");
+
+  form_aula.addEventListener("submit",(e)=>{
+    e.preventDefault();
+
+    let error = 0;
+    
+    const titulo = document.getElementById("input_titulo").value;
+    const error_titulo = document.getElementById("error_titulo");
+
+    if ( !titulo ) {
+
+      error_titulo.innerText = "Insira o titulo do conteúdo";
+      error++;
+    }
+
+    let conteudo;
+    const error_conteudo = document.getElementById("error_conteudo");
+    setTimeout(() => {
+      conteudo = document.getElementById("editor");
+      if (!conteudo.value) {
+
+        error_conteudo.innerText = "Escreva sua dúvida";
+        error++;
+
+      }
+
+      if (error > 0) {
+
+        setTimeout(() => {
+          error_conteudo.innerText = "";
+        error_titulo.innerText = "";
+      }, 5000);
+        return;
+      }
+      form.submit();
+    }, 200);
+
   });
 
 </script>

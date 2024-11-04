@@ -60,7 +60,7 @@
           </section>
 
         </section>
-        <form action="#" method="POST" class="column gap-2">
+        <form action="#" method="POST" id="form_resposta" class="column gap-2">
 
           <section class="input-box">
 
@@ -116,6 +116,37 @@
 
   open_sidebar.addEventListener("click", () => {
     sidebar.classList.toggle("left-0");
+  });
+
+  const form = document.getElementById("form_resposta");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let error = 0;
+
+    let conteudo;
+    const error_conteudo = document.getElementById("error_conteudo");
+    setTimeout(() => {
+      conteudo = document.getElementById("editor");
+      if (!conteudo.value) {
+
+        error_conteudo.innerText = "Escreva sua resposta!";
+        error++;
+
+      }
+
+      if (error > 0) {
+
+        setTimeout(() => {
+          error_conteudo.innerText = "";
+        }, 5000);
+        return;
+      }
+      form.submit();
+    }, 200);
+
+
   });
 </script>
 <script type="module">

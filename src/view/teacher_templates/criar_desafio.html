@@ -43,15 +43,15 @@
 
     <section class="row">
 
-      <form action="#" method="POST" class="col column gap-2">
+      <form action="#" method="POST" id="form_desafio" class="col column gap-2">
 
         <section class="input-box">
 
-          <label for="#">Título do desafio</label>
+          <label for="desafio">Título do desafio</label>
 
-          <input type="text" name="#" id="input_#">
+          <input type="text" name="desafio" id="input_desafio">
 
-          <span class="error"></span>
+          <span class="error" id="error_desafio"></span>
           
         </section>
         
@@ -63,7 +63,7 @@
             <textarea name="conteudo" id="editor"></textarea>
           </section>
 
-          <span class="erro" id="error_conteudo"></span>
+          <span class="error" id="error_conteudo"></span>
           
         </section>
 
@@ -99,6 +99,46 @@
 
   open_sidebar.addEventListener("click",()=>{
     sidebar.classList.toggle("left-0");
+  });
+
+  const form_desafio = document.getElementById("form_desafio");
+
+  form_desafio.addEventListener("submit",(e)=>{
+    e.preventDefault();
+
+    let error = 0;
+    
+    const desafio = document.getElementById("input_desafio").value;
+    const error_desafio = document.getElementById("error_desafio");
+
+    if ( !desafio ) {
+
+      error_desafio.innerText = "Insira o título do desafio";
+      error++;
+    }
+
+    let conteudo;
+    const error_conteudo = document.getElementById("error_conteudo");
+    setTimeout(() => {
+      conteudo = document.getElementById("editor");
+      if (!conteudo.value) {
+
+        error_conteudo.innerText = "Crie uma descrição para o desafio";
+        error++;
+
+      }
+
+      if (error > 0) {
+
+        setTimeout(() => {
+          error_titulo.innerText = "";
+          error_conteudo.innerText = "";
+        }, 5000);
+        return;
+      }
+      form.submit();
+    }, 200);
+    
   });
   
 </script>
