@@ -33,6 +33,11 @@ class TeacherController extends Controller
 			header("location: ./home");
 		}
 
+		if ($url_model[0] == "sair") {
+			session_destroy();
+			header("location: ../login");
+		}
+
 		if ($url_model[0] == "conteudos") {
 
 			if (!empty($url_model[1])) {

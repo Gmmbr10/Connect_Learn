@@ -17,6 +17,12 @@ class LoginController extends Controller
 					header("location: ./student/home");
 
 				}
+
+				if ( $_SESSION["usuario"]["usu_tipo"] == 2 ) {
+
+					header("location: ./teacher/home");
+
+				}
 				
 				return;
 				
