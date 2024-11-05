@@ -1,7 +1,20 @@
 services:
   app:
     build: .
+    networks:
+      - connect_learn
     ports:
       - 8888:80
     volumes:
       - .:/var/www/html
+  db:
+    image: mariadb:10.6
+    networks:
+      - connect_learn
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+networks:
+  connect_learn:
+    driver: "bridge"
