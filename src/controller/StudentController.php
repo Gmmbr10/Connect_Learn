@@ -6,6 +6,15 @@ class StudentController extends Controller
 	public function __construct()
 	{
 
+		session_start();
+		
+		if ( !isset($_SESSION["usuario"]) || $_SESSION["usuario"]["usu_tipo"] != 1 ) {
+
+			session_destroy();
+			header("location: ../login");
+
+		}
+		
 		$url = explode("/", str_replace("student/", "", strtolower($_GET["url"])));
 
 		$this->routes($url);
@@ -22,6 +31,11 @@ class StudentController extends Controller
 		if (empty($url_model[0])) {
 
 			header("location: ./home");
+		}
+
+		if ($url_model[0] == "sair") {
+			session_destroy();
+			header("location: ../login");
 		}
 
 		if ($url_model[0] == "conteudos") {

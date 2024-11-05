@@ -6,6 +6,15 @@ class TeacherController extends Controller
 	public function __construct()
 	{
 
+		session_start();
+		
+		if ( !isset($_SESSION["usuario"]) || $_SESSION["usuario"]["usu_tipo"] != 2 ) {
+
+			session_destroy();
+			header("location: ../login");
+
+		}
+
 		$url = explode("/", str_replace("teacher/", "", strtolower($_GET["url"])));
 
 		$this->routes($url);
