@@ -270,6 +270,7 @@ body>footer {
   border-radius: 7px;
   cursor: pointer;
   font-size: 18px;
+
   i {
     font-size: 18px;
   }
@@ -429,7 +430,8 @@ i {
   gap: .5rem;
   margin: 0 !important;
 
-  input, select {
+  input,
+  select {
     padding: .75rem;
     border-radius: 7px;
     border: 1px solid #222;
@@ -566,11 +568,47 @@ dialog {
   >* {
     border-radius: 7px;
   }
-  
+
 }
 
 textarea {
   display: block;
   resize: none;
   padding: .75rem !important;
+}
+
+p.alert {
+  padding: 1rem;
+  border-radius: 7px;
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+}
+
+.profile-bar {
+  display: flex;
+  flex-direction: column;
+  border-radius: 7px;
+  background-color: var(--bg-secondary);
+
+  * {
+    color: var(--bg-primary) !important;
+    transition: all .2s;
+  }
+
+  a {
+    padding: .5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+  }
+
+  a:hover {
+    color: var(--link-secondary) !important;
+    background-color: var(--bg-primary);
+
+    * {
+      color: var(--link-secondary) !important;
+    }
+  }
 }
