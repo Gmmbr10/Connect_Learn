@@ -508,6 +508,7 @@ dialog {
 
 .box {
   border: 1px solid #222;
+  color: var(--text-primary) !important;
 
   >* {
     border-bottom: 1px solid #222;
@@ -601,14 +602,5 @@ p.alert {
     align-items: center;
     gap: 1rem;
     cursor: pointer;
-  }
-
-  a:hover {
-    color: var(--link-secondary) !important;
-    background-color: var(--bg-primary);
-
-    * {
-      color: var(--link-secondary) !important;
-    }
   }
 }
