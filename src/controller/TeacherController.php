@@ -7,12 +7,11 @@ class TeacherController extends Controller
 	{
 
 		session_start();
-		
-		if ( !isset($_SESSION["usuario"]) || $_SESSION["usuario"]["usu_tipo"] != 2 ) {
+
+		if (!isset($_SESSION["usuario"]) || $_SESSION["usuario"]["usu_tipo"] != 2) {
 
 			session_destroy();
 			header("location: ../login");
-
 		}
 
 		$url = explode("/", str_replace("teacher/", "", strtolower($_GET["url"])));
@@ -66,25 +65,24 @@ class TeacherController extends Controller
 		}
 
 		if ($url_model[0] == "desafio") {
-			if (empty($_GET["codigo"])) {
-				header("location: " . INCLUDE_PATH . "teacher/desafios");
-			}
 
 			$this->view("teacher.desafio");
 			return;
 		}
 
 		if ($url_model[0] == "desafios") {
-			if (!empty($url_model[1])) {
+			if (isset($_GET["action"]) && $_GET["action"] == "criar" && isset($_POST["desafio"])) {
 
-				if ($url_model[1] == "criar_desafio") {
+				$model = $this->model("DesafioModel")->post();
 
-					$this->view("teacher.criar_desafio");
-					return;
-				}
+				$this->view("teacher.desafios", $model);
+
+				return;
 			}
 
-			$this->view("teacher.desafios");
+			$dados = $this->model("DesafioModel")->get();
+
+			$this->view("teacher.desafios",["desafios"=>$dados]);
 			return;
 		}
 

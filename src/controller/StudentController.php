@@ -44,24 +44,42 @@ class StudentController extends Controller
 			return;
 		}
 
-		if ($url_model[0] == "desafio") {
-			if (empty($_GET["codigo"])) {
-				header("location: " . INCLUDE_PATH . "student/desafios");
-			}
-
-			$this->view("student.desafio");
-			return;
-		}
-
 		if ($url_model[0] == "desafios") {
 
-			$this->view("student.desafios");
+			if ( isset($_GET["desafio"]) && !empty($_GET["desafio"]) ) {
+				$dados = $this->model("DesafioModel")->get(filter_input(INPUT_GET,"desafio",FILTER_DEFAULT));
+
+				$this->view("student.desafios",["desafio" => $dados]);
+				return;
+			}
+			
+			$dados = $this->model("DesafioModel")->get();
+
+			$this->view("student.desafios",["desafios" => $dados]);
 			return;
 		}
 
 		if ($url_model[0] == "duvidas") {
 
+			if ( isset($_GET["action"]) and $_GET["action"] == 	"escrever" and isset($_POST["conteudo"]) ) {
+
+				$model = $this->model("DuvidaModel")->post();
+
+				$this->view("student.duvidas",$model);
+
+				
+				return;
+				
+			}
+
+			if ( isset($_GET["action"]) && $_GET["action"] == "escrever" ) {
+
 			$this->view("student.duvidas");
+			return;
+		}
+			$model = $this->model("DuvidaModel")->get();
+			
+			$this->view("student.duvidas",["duvidas"=>$model]);
 			return;
 		}
 

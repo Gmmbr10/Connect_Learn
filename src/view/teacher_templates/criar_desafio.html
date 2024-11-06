@@ -45,6 +45,8 @@
 
       <form action="#" method="POST" id="form_desafio" class="col column gap-2">
 
+        {resultado}
+
         <section class="input-box">
 
           <label for="desafio">Título do desafio</label>
@@ -136,7 +138,7 @@
         }, 5000);
         return;
       }
-      form.submit();
+      form_desafio.submit();
     }, 200);
     
   });

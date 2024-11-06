@@ -3,8 +3,6 @@
 class SiginController extends Controller
 {
 
-	private $model = null;
-	
 	public function __construct()
 	{
 
@@ -13,6 +11,8 @@ class SiginController extends Controller
 			$model = $this->model("SiginModel")->post();
 
 			$this->view("sigin",$model);
+
+			return;
 
 		}
 		
