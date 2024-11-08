@@ -87,8 +87,9 @@ class TeacherController extends Controller
 		}
 
 		if ($url_model[0] == "duvidas") {
+			$model = $this->model("DuvidaModel")->get();
 
-			$this->view("teacher.duvidas");
+			$this->view("teacher.duvidas",$model);
 			return;
 		}
 

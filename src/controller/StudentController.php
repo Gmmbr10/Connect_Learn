@@ -7,14 +7,13 @@ class StudentController extends Controller
 	{
 
 		session_start();
-		
-		if ( !isset($_SESSION["usuario"]) || $_SESSION["usuario"]["usu_tipo"] != 1 ) {
+
+		if (!isset($_SESSION["usuario"]) || $_SESSION["usuario"]["usu_tipo"] != 1) {
 
 			session_destroy();
 			header("location: ../login");
-
 		}
-		
+
 		$url = explode("/", str_replace("student/", "", strtolower($_GET["url"])));
 
 		$this->routes($url);
@@ -46,40 +45,65 @@ class StudentController extends Controller
 
 		if ($url_model[0] == "desafios") {
 
-			if ( isset($_GET["desafio"]) && !empty($_GET["desafio"]) ) {
-				$dados = $this->model("DesafioModel")->get(filter_input(INPUT_GET,"desafio",FILTER_DEFAULT));
+			if (isset($_GET["desafio"]) && !empty($_GET["desafio"])) {
+				$dados = $this->model("DesafioModel")->get(filter_input(INPUT_GET, "desafio", FILTER_DEFAULT));
 
-				$this->view("student.desafios",["desafio" => $dados]);
+				$this->view("student.desafios", ["desafio" => $dados]);
 				return;
 			}
-			
+
 			$dados = $this->model("DesafioModel")->get();
 
-			$this->view("student.desafios",["desafios" => $dados]);
+			$this->view("student.desafios", ["desafios" => $dados]);
 			return;
 		}
 
 		if ($url_model[0] == "duvidas") {
 
-			if ( isset($_GET["action"]) and $_GET["action"] == 	"escrever" and isset($_POST["conteudo"]) ) {
+			if (isset($_GET["action"]) and $_GET["action"] == "escrever" and isset($_POST["conteudo"])) {
 
 				$model = $this->model("DuvidaModel")->post();
 
-				$this->view("student.duvidas",$model);
+				$this->view("student.duvidas", $model);
 
-				
+
 				return;
-				
 			}
 
-			if ( isset($_GET["action"]) && $_GET["action"] == "escrever" ) {
+			if (isset($_GET["action"]) && $_GET["action"] == "escrever") {
 
-			$this->view("student.duvidas");
-			return;
-		}
+				$this->view("student.duvidas");
+				return;
+			}
+
+			if (isset($_GET["action"]) && $_GET["action"] == "responder") {
+				if ( empty($_GET["duvida"]) ) {
+
+					header("location: " . INCLUDE_PATH . "student/duvidas");
+
+				}
+				
+				$model = $this->model("DuvidaModel")->get($_GET["duvida"]);
+
+				$this->view("student.duvidas",$model);
+				return;
+			}
+
+			if (isset($_GET["action"]) && $_GET["action"] == "ver respostas") {
+				if ( empty($_GET["duvida"]) ) {
+
+					header("location: " . INCLUDE_PATH . "student/duvidas");
+
+				}
+				
+				$model = $this->model("DuvidaModel")->get($_GET["duvida"]);
+
+				$this->view("student.duvidas",$model);
+				return;
+			}
 			$model = $this->model("DuvidaModel")->get();
-			
-			$this->view("student.duvidas",["duvidas"=>$model]);
+
+			$this->view("student.duvidas", ["duvidas" => $model]);
 			return;
 		}
 

@@ -27,12 +27,17 @@ if ( isset($_GET["action"]) && $_GET["action"] == "escrever" ) {
 if ( isset($_GET["action"]) && $_GET["action"] == "responder" ) {
   
   $html = file_get_contents("src/view/student_templates/responder_duvida.html");
+  $html = str_replace("{respostas}",$data["respostas"],$html);
+  $html = str_replace("{usuario_fez_pergunta}",$data["duvida"]["usu_nome"],$html);
+  $html = str_replace("{duvida}",$data["duvida"]["duv_texto"],$html);
 
 }
 
 if ( isset($_GET["action"]) && $_GET["action"] == "ver respostas" ) {
   
   $html = file_get_contents("src/view/student_templates/ver_respostas.html");
+  $html = str_replace("{respostas}",$data["respostas"],$html);
+  $html = str_replace("{duvida}",$data["duvida"]["duv_texto"],$html);
 
 }
 

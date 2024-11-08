@@ -41,12 +41,61 @@ class DuvidaModel
     }
   }
 
-  public function get()
+  public function get($id_duvida = null)
   {
 
     require_once __DIR__ . "/../core/Banco.php";
 
     $conexao = new Banco();
+
+    if ( $id_duvida != null ) {
+
+      $query = "SELECT * FROM duvidas INNER JOIN usuarios ON duvidas.duv_id_usuario = usuarios.usu_id WHERE duv_id = :id_duvida";
+      $buscar_duvida = $conexao->getConexao()->prepare($query);
+
+      $buscar_duvida->bindParam(":id_duvida",$id_duvida,PDO::PARAM_INT);
+
+      $buscar_duvida->execute();
+
+      if ( $duvida = $buscar_duvida->fetch(PDO::FETCH_ASSOC) ) {
+
+        $respostas = "";
+
+        $query = "SELECT * FROM respostas INNER JOIN usuarios ON respostas.res_id_usuario = usuarios.usu_id WHERE res_id_duvida = :id_duvida";
+        $buscar_respostas = $conexao->getConexao()->prepare($query);
+
+        $buscar_respostas->bindParam(":id_duvida",$duvida["duv_id"],PDO::PARAM_INT);
+
+        $buscar_respostas->execute();
+
+        if ( $buscar_respostas->rowCount() ) {
+
+          while ( $linha = $buscar_respostas->fetch(PDO::FETCH_ASSOC) ) {
+
+            $respostas .= '<section class="box rounded">
+
+              <header class="bg-primary">'. $linha["usu_nome"] .'</header>
+
+              <main>'. $linha["res_texto"] .'</main>
+            
+            </section>';
+            
+          }
+          
+        } else {
+
+          $respostas = '<p class="alert">Nenhuma resposta encontrada</p>';
+          
+        }
+
+        return ["duvida"=>$duvida,"respostas"=>$respostas];
+
+      }
+      
+      return false;
+
+    }
+    
     $query = "SELECT * FROM duvidas INNER JOIN usuarios ON duvidas.duv_id_usuario = usuarios.usu_id WHERE NOT duv_id_usuario = :id_usuario";
     $buscar = $conexao->getConexao()->prepare($query);
 
@@ -61,9 +110,9 @@ class DuvidaModel
 
       while ($linha = $buscar->fetch(PDO::FETCH_ASSOC)) {
 
-        $outras_duvidas .= '<section class="box">
+        $outras_duvidas .= '<a href="duvidas?action=responder&duvida='. $linha["duv_id"] .'" class="box">
 
-        <header class="row gap-1 align-center">
+        <header class="bg-primary row gap-1 align-center">
           <i class="fa-solid fa-user profile"></i>
           <p class="bold">' . $linha["usu_nome"] . '</p>
         </header>
@@ -74,7 +123,7 @@ class DuvidaModel
 
         </main>
 
-      </section>';
+      </a>';
       }
     } else {
 
@@ -92,8 +141,8 @@ class DuvidaModel
 
       while ($linha = $buscar->fetch(PDO::FETCH_ASSOC)) {
 
-        $minhas_duvidas .= '<section class="box">
-        <header>
+        $minhas_duvidas .= '<a href="duvidas?action=ver respostas&duvida='. $linha["duv_id"] .'" class="box">
+        <header class="bg-primary">
           <p>
             <span class="bold">Respostas:</span>
             ' . $linha["num_respostas"] . '
@@ -102,7 +151,7 @@ class DuvidaModel
         <main>
           ' . $linha["duv_texto"] . '
         </main>
-      </section>';
+      </a>';
       }
     } else {
 

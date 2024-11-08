@@ -9,6 +9,12 @@ if ( isset($_GET["action"]) && $_GET["action"] == "responder" ) {
 
 }
 
+if ( isset($data["outras"]) ) {
+
+  $html = str_replace("{outras_duvidas}",$data["outras"],$html);
+
+}
+
 $navbar = str_replace("{include_path}",INCLUDE_PATH,$navbar);
 $html = str_replace("{navbar}",$navbar,$html);
 $html = str_replace("{include_path}",INCLUDE_PATH,$html);
