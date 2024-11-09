@@ -48,54 +48,49 @@ class DuvidaModel
 
     $conexao = new Banco();
 
-    if ( $id_duvida != null ) {
+    if ($id_duvida != null) {
 
       $query = "SELECT * FROM duvidas INNER JOIN usuarios ON duvidas.duv_id_usuario = usuarios.usu_id WHERE duv_id = :id_duvida";
       $buscar_duvida = $conexao->getConexao()->prepare($query);
 
-      $buscar_duvida->bindParam(":id_duvida",$id_duvida,PDO::PARAM_INT);
+      $buscar_duvida->bindParam(":id_duvida", $id_duvida, PDO::PARAM_INT);
 
       $buscar_duvida->execute();
 
-      if ( $duvida = $buscar_duvida->fetch(PDO::FETCH_ASSOC) ) {
+      if ($duvida = $buscar_duvida->fetch(PDO::FETCH_ASSOC)) {
 
         $respostas = "";
 
         $query = "SELECT * FROM respostas INNER JOIN usuarios ON respostas.res_id_usuario = usuarios.usu_id WHERE res_id_duvida = :id_duvida";
         $buscar_respostas = $conexao->getConexao()->prepare($query);
 
-        $buscar_respostas->bindParam(":id_duvida",$duvida["duv_id"],PDO::PARAM_INT);
+        $buscar_respostas->bindParam(":id_duvida", $duvida["duv_id"], PDO::PARAM_INT);
 
         $buscar_respostas->execute();
 
-        if ( $buscar_respostas->rowCount() ) {
+        if ($buscar_respostas->rowCount()) {
 
-          while ( $linha = $buscar_respostas->fetch(PDO::FETCH_ASSOC) ) {
+          while ($linha = $buscar_respostas->fetch(PDO::FETCH_ASSOC)) {
 
             $respostas .= '<section class="box rounded">
 
-              <header class="bg-primary">'. $linha["usu_nome"] .'</header>
+              <header class="bg-primary">' . $linha["usu_nome"] . '</header>
 
-              <main>'. $linha["res_texto"] .'</main>
+              <main>' . $linha["res_texto"] . '</main>
             
             </section>';
-            
           }
-          
         } else {
 
           $respostas = '<p class="alert">Nenhuma resposta encontrada</p>';
-          
         }
 
-        return ["duvida"=>$duvida,"respostas"=>$respostas];
-
+        return ["duvida" => $duvida, "respostas" => $respostas];
       }
-      
-      return false;
 
+      return false;
     }
-    
+
     $query = "SELECT * FROM duvidas INNER JOIN usuarios ON duvidas.duv_id_usuario = usuarios.usu_id WHERE NOT duv_id_usuario = :id_usuario";
     $buscar = $conexao->getConexao()->prepare($query);
 
@@ -110,7 +105,7 @@ class DuvidaModel
 
       while ($linha = $buscar->fetch(PDO::FETCH_ASSOC)) {
 
-        $outras_duvidas .= '<a href="duvidas?action=responder&duvida='. $linha["duv_id"] .'" class="box">
+        $outras_duvidas .= '<a href="duvidas?action=responder&duvida=' . $linha["duv_id"] . '" class="box">
 
         <header class="bg-primary row gap-1 align-center">
           <i class="fa-solid fa-user profile"></i>
@@ -141,7 +136,7 @@ class DuvidaModel
 
       while ($linha = $buscar->fetch(PDO::FETCH_ASSOC)) {
 
-        $minhas_duvidas .= '<a href="duvidas?action=ver respostas&duvida='. $linha["duv_id"] .'" class="box">
+        $minhas_duvidas .= '<a href="duvidas?action=ver respostas&duvida=' . $linha["duv_id"] . '" class="box">
         <header class="bg-primary">
           <p>
             <span class="bold">Respostas:</span>
@@ -159,5 +154,67 @@ class DuvidaModel
     }
 
     return ["minhas" => $minhas_duvidas, "outras" => $outras_duvidas];
+  }
+
+  public function path()
+  {
+
+    $id_duvida = filter_input(INPUT_GET, "duvida", FILTER_DEFAULT);
+    $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+    $erros = [];
+
+    if (empty($dados["texto"])) {
+
+      $erros[1] = "Escreva a duvida";
+    }
+
+    if (!empty($erros)) {
+
+      return $erros;
+    }
+
+    require_once __DIR__ . "/../core/Banco.php";
+    $banco = new Banco();
+    $query = "UPDATE duvidas SET duv_texto = :texto WHERE duv_id = :id_duvida AND duv_id_usuario = :id_usuario";
+    $atualizar = $banco->getConexao()->prepare($query);
+
+    $atualizar->bindParam(":texto", $dados["texto"], PDO::PARAM_STR);
+    $atualizar->bindParam(":id_duvida", $id_duvida, PDO::PARAM_INT);
+    $atualizar->bindParam(":id_usuario", $_SESSION["usuario"]["usu_id"], PDO::PARAM_INT);
+
+    $atualizar->execute();
+
+    if ($atualizar->rowCount()) {
+
+      return true;
+    }
+
+    return ["Houve um erro durante o processo :("];
+  }
+
+  public function delete($id_duvida)
+  {
+
+    if (empty($id_duvida)) {
+
+      return ["Selecione a duvida"];
+    }
+
+    require_once __DIR__ . "/../core/Banco.php";
+    $banco = new Banco();
+    $query = "DELETE FROM duvidas WHERE des_id = :id_duvida AND des_id_usuario = :id_usuario";
+    $deletar = $banco->getConexao()->prepare($query);
+
+    $deletar->bindParam(":id_duvida", $id_duvida, PDO::PARAM_INT);
+    $deletar->bindParam(":id_usuario", $_SESSION["usuario"]["usu_id"], PDO::PARAM_INT);
+
+    $deletar->execute();
+
+    if ($deletar->rowCount()) {
+
+      return true;
+    }
+
+    return ["Houve um erro durante o processo"];
   }
 }
