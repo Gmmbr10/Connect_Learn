@@ -9,10 +9,10 @@ class DesafioModel
     $erros = [];
 
     if (empty($dados["desafio"])) {
-      $erros[0] = "Preencha o campo do título do desafio!";
+      $erros[] = "Preencha o campo do título do desafio!";
     }
     if (empty($dados["conteudo"])) {
-      $erros[1] = "Escreva uma descrição para o desafio!";
+      $erros[] = "Escreva uma descrição para o desafio!";
     }
 
     if (!empty($erros)) {
@@ -41,7 +41,7 @@ class DesafioModel
       return true;
     } else {
 
-      $erros[7] = "Houve algum erro durante o cadastro :(";
+      $erros[] = "Houve algum erro durante o cadastro :(";
 
       return $erros;
     }
@@ -102,13 +102,13 @@ class DesafioModel
 
     if ( empty($dados["titulo"]) ) {
 
-      $erros[1] = "Escreva o título do desafio";
+      $erros[] = "Escreva o título do desafio";
 
     }
 
     if ( empty($dados["descricao"]) ) {
 
-      $erros[2] = "Escreva a descrição do desafio";
+      $erros[] = "Escreva a descrição do desafio";
 
     }
 

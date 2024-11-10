@@ -11,7 +11,7 @@ class DuvidaModel
 
     if (empty($dados["conteudo"])) {
 
-      $erros[0] = "Escreva sua dúvida";
+      $erros[] = "Escreva sua dúvida";
     }
 
     if (!empty($erros)) {
@@ -35,7 +35,7 @@ class DuvidaModel
       return true;
     } else {
 
-      $erros[2] = "Houve algum erro durante o cadastro :(";
+      $erros[] = "Houve algum erro durante o cadastro :(";
 
       return $erros;
     }
@@ -165,7 +165,7 @@ class DuvidaModel
 
     if (empty($dados["texto"])) {
 
-      $erros[1] = "Escreva a duvida";
+      $erros[] = "Escreva a duvida";
     }
 
     if (!empty($erros)) {

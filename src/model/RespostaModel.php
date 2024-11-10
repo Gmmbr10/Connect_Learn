@@ -11,7 +11,7 @@ class RespostaModel {
 
     if ( empty($dados["texto"]) ) {
 
-      $erros[1] = "Escreva sua resposta";
+      $erros[] = "Escreva sua resposta";
 
     }
 
@@ -93,7 +93,7 @@ class RespostaModel {
 
     if (empty($dados["texto"])) {
 
-      $erros[1] = "Escreva a resposta";
+      $erros[] = "Escreva a resposta";
     }
 
     if (!empty($erros)) {

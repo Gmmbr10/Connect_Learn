@@ -10,10 +10,10 @@ class LoginModel
     $erros = [];
 
     if (empty($dados["email"])) {
-      $erros[0] = "Preencha o campo email!";
+      $erros[] = "Preencha o campo email!";
     }
     if (empty($dados["senha"])) {
-      $erros[1] = "Preencha o campo senha!";
+      $erros[] = "Preencha o campo senha!";
     }
 
     if (!empty($erros)) {
@@ -43,12 +43,12 @@ class LoginModel
         return true;
       } else {
 
-        $erros[2] = "Email ou senha inválido(s)!";
+        $erros[] = "Email ou senha inválido(s)!";
         return $erros;
       }
     } else {
 
-      $erros[2] = "Email ou senha inválido(s)!";
+      $erros[] = "Email ou senha inválido(s)!";
       return $erros;
     }
   }

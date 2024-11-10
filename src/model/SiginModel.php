@@ -9,33 +9,33 @@ class SiginModel {
     $erros = [];
 
     if ( empty($dados["nome"]) ) {
-      $erros[0] = "Preencha o campo nome!";
+      $erros[] = "Preencha o campo nome!";
     }
 
     if ( empty($dados["sobrenome"]) ) {
-      $erros[1] = "Preencha o campo sobrenome!";
+      $erros[] = "Preencha o campo sobrenome!";
     }
 
     if ( empty($dados["email"]) ) {
-      $erros[2] = "Preencha o campo email!";
+      $erros[] = "Preencha o campo email!";
     }
     if ( empty($dados["senha"]) ) {
-      $erros[3] = "Preencha o campo senha!";
+      $erros[] = "Preencha o campo senha!";
     }
 
     if ( empty($dados["confirmar_senha"]) ) {
-      $erros[4] = "Preencha o campo confirmar senha!";
+      $erros[] = "Preencha o campo confirmar senha!";
     } else if ( $dados["senha"] != $dados["confirmar_senha"] ) {
-      $erros[3] = "As senhas devem ser iguais!";
-      $erros[4] = "As senhas devem ser iguais!";
+      $erros[] = "As senhas devem ser iguais!";
+      $erros[] = "As senhas devem ser iguais!";
     }
 
     if ( empty($dados["tipo_usuario"]) ) {
-      $erros[5] = "Selecione um tipo de usuário!";
+      $erros[] = "Selecione um tipo de usuário!";
     }
 
     if ( empty($dados["termos"]) || $dados["termos"] != "on" ) {
-      $erros[6] = "Aceite os termos!";
+      $erros[] = "Aceite os termos!";
     }
 
     if ( !empty($erros) ) {
@@ -70,7 +70,7 @@ class SiginModel {
       
     } else {
 
-      $erros[7] = "Houve algum erro durante o cadastro :(";
+      $erros[] = "Houve algum erro durante o cadastro :(";
       
       return $erros;
       
