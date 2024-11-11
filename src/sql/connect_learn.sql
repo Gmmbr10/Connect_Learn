@@ -20,7 +20,10 @@ create table usuarios (
 create table cursos (
   cur_id int auto_increment not null,
   cur_nome varchar(255) not null,
-  primary key(cur_id)
+  cur_tema tinyint not null,
+  cur_id_usuario int not null,
+  primary key(cur_id),
+  foreign key(cur_id_usuario) references usuarios(usu_id)
 );
 
 create table modulos (

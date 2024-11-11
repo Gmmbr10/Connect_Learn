@@ -39,28 +39,17 @@ class TeacherController extends Controller
 
 		if ($url_model[0] == "conteudos") {
 
-			if (!empty($url_model[1])) {
+			if ( isset($_POST["curso"]) ) {
 
-				if ($url_model[1] == "criar_curso") {
+				$model = $this->model("CursoModel")->post();
+	
+				header("location: ./conteudos?action=criar conteudo");
 
-					$this->view("teacher.criar_lista_conteudo");
-					return;
-				}
-
-				if ($url_model[1] == "criar_modulo") {
-
-					$this->view("teacher.adicionar_modulo");
-					return;
-				}
-
-				if ($url_model[1] == "criar_aula") {
-
-					$this->view("teacher.adicionar_conteudo");
-					return;
-				}
 			}
 
-			$this->view("teacher.conteudos");
+			$model = $this->model("CursoModel")->get();
+
+			$this->view("teacher.conteudos",$model);
 			return;
 		}
 
