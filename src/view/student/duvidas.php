@@ -30,6 +30,7 @@ if ( isset($_GET["action"]) && $_GET["action"] == "responder" ) {
   $html = str_replace("{respostas}",$data["respostas"],$html);
   $html = str_replace("{usuario_fez_pergunta}",$data["duvida"]["usu_nome"],$html);
   $html = str_replace("{duvida}",$data["duvida"]["duv_texto"],$html);
+  $html = str_replace("{id_duvida}",$data["duvida"]["duv_id"],$html);
 
 }
 

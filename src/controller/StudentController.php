@@ -82,6 +82,14 @@ class StudentController extends Controller
 					header("location: " . INCLUDE_PATH . "student/duvidas");
 
 				}
+
+				if ( isset($_POST["duvida"]) && !empty($_POST["duvida"]) ) {
+
+					$model = $this->model("RespostaModel")->post();
+
+					header("location: " . INCLUDE_PATH . "student/duvidas?action=responder&duvida=" . $_GET["duvida"]);
+
+				}
 				
 				$model = $this->model("DuvidaModel")->get($_GET["duvida"]);
 

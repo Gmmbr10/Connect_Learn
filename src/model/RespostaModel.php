@@ -25,9 +25,9 @@ class RespostaModel {
     $query = "INSERT INTO respostas (res_texto,res_id_usuario,res_id_duvida) VALUES (:texto,:id_usuario,:id_duvida)";
     $cadastrar = $banco->getConexao()->prepare($query);
 
-    $cadastrar->bindParam(":texto",$dados["texto"],PDO::PARAM_STR);
+    $cadastrar->bindParam(":texto",$dados["conteudo"],PDO::PARAM_STR);
     $cadastrar->bindParam(":id_usuario",$_SESSION["usuario"]["usu_id"],PDO::PARAM_INT);
-    $cadastrar->bindParam(":id_duvida",$id_desafio,PDO::PARAM_INT);
+    $cadastrar->bindParam(":id_duvida",$dados["duvida"],PDO::PARAM_INT);
 
     $cadastrar->execute();
 
