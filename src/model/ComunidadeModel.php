@@ -120,7 +120,7 @@ class ComunidadeModel
         </header>
         <main>
           <span>
-            <a href="' . $linha["com_link"] . '" class="btn">Abrir comunidade</a>
+            <a href="' . $linha["com_link"] . '" class="btn" target="__blank">Abrir comunidade</a>
           </span>
           <span>
             <a href="{include_path}teacher/comunidades?action=editar&comunidade=' . $linha["com_id"] . '" class="btn">Editar</a>
