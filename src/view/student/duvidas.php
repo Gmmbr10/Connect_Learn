@@ -39,6 +39,7 @@ if ( isset($_GET["action"]) && $_GET["action"] == "ver respostas" ) {
   $html = file_get_contents("src/view/student_templates/ver_respostas.html");
   $html = str_replace("{respostas}",$data["respostas"],$html);
   $html = str_replace("{duvida}",$data["duvida"]["duv_texto"],$html);
+  $html = str_replace("{id}",$data["duvida"]["duv_id"],$html);
 
 }
 

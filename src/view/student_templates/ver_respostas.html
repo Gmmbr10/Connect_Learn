@@ -32,9 +32,9 @@
       <span class="row gap-1 align-center">
         <i class="fa-solid fa-angle-right display-5"></i>Ver respostas
       </span>
-      
+
     </nav>
-    
+
     <section class="row gap-2">
 
       <section class="col column gap-2">
@@ -43,15 +43,60 @@
 
           <h2>Pergunta</h2>
 
-          <section class="box rounded">
+          <form action="#" method="POST">
 
-            <main>
+            <section class="input-box">
 
-              {duvida}
-              
-            </main>
-            
-          </section>
+              <label for="conteudo">Altere sua dúvida</label>
+
+              <section>
+                <textarea name="conteudo" id="editor">{duvida}</textarea>
+              </section>
+
+              <span class="error" id="error_conteudo"></span>
+
+            </section>
+
+            <span class="row">
+              <span id="open_termos_modal" class="btn col">Atualizar</span>
+              <a class="btn col btn-error" id="open_deletar_modal">Deletar pergunta</a>
+            </span>
+
+            <dialog id="termos_modal">
+
+              <header class="row justify-between align-center bg-primary p-2">
+
+                <h2>Confirmar</h2>
+
+                <span class="close_termos_modal cursor">
+                  <i class="fa-solid fa-close"></i>
+                </span>
+
+              </header>
+
+              <main class="p-2">
+
+                <p>
+                  Atualizar dúvida?
+                </p>
+
+              </main>
+
+              <footer class="p-2 row justify-end">
+
+                <button type="submit" class="btn cursor" onclick="">
+                  Sim
+                </button>
+
+                <span class="close_termos_modal btn cursor">
+                  Fechar
+                </span>
+
+              </footer>
+
+            </dialog>
+          </form>
+
 
         </section>
 
@@ -84,6 +129,41 @@
 
 </footer>
 
+<dialog id="deletar_modal">
+
+  <header class="row justify-between align-center bg-primary p-2">
+
+    <h2>Deletar pergunta</h2>
+
+    <span class="close_deletar_modal cursor">
+      <i class="fa-solid fa-close"></i>
+    </span>
+
+  </header>
+
+  <main class="p-2">
+
+    <p>
+      Você tem certeza de que deseja excluir sua pergunta?
+    </p>
+
+  </main>
+
+  <footer class="p-2 row justify-end">
+
+    <a href="./deletar_pergunta?duvida={id}" class="btn btn-error">
+      Sim, deletar
+    </a>
+
+    <span class="close_deletar_modal btn cursor">
+      Cancelar
+    </span>
+
+  </footer>
+
+</dialog>
+
+
 <script>
 
   const open_sidebar = document.getElementById("open_sidebar");
@@ -93,18 +173,92 @@
     sidebar.classList.toggle("left-0");
   });
 
-  const quill = new Quill('#editor', {
-    theme: 'snow'
+  const open_termos = document.getElementById("open_termos_modal");
+  const termos_modal = document.getElementById("termos_modal");
+  const close_termos = document.getElementsByClassName("close_termos_modal");
+
+  open_termos.addEventListener("click", () => {
+    termos_modal.showModal();
+    termos_modal.style.display = "grid";
+  })
+
+  for (let i = 0; i < close_termos.length; i++) {
+
+    close_termos[i].addEventListener("click", () => {
+      termos_modal.style.display = "none";
+      termos_modal.close();
+    });
+
+  }
+
+  const open_deletar = document.getElementById("open_deletar_modal");
+  const deletar_modal = document.getElementById("deletar_modal");
+  const close_deletar = document.getElementsByClassName("close_deletar_modal");
+
+  open_deletar.addEventListener("click", () => {
+    deletar_modal.showModal();
+    deletar_modal.style.display = "grid";
+  })
+
+  for (let i = 0; i < close_deletar.length; i++) {
+
+    close_deletar[i].addEventListener("click", () => {
+      deletar_modal.style.display = "none";
+      deletar_modal.close();
+    });
+
+  }
+
+  const form = document.getElementById("form_duvida");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let error = 0;
+
+    let conteudo;
+    const error_conteudo = document.getElementById("error_conteudo");
+    setTimeout(() => {
+      conteudo = document.getElementById("editor");
+      if (!conteudo.value) {
+
+        error_conteudo.innerText = "Escreva sua dúvida!";
+        error++;
+
+      }
+
+      if (error > 0) {
+
+        setTimeout(() => {
+          error_conteudo.innerText = "";
+        }, 5000);
+        return;
+      }
+      form.submit();
+    }, 200);
+
+
   });
 
-  const conteudo = document.getElementById("input_conteudo");
-  
-  function atualizarTextarea() {
-    
-    const html = quill.root.innerHTML;
-    conteudo.value = html;
-    console.log("atualizando");
-    
-  }
-  
+</script>
+<script type="module">
+  import {
+    ClassicEditor,
+    Essentials,
+    Bold,
+    Italic,
+    Font,
+    Paragraph
+  } from 'ckeditor5';
+
+  ClassicEditor
+    .create(document.querySelector('#editor'), {
+      plugins: [Essentials, Bold, Italic, Font, Paragraph],
+      toolbar: [
+        'bold', 'italic', '|',
+        'fontColor', 'fontBackgroundColor'
+      ]
+    })
+    .then( /* ... */)
+    .catch( /* ... */);
 </script>

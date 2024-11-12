@@ -50,7 +50,7 @@ class CursoModel
       return true;
     }
 
-    return ["Houve um problema durante o processo :("];
+    return "Houve um problema durante o processo :(";
   }
 
   public function path()
@@ -101,7 +101,7 @@ class CursoModel
       return true;
     }
 
-    return ["Houve um problema durante o processo :("];
+    return "Houve um problema durante o processo :(";
   }
 
   public function delete($id_curso)
@@ -109,7 +109,7 @@ class CursoModel
 
     if (empty($id_curso)) {
 
-      return ["Selecione uma curso"];
+      return "Selecione uma curso";
     }
 
     require_once __DIR__ . "/../core/Banco.php";
@@ -127,20 +127,52 @@ class CursoModel
       return true;
     }
 
-    return ["Houve um erro durante o processo :("];
+    return "Houve um erro durante o processo :(";
   }
 
-  public function get($id_curso = null)
+  public function get($id_curso_tema = null)
   {
 
     require_once __DIR__ . "/../core/Banco.php";
     $banco = new Banco();
 
-    if (!empty($id_curso)) {
+    if ($_SESSION["usuario"]["usu_tipo"] == 1 && $id_curso_tema) {
+
+      $query = "SELECT * FROM cursos WHERE cur_tema = :tema";
+      $buscar = $banco->getConexao()->prepare($query);
+
+      $buscar->bindParam(":tema",$id_curso_tema,PDO::PARAM_INT);
+
+      $buscar->execute();
+
+      if ($buscar->rowCount()) {
+
+        $string = "";
+
+        while ( $linha = $buscar->fetch(PDO::FETCH_ASSOC) )
+        {
+          $string .= '<section class="box">
+
+            <div class="row p-4"></div>
+
+            <p class="bold">
+              '. $linha["cur_nome"] .'
+            </p>
+            
+          </section>';
+        }
+        
+        return $string;
+      }
+
+      return "Nenhum registro encontrado";
+    }
+
+    if (!empty($id_curso_tema)) {
       $query = "SELECT * FROM cursos INNER JOIN usuarios ON cursos.cur_id_usuario = usuarios.usu_id WHERE cur_id = :curso";
       $buscar = $banco->getConexao()->prepare($query);
 
-      $buscar->bindParam(":curso", $id_curso, PDO::PARAM_INT);
+      $buscar->bindParam(":curso", $id_curso_tema, PDO::PARAM_INT);
 
       $buscar->execute();
 
@@ -155,7 +187,7 @@ class CursoModel
         return $dados;
       }
 
-      return ["Nenhum registro encontrado"];
+      return "Nenhum registro encontrado";
     }
 
     if ($_SESSION["usuario"]["usu_tipo"] == 2) {
@@ -187,7 +219,7 @@ class CursoModel
         return $string;
       }
 
-      return ["Nenhum registro encontrado"];
+      return "Nenhum registro encontrado";
     }
 
     $query = "SELECT * FROM cursos INNER JOIN usuarios ON cursos.cur_id_usuario = usuarios.usu_id";
@@ -200,6 +232,6 @@ class CursoModel
       return true;
     }
 
-    return ["Nenhum registro encontrado"];
+    return "Nenhum registro encontrado";
   }
 }

@@ -270,6 +270,7 @@ body>footer {
   border-radius: 7px;
   cursor: pointer;
   font-size: 18px;
+  text-align: center;
 
   i {
     font-size: 18px;
@@ -416,6 +417,11 @@ i {
   color: #ef4444;
 }
 
+.btn-error {
+  background-color: #ef4444;
+  color: #fff;
+}
+
 .destaque {
   color: var(--primary);
 }
@@ -509,6 +515,7 @@ dialog {
 .box {
   border: 1px solid #222;
   color: var(--text-primary) !important;
+  overflow: hidden;
 
   >* {
     border-bottom: 1px solid #222;

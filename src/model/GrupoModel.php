@@ -36,11 +36,12 @@ class GrupoModel
 
       $query = "INSERT INTO grupos ( gru_nome , gru_id_fundador , gru_id_desafio , gru_tipo , gru_senha ) VALUES ( :nome , :fundador , :desafio , :tipo , :senha )";
       $cadastrar = $banco->getConexao()->prepare($query);
+      $tipo = 2;
 
-      $cadastrar->bindParam(":nome", $dados["nome"], PDO::PARAM_STR);
+      $cadastrar->bindParam(":nome", $dados["equipe"], PDO::PARAM_STR);
       $cadastrar->bindParam(":fundador", $_SESSION["usuario"]["usu_id"], PDO::PARAM_INT);
       $cadastrar->bindParam(":desafio", $id_desafio, PDO::PARAM_INT);
-      $cadastrar->bindParam(":tipo", 2, PDO::PARAM_INT);
+      $cadastrar->bindParam(":tipo", $tipo, PDO::PARAM_INT);
       $cadastrar->bindParam(":senha", $senha, PDO::PARAM_STR);
 
       $cadastrar->execute();
@@ -55,11 +56,12 @@ class GrupoModel
 
     $query = "INSERT INTO grupos ( gru_nome , gru_id_fundador , gru_id_desafio , gru_tipo ) VALUES ( :nome , :fundador , :desafio , :tipo )";
     $cadastrar = $banco->getConexao()->prepare($query);
+    $tipo = 1;
 
-    $cadastrar->bindParam(":nome", $dados["nome"], PDO::PARAM_STR);
+    $cadastrar->bindParam(":nome", $dados["equipe"], PDO::PARAM_STR);
     $cadastrar->bindParam(":fundador", $_SESSION["usuario"]["usu_id"], PDO::PARAM_INT);
     $cadastrar->bindParam(":desafio", $id_desafio, PDO::PARAM_INT);
-    $cadastrar->bindParam(":tipo", 1, PDO::PARAM_INT);
+    $cadastrar->bindParam(":tipo", $tipo, PDO::PARAM_INT);
 
     $cadastrar->execute();
 
@@ -89,11 +91,13 @@ class GrupoModel
         return $buscar->fetch(PDO::FETCH_ASSOC);
       }
 
-      return ["Grupo não encontrado"];
+      return "Grupo não encontrado";
     }
 
-    $query = "SELECT * FROM grupos";
+    $desafio = filter_input(INPUT_GET,"desafio",FILTER_DEFAULT);
+    $query = "SELECT * FROM grupos WHERE gru_id_desafio = :desafio";
     $buscar = $banco->getConexao()->prepare($query);
+    $buscar->bindParam(":desafio", $desafio ,PDO::PARAM_INT);
     $buscar->execute();
 
     if ($buscar->rowCount()) {
@@ -106,8 +110,10 @@ class GrupoModel
           <p class="bold">
             ' . $linha["gru_nome"] . '
           </p>
+
+          <input type="hidden" name="id_equipe" value="' . $linha["gru_id"] . '">
   
-          <a class="btn">Juntar</a>
+          <button type="submit" class="btn">Juntar</button>
         </section>
       </section>';
       }
@@ -115,7 +121,7 @@ class GrupoModel
       return $grupos;
     }
 
-    return ["Nenhum grupo registrado"];
+    return "Nenhum grupo registrado";
   }
 
   public function delete($id_grupo)
@@ -142,6 +148,33 @@ class GrupoModel
 
     return ["Houve um erro durante o processo :("];
     
+  }
+
+  public function juntar()
+  {
+
+    $dados = filter_input_array(INPUT_POST,FILTER_DEFAULT);
+
+    if ( empty($dados["id_equipe"]) ) {
+      return "Escolha uma equipe válida";
+    }
+
+    require_once __DIR__ . "/../core/Banco.php";
+    $banco = new Banco();
+    $query = "INSERT INTO usuarios_grupos VALUES ( :grupo , :usuario )";
+    $juntar = $banco->getConexao()->prepare($query);
+
+    $juntar->bindParam(":grupo",$dados["id_equipe"],PDO::PARAM_INT);
+    $juntar->bindParam(":usuario",$_SESSION["usuario"]["usu_id"],PDO::PARAM_INT);
+
+    $juntar->execute();
+
+    if ( $juntar->rowCount() ) {
+
+      return true;
+    }
+
+    return "Houve um erro durante o processo :(";
   }
   
 }

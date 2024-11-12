@@ -159,7 +159,7 @@
   } from 'ckeditor5';
 
   ClassicEditor
-      .create( document.querySelector( '#editor' ), {
+      .create( document.getElementsByClassName( 'editor' ), {
           plugins: [ Essentials, Bold, Italic, Font, Paragraph ],
           toolbar: [
               'bold', 'italic', '|',

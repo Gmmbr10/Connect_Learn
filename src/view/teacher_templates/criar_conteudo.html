@@ -38,8 +38,7 @@
     <h2>Conteúdos</h2>
 
     <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius numquam incidunt cum exercitationem quos a magni
-      magnam eveniet, provident ea.
+      Crie cursos que inspirem e auxiliem os estudantes. 
     </p>
 
     <section class="row gap-2">
@@ -87,15 +86,13 @@
 
             <section class="input-box">
 
-              <label for="#">Selecione o curso</label>
+              <label for="id_curso">Selecione o curso</label>
 
-              <select name="#" id="input_#">
+              <select name="id_curso" id="input_curso">
 
-                <option value="0">Nome do curso</option>
+                {modulos}
                 
               </select>
-
-              <span class="error" id="error_#"></span>
 
             </section>
 
@@ -120,6 +117,18 @@
         <section class="col rounded">
           <form action="#" method="POST" id="form_aula" class="column gap-2">
             <h2>Adicionar aula</h2>
+
+            <section class="input-box">
+
+              <label for="id_curso">Selecione o curso e módulo</label>
+
+              <select name="id_curso" id="input_curso">
+
+                {cursos}
+                
+              </select>
+
+            </section>
 
             <section class="input-box">
 
@@ -277,7 +286,7 @@
       }, 5000);
         return;
       }
-      form.submit();
+      form_aula.submit();
     }, 200);
 
   });

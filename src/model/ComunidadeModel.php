@@ -42,7 +42,7 @@ class ComunidadeModel {
       return true;
     }
 
-    return ["Houve um problema durante o processo :("];
+    return "Houve um problema durante o processo :(";
     
   }
 
@@ -61,7 +61,7 @@ class ComunidadeModel {
       return true;
     }
 
-    return ["Houve um erro durante o processo :("];
+    return "Houve um erro durante o processo :(";
     
   }
 
@@ -99,7 +99,7 @@ class ComunidadeModel {
       return true;
     }
 
-    return ["Houve um erro durante o processo :("];
+    return "Houve um erro durante o processo :(";
     
   }
 
@@ -108,7 +108,7 @@ class ComunidadeModel {
 
     if ( empty($id_comunidade) ) {
 
-      return ["Selecione uma comunidade"];
+      return "Selecione uma comunidade";
     }
 
     require_once __DIR__ . "/../core/Banco.php";
@@ -126,7 +126,7 @@ class ComunidadeModel {
       return true;
     }
 
-    return ["Houve um erro durante o processo :("];
+    return "Houve um erro durante o processo :(";
     
   }
   

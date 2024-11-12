@@ -45,15 +45,13 @@
 
           <section class="box rounded">
 
-            <header>
-              <p class="bold">Nome do usuário</p>
+            <header class="bg-primary">
+              <p class="bold">{usuario_fez_pergunta}</p>
             </header>
 
             <main>
 
-              <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas ducimus eum molestias error nobis. Quibusdam harum ipsa aliquam reprehenderit incidunt.
-              </p>
+              {duvida}
               
             </main>
             
@@ -63,6 +61,8 @@
         <form action="#" method="POST" id="form_resposta" class="column gap-2">
 
           <section class="input-box">
+
+            <input type="hidden" name="duvida" value="{id_duvida}">
 
             <label for="editor">Monte sua resposta</label>
 
@@ -84,9 +84,7 @@
 
         <h2>Outras respostas</h2>
 
-        <div class="box p-4 rounded"></div>
-        <div class="box p-4 rounded"></div>
-        <div class="box p-4 rounded"></div>
+        {respostas}
 
       </section>
 
@@ -148,6 +146,7 @@
 
 
   });
+  
 </script>
 <script type="module">
   import {

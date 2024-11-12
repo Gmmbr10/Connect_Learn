@@ -7,7 +7,16 @@ if (isset($_GET["action"]) && $_GET["action"] == "lista") {
 
   $html = file_get_contents("src/view/student_templates/lista_conteudos.html");
 
-  $html = str_replace("{nucleo}", ucfirst(strtolower($_GET["nucleo"])), $html);
+  if ($_GET["nucleo"] == 1) {
+
+    $html = str_replace("{nucleo}", "Biológicas", $html);
+  } else if ($_GET["nucleo"] == 2) {
+    $html = str_replace("{nucleo}", "Exatas", $html);
+  } else if ($_GET["nucleo"] == 3) {
+    $html = str_replace("{nucleo}", "Humanas", $html);
+  }
+
+  $html = str_replace("{cursos}", $data, $html);
 }
 
 $navbar = str_replace("{include_path}", INCLUDE_PATH, $navbar);

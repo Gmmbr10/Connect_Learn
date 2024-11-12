@@ -10,7 +10,7 @@ if (!empty($data)) {
 
   if ($data) {
 
-    $resultado = "<p class=\"alert\">" . $data[2] . "</p>";
+    $resultado = "<p class=\"alert\">" . $data[0] . "</p>";
   }
 }
 

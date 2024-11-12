@@ -37,25 +37,63 @@ class TeacherController extends Controller
 			header("location: ../login");
 		}
 
+		if ($url_model[0] == "deletar") {
+
+			$model = $this->model("UsuarioModel")->deletar();
+
+			session_destroy();
+			header("location: ../home");
+		}
+
+		if ($url_model[0] == "deletar_pergunta") {
+
+			$model = $this->model("DuvidaModel")->delete($_GET["duvida"]);
+
+			header("location: ./home");
+		}
+
+		if ($url_model[0] == "deletar_resposta") {
+
+			$model = $this->model("RespostaModel")->delete($_GET["resposta"]);
+
+			header("location: ./duvidas");
+		}
+
 		if ($url_model[0] == "conteudos") {
 
-			if ( isset($_POST["curso"]) ) {
+			if (isset($_POST["curso"])) {
 
 				$model = $this->model("CursoModel")->post();
-	
-				header("location: ./conteudos?action=criar conteudo");
 
+				header("location: ./conteudos?action=criar conteudo");
+			}
+
+			if (isset($_POST["modulo"])) {
+
+				$model = $this->model("ModuloModel")->post();
+
+				header("location: ./conteudos?action=criar conteudo");
+			}
+
+			if (isset($_POST["titulo"])) {
+
+				$model = $this->model("AulaModel")->post();
+
+				header("location: ./conteudos?action=criar conteudo");
+			}
+
+			if (isset($_GET["action"]) && $_GET["action"] == "criar conteudo") {
+
+				$modulos = $this->model("ModuloModel")->getCursos();
+				$cursos = $this->model("ModuloModel")->get();
+
+				$this->view("teacher.conteudos", ["cursos" => $cursos, "modulos" => $modulos]);
+				return;
 			}
 
 			$model = $this->model("CursoModel")->get();
 
-			$this->view("teacher.conteudos",$model);
-			return;
-		}
-
-		if ($url_model[0] == "desafio") {
-
-			$this->view("teacher.desafio");
+			$this->view("teacher.conteudos", $model);
 			return;
 		}
 
@@ -71,14 +109,33 @@ class TeacherController extends Controller
 
 			$dados = $this->model("DesafioModel")->get();
 
-			$this->view("teacher.desafios",["desafios"=>$dados]);
+			$this->view("teacher.desafios", ["desafios" => $dados]);
 			return;
 		}
 
 		if ($url_model[0] == "duvidas") {
+			if (isset($_GET["action"]) && $_GET["action"] == "responder") {
+				if (empty($_GET["duvida"])) {
+
+					header("location: " . INCLUDE_PATH . "teacher/duvidas");
+				}
+
+				if (isset($_POST["duvida"]) && !empty($_POST["duvida"])) {
+
+					$model = $this->model("RespostaModel")->post();
+
+					header("location: " . INCLUDE_PATH . "teacher/duvidas?action=responder&duvida=" . $_GET["duvida"]);
+				}
+
+				$model = $this->model("DuvidaModel")->get($_GET["duvida"]);
+
+				$this->view("teacher.duvidas", $model);
+				return;
+			}
+
 			$model = $this->model("DuvidaModel")->get();
 
-			$this->view("teacher.duvidas",$model);
+			$this->view("teacher.duvidas", $model);
 			return;
 		}
 
@@ -105,6 +162,26 @@ class TeacherController extends Controller
 		if ($url_model[0] == "suporte") {
 
 			$this->view("teacher.suporte");
+			return;
+		}
+		
+		if ($url_model[0] == "perfil") {
+
+			if (isset($_POST["senha"])) {
+
+				$model = $this->model("UsuarioModel")->atualizarSenha();
+				
+				header("location: ./perfil");
+			}
+
+			if (isset($_POST["nome"])) {
+
+				$model = $this->model("UsuarioModel")->atualizar();
+				
+				header("location: ./perfil");
+			}
+
+			$this->view("student.perfil");
 			return;
 		}
 

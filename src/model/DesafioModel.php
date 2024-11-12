@@ -134,7 +134,7 @@ class DesafioModel
       return true;
     }
 
-    return ["Houve um erro durante o processo :("];
+    return "Houve um erro durante o processo :(";
     
   }
 
@@ -143,7 +143,7 @@ class DesafioModel
 
     if ( empty($id_desafio) ) {
 
-      return ["Selecione o desafio"];
+      return "Selecione o desafio";
     }
     
     require_once __DIR__ . "/../core/Banco.php";
@@ -161,6 +161,6 @@ class DesafioModel
       return true;
     }
 
-    return ["Houve um erro durante o processo"];
+    return "Houve um erro durante o processo";
   }
 }

@@ -72,6 +72,35 @@ class DuvidaModel
 
           while ($linha = $buscar_respostas->fetch(PDO::FETCH_ASSOC)) {
 
+            if ($linha["res_id_usuario"] == $_SESSION["usuario"]["usu_id"]) {
+
+              $respostas .= '<section class="box rounded">
+
+              <header class="bg-primary row align-center justify-between">' . $linha["usu_nome"] . ' <a href="./deletar_resposta?resposta=' . $linha["res_id"] . '" class="btn btn-error">Deletar resposta</a> </header>
+
+              <main>
+              <form action="#" method="POST">
+                <section class="input-box">
+
+                  <label for="conteudo">Reescreva sua resposta</label>
+
+                  <section>
+                    <textarea name="conteudo" id="editor">
+                    ' . $linha["res_texto"] . '
+                    </textarea>
+                  </section>
+
+                  <span class="error" id="error_conteudo"></span>
+
+                </section>
+              <button type="submit">Atualizar resposta</button>
+              </form>
+              </main>
+            
+            </section>';
+              continue;
+            }
+
             $respostas .= '<section class="box rounded">
 
               <header class="bg-primary">' . $linha["usu_nome"] . '</header>
@@ -163,7 +192,7 @@ class DuvidaModel
     $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
     $erros = [];
 
-    if (empty($dados["texto"])) {
+    if (empty($dados["conteudo"])) {
 
       $erros[] = "Escreva a duvida";
     }
@@ -178,7 +207,7 @@ class DuvidaModel
     $query = "UPDATE duvidas SET duv_texto = :texto WHERE duv_id = :id_duvida AND duv_id_usuario = :id_usuario";
     $atualizar = $banco->getConexao()->prepare($query);
 
-    $atualizar->bindParam(":texto", $dados["texto"], PDO::PARAM_STR);
+    $atualizar->bindParam(":texto", $dados["conteudo"], PDO::PARAM_STR);
     $atualizar->bindParam(":id_duvida", $id_duvida, PDO::PARAM_INT);
     $atualizar->bindParam(":id_usuario", $_SESSION["usuario"]["usu_id"], PDO::PARAM_INT);
 
@@ -189,7 +218,7 @@ class DuvidaModel
       return true;
     }
 
-    return ["Houve um erro durante o processo :("];
+    return "Houve um erro durante o processo :(";
   }
 
   public function delete($id_duvida)
@@ -197,12 +226,12 @@ class DuvidaModel
 
     if (empty($id_duvida)) {
 
-      return ["Selecione a duvida"];
+      return "Selecione a duvida";
     }
 
     require_once __DIR__ . "/../core/Banco.php";
     $banco = new Banco();
-    $query = "DELETE FROM duvidas WHERE des_id = :id_duvida AND des_id_usuario = :id_usuario";
+    $query = "DELETE FROM duvidas WHERE duv_id = :id_duvida AND duv_id_usuario = :id_usuario";
     $deletar = $banco->getConexao()->prepare($query);
 
     $deletar->bindParam(":id_duvida", $id_duvida, PDO::PARAM_INT);
@@ -215,6 +244,6 @@ class DuvidaModel
       return true;
     }
 
-    return ["Houve um erro durante o processo"];
+    return "Houve um erro durante o processo";
   }
 }

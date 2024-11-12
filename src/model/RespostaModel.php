@@ -36,7 +36,7 @@ class RespostaModel {
       return true;
     }
 
-    return ["Houve um erro no processo :("];
+    return "Houve um erro no processo :(";
     
   }
 
@@ -45,7 +45,7 @@ class RespostaModel {
 
     if ( empty($id_resposta) ) {
 
-      return ["Selecione uma resposta"];
+      return "Selecione uma resposta";
     }
 
     require_once __DIR__ . "/../core/Banco.php";
@@ -62,7 +62,7 @@ class RespostaModel {
 
     if ( !$linha ) {
 
-      return ["Resposta não encontrada"];
+      return "Resposta não encontrada";
     }
 
     $quantidade_like = $quantidadeAdicionar + $linha["res_like"];
@@ -80,7 +80,7 @@ class RespostaModel {
       return true;
     }
 
-    return ["Houve algum erro durante o processo :("];
+    return "Houve algum erro durante o processo :(";
     
   }
 
@@ -117,7 +117,7 @@ class RespostaModel {
       return true;
     }
 
-    return ["Houve um erro durante o processo :("];
+    return "Houve um erro durante o processo :(";
   }
 
   public function delete($id_resposta)
@@ -125,7 +125,7 @@ class RespostaModel {
 
     if (empty($id_resposta)) {
 
-      return ["Selecione a resposta"];
+      return "Selecione a resposta";
     }
 
     require_once __DIR__ . "/../core/Banco.php";
@@ -143,7 +143,7 @@ class RespostaModel {
       return true;
     }
 
-    return ["Houve um erro durante o processo"];
+    return "Houve um erro durante o processo";
   }
   
 }
