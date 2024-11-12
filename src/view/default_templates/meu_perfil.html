@@ -14,6 +14,21 @@
 
       <section class="col column gap-2">
 
+        <form action="#" method="POST" id="form_perfil" class="flex column gap-1" enctype="multipart/form-data">
+
+          <section class="input-box file-box">
+
+            <label for="input_foto"><i class="fa-solid fa-upload"></i> Upload imagem de perfil</label>
+
+            <input type="file" name="foto" id="input_foto">
+
+            <span class="error" id="error_foto"></span>
+
+          </section>
+
+          <input type="submit" value="Atualizar foto de perfil" class="btn">
+
+        </form>
         <form action="#" method="POST" id="form_dados" class="flex column gap-1">
 
           <section class="input-box">
@@ -232,6 +247,75 @@
 
     form_senha.submit();
 
+  });
+
+  function isValidFile(file) {
+    // Verifica o tipo de arquivo (por exemplo, somente imagens e documentos PDF)
+    const validTypes = ["image/jpeg", "image/png", "image/jpg"];
+
+    // Verificar o tipo do arquivo
+    if (!validTypes.includes(file.type)) {
+      return false;
+    }
+
+    // Verificar o tamanho do arquivo (exemplo: até 5MB)
+    const maxSize = 5 * 1024 * 1024; // 5MB
+    if (file.size > maxSize) {
+      return false;
+    }
+
+    return true;
+  }
+
+  const form_perfil = document.getElementById("form_perfil");
+  const file = document.getElementById("input_foto");
+  const error_foto = document.getElementById("error_foto");
+
+  file.addEventListener("change", function (event) {
+    const files = event.target.files;
+    if (files.length === 0) {
+      error_foto.textContent = "Nenhum arquivo selecionado.";
+    } else {
+      error_foto.textContent = "";
+      
+      // Verificar tipo e tamanho dos arquivos
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (!isValidFile(file)) {
+          error_foto.innerHTML += `<br>Erro: O arquivo <strong>${file.name}</strong> não é válido.`;
+        } else {
+          error_foto.style.color = "green";
+          error_foto.innerHTML += `<br>Arquivo <strong>${file.name}</strong> está pronto para upload.`;
+        }
+      }
+    }
+  });
+
+  form_perfil.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    console.log(file);
+
+    const files = file.files;
+    if (files.length === 0) {
+      error_foto.textContent = "Por favor, selecione pelo menos um arquivo para o upload.";
+      return;
+    }
+
+    // Verificar novamente os arquivos antes de enviar
+    let validFiles = true;
+    for (let i = 0; i < files.length; i++) {
+      if (!isValidFile(files[i])) {
+        validFiles = false;
+        break;
+      }
+    }
+
+    if (validFiles) {
+      form_perfil.submit();
+    } else {
+      error_foto.textContent = "Alguns arquivos não são válidos. Por favor, verifique.";
+    }
   });
 
 </script>

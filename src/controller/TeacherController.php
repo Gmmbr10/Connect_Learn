@@ -167,9 +167,19 @@ class TeacherController extends Controller
 		
 		if ($url_model[0] == "perfil") {
 
+			if ( isset($_FILES["foto"]) ) {
+
+				$model = $this->model("FileModel")->post($_FILES["foto"]);
+				
+				header("location: ./perfil");
+			}
+			
 			if (isset($_POST["senha"])) {
 
 				$model = $this->model("UsuarioModel")->atualizarSenha();
+
+				$_SESSION["usuario"]["usu_id_foto"] = $model["arq_id"];
+				$_SESSION["usuario"]["arq_caminho"] = $model["arq_caminho"];
 				
 				header("location: ./perfil");
 			}

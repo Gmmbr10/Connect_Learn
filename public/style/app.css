@@ -491,6 +491,24 @@ input[type=radio]:checked::before {
   transform: translate(-50%, -50%);
 }
 
+input[type=file] {
+  display: none;
+}
+
+.input-box.file-box label {
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  padding: 10px 40px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 7px;
+
+  i {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+}
+
 dialog::backdrop {
   background-color: rgba(2, 0, 20, 0.75);
 }

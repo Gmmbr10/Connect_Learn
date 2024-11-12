@@ -2,6 +2,17 @@ create database connect_learn;
 
 use connect_learn;
 
+# arquivos
+
+create table arquivos (
+  arq_id int auto_increment not null,
+  arq_id_usuario int not null,
+  arq_caminho varchar(255) not null,
+  primary key(arq_id),
+  foreign key(arq_id_usuario) references usuarios(usu_id) ON DELETE CASCADE
+);
+
+# fim arquivos
 # usuarios
 
 create table usuarios (
@@ -11,7 +22,9 @@ create table usuarios (
   usu_senha varchar(100) not null,
   usu_tipo tinyint not null default(1),
   usu_tel varchar(50),
-  primary key(usu_id)
+  usu_id_foto int,
+  primary key(usu_id),
+  foreign key(usu_id_foto) references arquivos(arq_id)
 );
 
 # fim usuarios
@@ -87,7 +100,7 @@ create table desafios (
 create table comunidades (
   com_id int not null auto_increment,
   com_nome varchar(150) not null,
-  com_link varchar(255) not null,
+  com_url varchar(255) not null,
   com_id_fundador int not null,
   primary key(com_id),
   foreign key(com_id_fundador) references usuarios(usu_id) ON DELETE CASCADE
