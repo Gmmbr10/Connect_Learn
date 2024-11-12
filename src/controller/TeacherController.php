@@ -100,8 +100,10 @@ class TeacherController extends Controller
 		if ($url_model[0] == "desafios") {
 			if (isset($_GET["action"]) && $_GET["action"] == "criar" && isset($_POST["desafio"])) {
 
-				$model = $this->model("DesafioModel")->post();
-
+				$foto = $this->model("FileModel")->post($_FILES["foto"]);
+				
+				$model = $this->model("DesafioModel")->post($foto["arq_id"]);
+				
 				$this->view("teacher.desafios", $model);
 
 				return;

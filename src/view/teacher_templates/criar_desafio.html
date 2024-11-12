@@ -5,11 +5,11 @@
   <nav class="sidebar" id="sidebar">
 
     {navbar}
-    
+
   </nav>
 
   <section class="container p-3">
-    
+
     <nav class="row gap-1 align-center">
 
       <a href="{include_path}teacher/desafios" class="row gap-1 align-center">Desafios</a>
@@ -17,14 +17,14 @@
       <span class="row gap-1 align-center">
         <i class="fa-solid fa-angle-right display-5"></i>Criar desafio
       </span>
-      
+
     </nav>
-    
+
     <h2>Desafio</h2>
 
     <section class="row">
 
-      <form action="#" method="POST" id="form_desafio" class="col column gap-2">
+      <form action="#" method="POST" id="form_desafio" enctype="multipart/form-data" class="col column gap-2">
 
         {resultado}
 
@@ -35,9 +35,9 @@
           <input type="text" name="desafio" id="input_desafio">
 
           <span class="error" id="error_desafio"></span>
-          
+
         </section>
-        
+
         <section class="input-box">
 
           <label for="conteudo">Escreva sobre o desafio</label>
@@ -47,7 +47,7 @@
           </section>
 
           <span class="error" id="error_conteudo"></span>
-          
+
         </section>
 
         <section class="input-box">
@@ -57,15 +57,25 @@
           <input type="text" name="link" id="input_link">
 
           <span class="error" id="error_link"></span>
-          
+
+        </section>
+
+        <section class="input-box file-box">
+
+          <label for="input_foto"><i class="fa-solid fa-upload"></i> Upload imagem de perfil</label>
+
+          <input type="file" name="foto" id="input_foto">
+
+          <span class="error" id="error_foto"></span>
+
         </section>
 
         <button type="submit" class="btn">Enviar</button>
-        
+
       </form>
 
       <span class="col"></span>
-      
+
     </section>
 
   </section>
@@ -90,21 +100,63 @@
   const open_sidebar = document.getElementById("open_sidebar");
   const sidebar = document.getElementById("sidebar");
 
-  open_sidebar.addEventListener("click",()=>{
+  open_sidebar.addEventListener("click", () => {
     sidebar.classList.toggle("left-0");
+  });
+
+  function isValidFile(file) {
+    // Verifica o tipo de arquivo (por exemplo, somente imagens e documentos PDF)
+    const validTypes = ["image/jpeg", "image/png", "image/jpg"];
+
+    // Verificar o tipo do arquivo
+    if (!validTypes.includes(file.type)) {
+      return false;
+    }
+
+    // Verificar o tamanho do arquivo (exemplo: até 5MB)
+    const maxSize = 5 * 1024 * 1024; // 5MB
+    if (file.size > maxSize) {
+      return false;
+    }
+
+    return true;
+  }
+
+  const form_perfil = document.getElementById("form_perfil");
+  const file = document.getElementById("input_foto");
+  const error_foto = document.getElementById("error_foto");
+
+  file.addEventListener("change", function (event) {
+    const files = event.target.files;
+    if (files.length === 0) {
+      error_foto.textContent = "Nenhum arquivo selecionado.";
+    } else {
+      error_foto.textContent = "";
+
+      // Verificar tipo e tamanho dos arquivos
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (!isValidFile(file)) {
+          error_foto.innerHTML += `<br>Erro: O arquivo <strong>${file.name}</strong> não é válido.`;
+        } else {
+          error_foto.style.color = "green";
+          error_foto.innerHTML += `<br>Arquivo <strong>${file.name}</strong> está pronto para upload.`;
+        }
+      }
+    }
   });
 
   const form_desafio = document.getElementById("form_desafio");
 
-  form_desafio.addEventListener("submit",(e)=>{
+  form_desafio.addEventListener("submit", (e) => {
     e.preventDefault();
 
     let error = 0;
-    
+
     const desafio = document.getElementById("input_desafio").value;
     const error_desafio = document.getElementById("error_desafio");
 
-    if ( !desafio ) {
+    if (!desafio) {
 
       error_desafio.innerText = "Insira o título do desafio";
       error++;
@@ -113,10 +165,52 @@
     const link = document.getElementById("input_link").value;
     const error_link = document.getElementById("error_link");
 
-    if ( !link ) {
+    if (!link) {
 
       error_link.innerText = "Insira o link do desafio";
       error++;
+    }
+
+    const files = file.files;
+    if (files.length === 0) {
+      error_foto.textContent = "Por favor, selecione pelo menos um arquivo para o upload.";
+      let conteudo;
+      const error_conteudo = document.getElementById("error_conteudo");
+      setTimeout(() => {
+        conteudo = document.getElementById("editor");
+        if (!conteudo.value) {
+
+          error_conteudo.innerText = "Crie uma descrição para o desafio";
+          error++;
+        }
+
+        if (error > 0) {
+
+          setTimeout(() => {
+            error_desafio.innerText = "";
+            error_conteudo.innerText = "";
+            error_link.innerText = "";
+            error_foto.innerText = "";
+          }, 5000);
+
+          return;
+        }
+      }, 200);
+      return;
+    }
+
+    // Verificar novamente os arquivos antes de enviar
+    let validFiles = true;
+    for (let i = 0; i < files.length; i++) {
+      if (!isValidFile(files[i])) {
+        validFiles = false;
+        break;
+      }
+    }
+
+    if (!validFiles) {
+      error_foto.textContent = "Alguns arquivos não são válidos. Por favor, verifique.";
+      error++
     }
 
     let conteudo;
@@ -127,7 +221,6 @@
 
         error_conteudo.innerText = "Crie uma descrição para o desafio";
         error++;
-
       }
 
       if (error > 0) {
@@ -136,34 +229,35 @@
           error_desafio.innerText = "";
           error_conteudo.innerText = "";
           error_link.innerText = "";
+          error_foto.innerText = "";
         }, 5000);
-        
+
         return;
       }
       form_desafio.submit();
     }, 200);
-    
+
   });
-  
+
 </script>
 <script type="module">
   import {
-      ClassicEditor,
-      Essentials,
-      Bold,
-      Italic,
-      Font,
-      Paragraph
+    ClassicEditor,
+    Essentials,
+    Bold,
+    Italic,
+    Font,
+    Paragraph
   } from 'ckeditor5';
 
   ClassicEditor
-      .create( document.querySelector( '#editor' ), {
-          plugins: [ Essentials, Bold, Italic, Font, Paragraph ],
-          toolbar: [
-              'bold', 'italic', '|',
-              'fontColor', 'fontBackgroundColor'
-          ]
-      } )
-      .then( /* ... */ )
-      .catch( /* ... */ );
+    .create(document.querySelector('#editor'), {
+      plugins: [Essentials, Bold, Italic, Font, Paragraph],
+      toolbar: [
+        'bold', 'italic', '|',
+        'fontColor', 'fontBackgroundColor'
+      ]
+    })
+    .then( /* ... */)
+    .catch( /* ... */);
 </script>

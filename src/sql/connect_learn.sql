@@ -90,8 +90,10 @@ create table desafios (
   des_descricao text not null,
   des_id_usuario int not null,
   des_url varchar(255) not null,
+  des_id_foto int not null,
   primary key(des_id),
-  foreign key(des_id_usuario) references usuarios(usu_id) ON DELETE CASCADE
+  foreign key(des_id_usuario) references usuarios(usu_id) ON DELETE CASCADE,
+  foreign key(des_id_foto) references arquivos(arq_id) ON DELETE CASCADE
 );
 
 # fim desafios

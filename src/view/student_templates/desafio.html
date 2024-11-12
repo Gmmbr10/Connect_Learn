@@ -26,23 +26,21 @@
 
       <section class="col column gap-2">
 
-        <section class="box p-4"></section>
+        <img src="{link_img}">
 
       </section>
 
       <section class="col column gap-2">
 
-        {pergunta}
+        <p><span class="bold">Autor:</span> {criador}</p>
+
+        <section>
+          {pergunta}
+        </section>
+        
+        <a href="{discord}" class="btn text-center" target="_blank">Participar</a>
 
       </section>
-
-    </section>
-
-    <section class="row gap-2">
-
-      <a href="{include_path}student/desafios?action=criar equipe&desafio={id}" class="btn col text-center">Criar equipe</a>
-
-      <a href="{include_path}student/desafios?action=juntar equipe&desafio={id}" class="btn col text-center">Juntar a uma equipe</a>
 
     </section>
 

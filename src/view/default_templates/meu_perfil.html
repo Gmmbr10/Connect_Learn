@@ -294,8 +294,6 @@
   form_perfil.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    console.log(file);
-
     const files = file.files;
     if (files.length === 0) {
       error_foto.textContent = "Por favor, selecione pelo menos um arquivo para o upload.";

@@ -2,7 +2,7 @@
 
 class DesafioModel
 {
-  public function post()
+  public function post($id_foto)
   {
 
     $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
@@ -20,6 +20,10 @@ class DesafioModel
       $erros[] = "Cole o link do discord de seu desafio!";
     }
 
+    if (empty($id_foto)) {
+      $erros[] = "Insira uma imagem";
+    }
+
     if (!empty($erros)) {
 
       return $erros;
@@ -33,13 +37,14 @@ class DesafioModel
     require_once __DIR__ . "/../core/Banco.php";
 
     $conexao = new Banco();
-    $query = "INSERT INTO desafios (des_titulo,des_descricao,des_id_usuario,des_url) VALUE (:titulo,:descricao,:id_usuario,:discord)";
+    $query = "INSERT INTO desafios (des_titulo,des_descricao,des_id_usuario,des_url,des_id_foto) VALUE (:titulo,:descricao,:id_usuario,:discord,:foto)";
     $cadastrar = $conexao->getConexao()->prepare($query);
 
     $cadastrar->bindParam(":titulo", $desafio["desafio"], PDO::PARAM_STR);
     $cadastrar->bindParam(":descricao", $desafio["descricao"], PDO::PARAM_STR);
     $cadastrar->bindParam(":discord", $desafio["url"], PDO::PARAM_STR);
     $cadastrar->bindParam(":id_usuario", $_SESSION["usuario"]["usu_id"], PDO::PARAM_INT);
+    $cadastrar->bindParam(":foto", $id_foto, PDO::PARAM_INT);
 
     $cadastrar->execute();
 
@@ -58,12 +63,11 @@ class DesafioModel
   {
 
     require_once(__DIR__ . "/../core/Banco.php");
-    $query = "SELECT * FROM desafios INNER JOIN usuarios ON desafios.des_id_usuario = usuarios.usu_id";
     $conexao = new Banco();
 
     if ($id_desafio != null) {
 
-      $query = "SELECT * FROM desafios INNER JOIN usuarios ON desafios.des_id_usuario = usuarios.usu_id WHERE des_id = :id_desafio";
+      $query = "SELECT * FROM desafios INNER JOIN usuarios ON desafios.des_id_usuario = usuarios.usu_id INNER JOIN arquivos ON desafios.des_id_foto = arquivos.arq_id WHERE des_id = :id_desafio";
       $buscar = $conexao->getConexao()->prepare($query);
 
       $buscar->bindParam(":id_desafio", $id_desafio, PDO::PARAM_INT);
@@ -78,6 +82,7 @@ class DesafioModel
       return false;
     }
 
+    $query = "SELECT * FROM desafios INNER JOIN usuarios ON desafios.des_id_usuario = usuarios.usu_id INNER JOIN arquivos ON desafios.des_id_foto = arquivos.arq_id";
     $buscar = $conexao->getConexao()->prepare($query);
 
     $buscar->execute();
@@ -87,10 +92,13 @@ class DesafioModel
       $string = "";
 
       while ($linha = $buscar->fetch(PDO::FETCH_ASSOC)) {
-        $string .= '<a href="desafios?action=visualizar&desafio='. $linha["des_id"] .'" class="box">
-        <p>' . $linha["des_titulo"] . '</p>
-        <section>' . $linha["des_descricao"] . '</section>
-        <p>' . $linha["usu_nome"] . '</p>
+        $string .= '<a href="desafios?action=visualizar&desafio='. $linha["des_id"] .'" class="box-2">
+        <header>
+          <img src="'. $linha["arq_caminho"] .'">
+        </header>
+        <main>
+          '. $linha["des_titulo"] .'
+        </main>
       </a>';
       }
 
