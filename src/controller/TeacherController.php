@@ -181,7 +181,7 @@ class TeacherController extends Controller
 				header("location: ./perfil");
 			}
 
-			$this->view("student.perfil");
+			$this->view("teacher.perfil");
 			return;
 		}
 
