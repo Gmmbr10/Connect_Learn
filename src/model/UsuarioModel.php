@@ -106,4 +106,22 @@ class UsuarioModel
     return "Houve um erro durante o processo :(";
     
   }
+
+  public function atualizarFoto($id_foto)
+  {
+
+    $id_usuario = $_SESSION["usuario"]["usu_id"];
+
+    require_once __DIR__ . "/../core/Banco.php";
+    $banco = new Banco();
+
+    $query = "UPDATE usuarios SET usu_id_foto = :id WHERE usu_id =:usuario";
+    $atualizar = $banco->getConexao()->prepare($query);
+    $atualizar->bindParam(":id", $id_foto, PDO::PARAM_INT);
+    $atualizar->bindParam(":usuario", $id_usuario, PDO::PARAM_INT);
+    $atualizar->execute();
+
+    return true;
+    
+  }
 }

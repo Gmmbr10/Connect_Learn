@@ -27,7 +27,7 @@ class LoginModel
     require_once __DIR__ . "/../core/Banco.php";
 
     $conexao = new Banco();
-    $query = "SELECT * FROM usuarios WHERE usu_email = :email";
+    $query = "SELECT * FROM usuarios LEFT JOIN arquivos ON usuarios.usu_id_foto = arquivos.arq_id WHERE usu_email = :email";
     $buscar = $conexao->getConexao()->prepare($query);
 
     $buscar->bindParam(":email", $usuario["email"], PDO::PARAM_STR);

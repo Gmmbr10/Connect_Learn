@@ -164,30 +164,32 @@ class TeacherController extends Controller
 			$this->view("teacher.suporte");
 			return;
 		}
-		
+
 		if ($url_model[0] == "perfil") {
 
-			if ( isset($_FILES["foto"]) ) {
+			if (isset($_FILES["foto"])) {
 
 				$model = $this->model("FileModel")->post($_FILES["foto"]);
-				
+
+				$_SESSION["usuario"]["usu_id_foto"] = $model["arq_id"];
+				$_SESSION["usuario"]["arq_caminho"] = $model["arq_caminho"];
+
+				$model = $this->model("UsuarioModel")->atualizarFoto($model["arq_id"]);
+	
 				header("location: ./perfil");
 			}
-			
+
 			if (isset($_POST["senha"])) {
 
 				$model = $this->model("UsuarioModel")->atualizarSenha();
 
-				$_SESSION["usuario"]["usu_id_foto"] = $model["arq_id"];
-				$_SESSION["usuario"]["arq_caminho"] = $model["arq_caminho"];
-				
 				header("location: ./perfil");
 			}
 
 			if (isset($_POST["nome"])) {
 
 				$model = $this->model("UsuarioModel")->atualizar();
-				
+
 				header("location: ./perfil");
 			}
 
