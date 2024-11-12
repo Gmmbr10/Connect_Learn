@@ -79,22 +79,7 @@ class DuvidaModel
               <header class="bg-primary row align-center justify-between">' . $linha["usu_nome"] . ' <a href="./deletar_resposta?resposta=' . $linha["res_id"] . '" class="btn btn-error">Deletar resposta</a> </header>
 
               <main>
-              <form action="#" method="POST">
-                <section class="input-box">
-
-                  <label for="conteudo">Reescreva sua resposta</label>
-
-                  <section>
-                    <textarea name="conteudo" id="editor">
                     ' . $linha["res_texto"] . '
-                    </textarea>
-                  </section>
-
-                  <span class="error" id="error_conteudo"></span>
-
-                </section>
-              <button type="submit">Atualizar resposta</button>
-              </form>
               </main>
             
             </section>';
