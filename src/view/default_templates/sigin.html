@@ -1,6 +1,6 @@
 <header class="container bg-primary p-2 row justify-between">
 
-  <img src="#" alt="logo">
+  <img src="{logo_header}">
 
   <nav class="navbar">
 
@@ -29,42 +29,42 @@
           <section class="input-box col">
 
             <label for="nome">Nome</label>
-  
+
             <input type="text" name="nome" id="input_nome">
-  
+
             <span class="error" id="error_nome"></span>
-  
+
           </section>
           <section class="input-box col">
 
             <label for="sobrenome">Sobrenome</label>
-  
+
             <input type="text" name="sobrenome" id="input_sobrenome">
-  
+
             <span class="error" id="error_sobrenome"></span>
-  
+
           </section>
-          
+
         </section>
         <section class="column gap-05">
           <section class="row gap-2">
 
             <section class="input-box-checkbox col">
-  
+
               <input type="radio" value="estudante" name="tipo_usuario" id="input_estudante">
-              
+
               <label for="input_estudante">Estudante</label>
-  
+
             </section>
-  
+
             <section class="input-box-checkbox col">
-  
+
               <input type="radio" value="professor" name="tipo_usuario" id="input_professor">
-              
+
               <label for="input_professor">Professor</label>
-  
+
             </section>
-            
+
           </section>
           <span class="error" id="error_tipo_usuario"></span>
         </section>
@@ -106,37 +106,37 @@
         </section>
         <section class="column gap-05">
           <section class="input-box-checkbox">
-  
+
             <input type="checkbox" name="termos" id="input_termos">
-            
+
             <p>
               <label for="input_termos">Eu li e concordo com os</label>
               <span class="destaque cursor" id="open_termos_modal">Termos de uso</span>
             </p>
-  
+
           </section>
           <span class="error" id="error_termos"></span>
         </section>
 
         <input type="submit" value="Cadastrar" class="btn">
-        
+
       </form>
-    
+
     </section>
 
     <section class="col column justify-center align-center">
 
-      <img src="#" alt="logo">
-      
+      <img src="{logo_header}">
+
     </section>
-    
+
   </section>
-  
+
 </main>
 
 <footer class="container p-2 row justify-between align-center">
 
-  <img src="#" alt="logo">
+  <img src="{logo_header}">
 
   <nav class="navbar">
 
@@ -156,15 +156,18 @@
     <span class="close_termos_modal cursor">
       <i class="fa-solid fa-close"></i>
     </span>
-    
+
   </header>
 
   <main class="p-2">
 
     <p>
-      O cliente tem a possibilidade de, a qualquer momento, solicitar a anulação de seu registro no site da ConnectLearn. A remoção de seu cadastro será efetuada com a maior celeridade possível, desde que não sejam identificadas pendências financeiras. O site não se responsabiliza por danos de qualquer natureza e nem pela conduta dos usuários.
+      O cliente tem a possibilidade de, a qualquer momento, solicitar a anulação de seu registro no site da
+      ConnectLearn. A remoção de seu cadastro será efetuada com a maior celeridade possível, desde que não sejam
+      identificadas pendências financeiras. O site não se responsabiliza por danos de qualquer natureza e nem pela
+      conduta dos usuários.
     </p>
-    
+
   </main>
 
   <footer class="p-2 row justify-end">
@@ -172,9 +175,9 @@
     <span class="close_termos_modal btn cursor">
       Fechar
     </span>
-    
+
   </footer>
-  
+
 </dialog>
 
 <script>
@@ -183,27 +186,27 @@
   const termos_modal = document.getElementById("termos_modal");
   const close_termos = document.getElementsByClassName("close_termos_modal");
 
-  open_termos.addEventListener("click",()=>{
+  open_termos.addEventListener("click", () => {
     termos_modal.showModal();
     termos_modal.style.display = "grid";
   })
 
-  for ( let i = 0 ; i < close_termos.length ; i++ ) {
+  for (let i = 0; i < close_termos.length; i++) {
 
-    close_termos[i].addEventListener("click",()=>{
+    close_termos[i].addEventListener("click", () => {
       termos_modal.style.display = "none";
       termos_modal.close();
     });
 
   }
-  
+
   const form = document.getElementById("form_sigin");
 
-  form.addEventListener("submit",(e)=>{
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
 
     let errors = 0;
-    
+
     const nome = document.getElementById("input_nome").value;
     const error_nome = document.getElementById("error_nome");
 
@@ -211,34 +214,34 @@
       error_nome.innerText = "Preencha o campo nome!";
       errors++;
     }
-    
+
     const sobrenome = document.getElementById("input_sobrenome").value;
     const error_sobrenome = document.getElementById("error_sobrenome");
-    
+
     if (!sobrenome) {
       error_sobrenome.innerText = "Preencha o campo sobrenome!";
       errors++;
     }
-    
+
     const email = document.getElementById("input_email").value;
     const error_email = document.getElementById("error_email");
-    
+
     if (!email) {
       error_email.innerText = "Preencha o campo email!";
       errors++;
     }
-    
+
     const senha = document.getElementById("input_senha").value;
     const error_senha = document.getElementById("error_senha");
-    
+
     if (!senha) {
       error_senha.innerText = "Preencha o campo senha!";
       errors++;
     }
-    
+
     const confirmar_senha = document.getElementById("input_confirmar_senha").value;
     const error_confirmar_senha = document.getElementById("error_confirmar_senha");
-    
+
     if (!confirmar_senha) {
       error_confirmar_senha.innerText = "Preencha o campo confirmar senha!";
       errors++;
@@ -246,7 +249,7 @@
 
     const termos = document.getElementById("input_termos").checked;
     const error_termos = document.getElementById("error_termos");
-    
+
     if (!termos) {
       error_termos.innerText = "Aceite os termos para proseguir!";
       errors++;
@@ -262,7 +265,7 @@
         break;
       }
     }
-    
+
     if (!tipo_usuario_value) {
       error_tipo_usuario.innerText = "Selecione um tipo de usuario para proseguir!";
       errors++;
@@ -270,9 +273,9 @@
       console.log(tipo_usuario_value);
     }
 
-    if ( errors > 0 ) {
+    if (errors > 0) {
 
-      setTimeout(()=>{
+      setTimeout(() => {
         error_nome.innerText = "";
         error_sobrenome.innerText = "";
         error_email.innerText = "";
@@ -280,22 +283,22 @@
         error_confirmar_senha.innerText = "";
         error_termos.innerText = "";
         error_tipo_usuario.innerText = "";
-      },5000);
+      }, 5000);
       return;
     }
 
     form.submit();
-    
+
   });
 
   function formatPhone(input) {
     let value = input.value
-        .replace(/\D/g, '') // Remove todos os caracteres não numéricos
-        .replace(/^(\d{2})(\d)/, '($1) $2') // Formata o DDD
-        .replace(/(\d{5})(\d)/, '$1-$2') // Adiciona o hífen
-        .substring(0, 15); // Limita o tamanho
+      .replace(/\D/g, '') // Remove todos os caracteres não numéricos
+      .replace(/^(\d{2})(\d)/, '($1) $2') // Formata o DDD
+      .replace(/(\d{5})(\d)/, '$1-$2') // Adiciona o hífen
+      .substring(0, 15); // Limita o tamanho
 
     input.value = value;
-}
-  
+  }
+
 </script>

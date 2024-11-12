@@ -221,6 +221,14 @@ class StudentController extends Controller
 			return;
 		}
 
+		if ($url_model[0] == "comunidades") {
+			
+			$model = $this->model("ComunidadeModel")->get();
+			
+			$this->view("student.comunidade",$model);
+			return;
+		}
+
 		$this->view("student.home");
 		return;
 	}

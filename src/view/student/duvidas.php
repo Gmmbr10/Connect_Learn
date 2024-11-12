@@ -63,6 +63,7 @@ if ( $_SESSION["usuario"]["usu_id_foto"] != null ) {
   $html = str_replace("{style_perfil}","bg-secondary profile",$html);
 }
 
+$html = str_replace("{logo_header}","{include_path}public/default/images/logo.png",$html);
 $html = str_replace("{navbar}",$navbar,$html);
 $html = str_replace("{include_path}",INCLUDE_PATH,$html);
 

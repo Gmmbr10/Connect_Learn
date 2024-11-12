@@ -79,5 +79,25 @@ class FileModel
     return $retornar->fetch(PDO::FETCH_ASSOC);
     
   }
+
+  public function path($id_file,$foto)
+  {
+
+    require_once __DIR__ . "/../core/Banco.php";
+    $banco = new Banco();
+    $query = "SELECT * FROM arquivos WHERE arq_id = :id";
+    $retornar = $banco->getConexao()->prepare($query);
+
+    $retornar->bindParam(":id",$id_file,PDO::PARAM_STR);
+
+    $retornar->execute();
+
+    $arquivo = str_replace("{include_path}",__DIR__ . "/",$retornar->fetch(PDO::FETCH_ASSOC)["arq_caminho"]);
+    
+    var_dump($arquivo);
+    var_dump($foto);
+    move_uploaded_file($foto["tmp_name"], $arquivo);
+    
+  }
   
 }

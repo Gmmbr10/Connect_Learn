@@ -1,11 +1,10 @@
 <?php
 
 $navbar = file_get_contents("src/view/student_templates/navbar.html");
-$html = file_get_contents("src/view/student_templates/home.html");
+$html = file_get_contents("src/view/student_templates/comunidades.html");
 
 $header = file_get_contents("src/view/student_templates/header.html");
 $html = str_replace("{header}",$header,$html);
-$html = str_replace("{logo_header}","{include_path}public/default/images/logo.png",$html);
 
 if ( $_SESSION["usuario"]["usu_id_foto"] != null ) {
 
@@ -17,7 +16,9 @@ if ( $_SESSION["usuario"]["usu_id_foto"] != null ) {
   $html = str_replace("{style_perfil}","bg-secondary profile",$html);
 }
 
+$html = str_replace("{comunidades}",$data,$html);
 $html = str_replace("{navbar}",$navbar,$html);
+$html = str_replace("{logo_header}","{include_path}public/default/images/logo.png",$html);
 $html = str_replace("{include_path}",INCLUDE_PATH,$html);
 
 echo $html;

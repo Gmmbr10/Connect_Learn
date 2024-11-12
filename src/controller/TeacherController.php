@@ -101,12 +101,42 @@ class TeacherController extends Controller
 			if (isset($_GET["action"]) && $_GET["action"] == "criar" && isset($_POST["desafio"])) {
 
 				$foto = $this->model("FileModel")->post($_FILES["foto"]);
-				
+
 				$model = $this->model("DesafioModel")->post($foto["arq_id"]);
-				
+
 				$this->view("teacher.desafios", $model);
 
 				return;
+			}
+
+			if (isset($_GET["desafio"]) && $_GET["action"] == "visualizar") {
+
+				// if ( isset($_POST["id_foto"]) ) {
+
+				// 	$dados = $this->model("FileModel")->path($_POST["id_foto"],$_FILES["foto"]);
+
+				// 	die();
+
+				// }
+
+				if (isset($_POST["conteudo"])) {
+
+					$model = $this->model("DesafioModel")->path();
+
+					header("location: ./desafios");
+				}
+
+				$dados = $this->model("DesafioModel")->get(filter_input(INPUT_GET, "desafio", FILTER_DEFAULT));
+
+				$this->view("teacher.desafios", ["desafio" => $dados]);
+				return;
+			}
+
+			if (isset($_GET["action"]) && $_GET["action"] == "deletar" && isset($_GET["desafio"])) {
+
+				$model = $this->model("DesafioModel")->delete($_GET["desafio"]);
+
+				header("location: ./desafios");
 			}
 
 			$dados = $this->model("DesafioModel")->get();
@@ -177,7 +207,7 @@ class TeacherController extends Controller
 				$_SESSION["usuario"]["arq_caminho"] = $model["arq_caminho"];
 
 				$model = $this->model("UsuarioModel")->atualizarFoto($model["arq_id"]);
-	
+
 				header("location: ./perfil");
 			}
 
@@ -196,6 +226,44 @@ class TeacherController extends Controller
 			}
 
 			$this->view("teacher.perfil");
+			return;
+		}
+
+		if ($url_model[0] == "comunidades") {
+
+			if ( isset($_POST["comunidade"]) && $_GET["action"] == "editar" ) {
+
+				$model = $this->model("ComunidadeModel")->path();
+
+				header("location: ./comunidades");
+
+			}
+			
+			if (isset($_POST["comunidade"]) && $_GET["action"] == "criar") {
+
+				$model = $this->model("ComunidadeModel")->post();
+
+				header("location: ./comunidades");
+			}
+
+			if (isset($_GET["action"]) && $_GET["action"] == "editar") {
+
+				$model = $this->model("ComunidadeModel")->get($_GET["comunidade"]);
+
+				$this->view("teacher.comunidade", $model);
+				return;
+			}
+
+			if (isset($_GET["action"]) && $_GET["action"] == "deletar") {
+
+				$model = $this->model("ComunidadeModel")->delete($_GET["comunidade"]);
+
+				header("location: ./comunidades");
+			}
+
+			$model = $this->model("ComunidadeModel")->get();
+
+			$this->view("teacher.comunidade", $model);
 			return;
 		}
 

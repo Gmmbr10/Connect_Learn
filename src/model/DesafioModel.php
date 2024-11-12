@@ -115,15 +115,21 @@ class DesafioModel
     $dados = filter_input_array(INPUT_POST,FILTER_DEFAULT);
     $erros = [];
 
-    if ( empty($dados["titulo"]) ) {
+    if ( empty($dados["desafio"]) ) {
 
       $erros[] = "Escreva o título do desafio";
 
     }
 
-    if ( empty($dados["descricao"]) ) {
+    if ( empty($dados["conteudo"]) ) {
 
       $erros[] = "Escreva a descrição do desafio";
+
+    }
+
+    if ( empty($dados["link"]) ) {
+
+      $erros[] = "Cole o link do discord";
 
     }
 
@@ -134,11 +140,12 @@ class DesafioModel
 
     require_once __DIR__ . "/../core/Banco.php";
     $banco = new Banco();
-    $query = "UPDATE desafios SET des_titulo = :titulo,des_descricao = :descricao WHERE des_id = :id_desafio AND des_id_usuario = :id_usuario";
+    $query = "UPDATE desafios SET des_titulo = :titulo,des_descricao = :descricao,des_url = :discord WHERE des_id = :id_desafio AND des_id_usuario = :id_usuario";
     $atualizar = $banco->getConexao()->prepare($query);
 
-    $atualizar->bindParam(":titulo",$dados["titulo"],PDO::PARAM_STR);
-    $atualizar->bindParam(":descricao",$dados["descricao"],PDO::PARAM_STR);
+    $atualizar->bindParam(":titulo",$dados["desafio"],PDO::PARAM_STR);
+    $atualizar->bindParam(":descricao",$dados["conteudo"],PDO::PARAM_STR);
+    $atualizar->bindParam(":discord",$dados["link"],PDO::PARAM_STR);
     $atualizar->bindParam(":id_desafio",$id_desafio,PDO::PARAM_INT);
     $atualizar->bindParam(":id_usuario",$_SESSION["usuario"]["usu_id"],PDO::PARAM_INT);
 

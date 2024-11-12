@@ -1,0 +1,199 @@
+{header}
+
+<main id="content">
+
+  <nav class="sidebar" id="sidebar">
+
+    {navbar}
+
+  </nav>
+
+  <section class="container p-3">
+
+    <nav class="row gap-1 align-center">
+
+      <a href="{include_path}teacher/desafios" class="row gap-1 align-center">Desafios</a>
+
+      <span class="row gap-1 align-center">
+        <i class="fa-solid fa-angle-right display-5"></i>{titulo}
+      </span>
+
+    </nav>
+
+    <h2>Desafio - {titulo}</h2>
+
+    <section class="row gap-2">
+
+      <section class="col column gap-2">
+        <img src="{link_img}">
+
+        <section>
+          {pergunta}
+        </section>
+
+        <a href="{discord}" class="btn text-center" target="_blank">Participar</a>
+        <a href="{include_path}teacher/desafios?action=deletar&desafio={id_desafio}" class="btn btn-error">Deletar</a>
+      </section>
+      <section class="col column gap-2">
+
+        <form action="#" method="POST" id="form_dados" class="column gap-1">
+
+          <h2>Atualizar alguma informação</h2>
+
+          <section class="input-box">
+
+            <label for="desafio">Título do desafio</label>
+
+            <input type="text" name="desafio" id="input_desafio" value="{titulo}">
+
+            <span class="error" id="error_desafio"></span>
+
+          </section>
+
+          <section class="input-box">
+
+            <label for="conteudo">Escreva sobre o desafio</label>
+
+            <section>
+              <textarea name="conteudo" id="editor">{pergunta}</textarea>
+            </section>
+
+            <span class="error" id="error_conteudo"></span>
+
+          </section>
+
+          <section class="input-box">
+
+            <label for="link">Link do discord</label>
+
+            <input type="text" name="link" id="input_link" value="{discord}">
+
+            <span class="error" id="error_link"></span>
+
+          </section>
+
+          <button type="submit" class="btn">Atualizar informações</button>
+
+        </form>
+
+        <!-- <form action="#" method="POST" id="form_foto" enctype="multipart/form-data" class="column gap-1">
+          
+          <input type="hidden" name="id_foto" value="{id_foto}">
+  
+          <section class="input-box file-box">
+  
+            <label for="input_foto"><i class="fa-solid fa-upload"></i> Upload imagem de perfil</label>
+  
+            <input type="file" name="foto" id="input_foto">
+  
+            <span class="error" id="error_foto"></span>
+  
+          </section>
+  
+          <input type="submit" value="Atualizar foto do desafio" class="btn">
+  
+        </form> -->
+
+      </section>
+
+    </section>
+
+  </section>
+
+</main>
+
+<footer class="container p-2 row justify-between align-center">
+
+  <img src="{logo_header}">
+
+  <nav class="navbar">
+
+    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#"><i class="fa-solid fa-envelope"></i></a>
+
+  </nav>
+
+</footer>
+
+<script>
+
+  const open_sidebar = document.getElementById("open_sidebar");
+  const sidebar = document.getElementById("sidebar");
+
+  open_sidebar.addEventListener("click", () => {
+    sidebar.classList.toggle("left-0");
+  });
+
+  const form_dados = document.getElementById("form_dados");
+
+  form_dados.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let error = 0;
+
+    const desafio = document.getElementById("input_desafio").value;
+    const error_desafio = document.getElementById("error_desafio");
+
+    if (!desafio) {
+
+      error_desafio.innerText = "Insira o título do desafio";
+      error++;
+    }
+
+    const link = document.getElementById("input_link").value;
+    const error_link = document.getElementById("error_link");
+
+    if (!link) {
+
+      error_link.innerText = "Insira o link do desafio";
+      error++;
+    }
+
+    let conteudo;
+    const error_conteudo = document.getElementById("error_conteudo");
+    setTimeout(() => {
+      conteudo = document.getElementById("editor");
+      if (!conteudo.value) {
+
+        error_conteudo.innerText = "Crie uma descrição para o desafio";
+        error++;
+      }
+
+      if (error > 0) {
+
+        setTimeout(() => {
+          error_desafio.innerText = "";
+          error_conteudo.innerText = "";
+          error_link.innerText = "";
+          error_foto.innerText = "";
+        }, 5000);
+
+        return;
+      }
+      form_dados.submit();
+    }, 200);
+
+  });
+
+</script>
+<script type="module">
+  import {
+    ClassicEditor,
+    Essentials,
+    Bold,
+    Italic,
+    Font,
+    Paragraph
+  } from 'ckeditor5';
+
+  ClassicEditor
+    .create(document.querySelector('#editor'), {
+      plugins: [Essentials, Bold, Italic, Font, Paragraph],
+      toolbar: [
+        'bold', 'italic', '|',
+        'fontColor', 'fontBackgroundColor'
+      ]
+    })
+    .then( /* ... */)
+    .catch( /* ... */);
+</script>
