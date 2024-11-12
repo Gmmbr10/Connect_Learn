@@ -50,7 +50,8 @@ if ( isset($data["duvidas"]) ) {
 
 }
 
-$navbar = str_replace("{include_path}",INCLUDE_PATH,$navbar);
+$header = file_get_contents("src/view/student_templates/header.html");
+$html = str_replace("{header}",$header,$html);
 $html = str_replace("{navbar}",$navbar,$html);
 $html = str_replace("{include_path}",INCLUDE_PATH,$html);
 

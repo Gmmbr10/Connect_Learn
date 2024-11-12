@@ -3,8 +3,10 @@
 $navbar = file_get_contents("src/view/student_templates/navbar.html");
 $html = file_get_contents("src/view/default_templates/meu_perfil.html");
 
-$navbar = str_replace("{include_path}",INCLUDE_PATH,$navbar);
+$header = file_get_contents("src/view/student_templates/header.html");
+$html = str_replace("{header}",$header,$html);
 $html = str_replace("{navbar}",$navbar,$html);
+$html = str_replace("{include_path}",INCLUDE_PATH,$html);
 $html = str_replace("{nome}",$_SESSION["usuario"]["usu_nome"],$html);
 $html = str_replace("{email}",$_SESSION["usuario"]["usu_email"],$html);
 

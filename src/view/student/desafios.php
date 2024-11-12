@@ -22,7 +22,8 @@ if (isset($_GET["action"]) && $_GET["action"] == "juntar equipe") {
 
   $html = str_replace("{equipes}", $data["desafio"], $html);
 
-  $navbar = str_replace("{include_path}", INCLUDE_PATH, $navbar);
+  $header = file_get_contents("src/view/student_templates/header.html");
+  $html = str_replace("{header}", $header, $html);
   $html = str_replace("{navbar}", $navbar, $html);
   $html = str_replace("{include_path}", INCLUDE_PATH, $html);
 
@@ -47,8 +48,9 @@ if (isset($_GET["desafio"])) {
   $html = str_replace("{pergunta}", $data["desafio"]["des_descricao"], $html);
 }
 
-$navbar = str_replace("{include_path}", INCLUDE_PATH, $navbar);
-$html = str_replace("{navbar}", $navbar, $html);
-$html = str_replace("{include_path}", INCLUDE_PATH, $html);
+$header = file_get_contents("src/view/student_templates/header.html");
+$html = str_replace("{header}",$header,$html);
+$html = str_replace("{navbar}",$navbar,$html);
+$html = str_replace("{include_path}",INCLUDE_PATH,$html);
 
 echo $html;

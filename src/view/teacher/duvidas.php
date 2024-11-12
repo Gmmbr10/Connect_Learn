@@ -25,7 +25,8 @@ if ( isset($_GET["action"]) && $_GET["action"] == "responder" ) {
 
 }
 
-$navbar = str_replace("{include_path}",INCLUDE_PATH,$navbar);
+$header = file_get_contents("src/view/teacher_templates/header.html");
+$html = str_replace("{header}",$header,$html);
 $html = str_replace("{navbar}",$navbar,$html);
 $html = str_replace("{include_path}",INCLUDE_PATH,$html);
 

@@ -8,7 +8,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "criar") {
 
   $html = file_get_contents("src/view/teacher_templates/criar_desafio.html");
 
-  if (!empty($data) and empty($data["desafios"])) {
+  if (!empty($data) && empty($data["desafios"]) && isset($_POST["desafio"])) {
 
     if ($data == true) {
 
@@ -23,6 +23,9 @@ if (isset($_GET["action"]) && $_GET["action"] == "criar") {
 if (!empty($data["desafios"])) {
 
   $html = str_replace("{desafios}", $data["desafios"], $html);
+} else {
+  
+  $html = str_replace("{desafios}", "<p>Nenhum desafio encontrado</p>", $html);
 }
 
 if (isset($_GET["action"]) and $_GET["action"] == "ver desafio") {
@@ -33,8 +36,9 @@ if (isset($_GET["action"]) and $_GET["action"] == "ver desafio") {
 
 $html = str_replace("{resultado}", $resultado, $html);
 
-$navbar = str_replace("{include_path}", INCLUDE_PATH, $navbar);
-$html = str_replace("{navbar}", $navbar, $html);
-$html = str_replace("{include_path}", INCLUDE_PATH, $html);
+$header = file_get_contents("src/view/teacher_templates/header.html");
+$html = str_replace("{header}",$header,$html);
+$html = str_replace("{navbar}",$navbar,$html);
+$html = str_replace("{include_path}",INCLUDE_PATH,$html);
 
 echo $html;
