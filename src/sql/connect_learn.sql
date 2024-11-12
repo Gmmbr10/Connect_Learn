@@ -76,28 +76,9 @@ create table desafios (
   des_titulo varchar(250) not null,
   des_descricao text not null,
   des_id_usuario int not null,
+  des_url varchar(255) not null,
   primary key(des_id),
   foreign key(des_id_usuario) references usuarios(usu_id) ON DELETE CASCADE
-);
-
-create table grupos (
-  gru_id int auto_increment not null,
-  gru_nome varchar(150) not null,
-  gru_id_fundador int not null,
-  gru_id_desafio int not null,
-  gru_tipo tinyint not null,
-  gru_senha varchar(100),
-  primary key(gru_id),
-  foreign key(gru_id_fundador) references usuarios(usu_id) ON DELETE CASCADE,
-  foreign key(gru_id_desafio) references desafios(des_id) ON DELETE CASCADE
-);
-
-create table usuarios_grupos (
-  usu_gru_id_grupo int not null,
-  usu_gru_id_usuario int not null,
-  primary key(usu_gru_id_grupo,usu_gru_id_usuario),
-  foreign key(usu_gru_id_grupo) references grupos(gru_id) ON DELETE CASCADE,
-  foreign key(usu_gru_id_usuario) references usuarios(usu_id) ON DELETE CASCADE
 );
 
 # fim desafios

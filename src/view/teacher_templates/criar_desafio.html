@@ -50,6 +50,16 @@
           
         </section>
 
+        <section class="input-box">
+
+          <label for="link">Link do discord</label>
+
+          <input type="text" name="link" id="input_link">
+
+          <span class="error" id="error_link"></span>
+          
+        </section>
+
         <button type="submit" class="btn">Enviar</button>
         
       </form>
@@ -100,6 +110,15 @@
       error++;
     }
 
+    const link = document.getElementById("input_link").value;
+    const error_link = document.getElementById("error_link");
+
+    if ( !link ) {
+
+      error_link.innerText = "Insira o link do desafio";
+      error++;
+    }
+
     let conteudo;
     const error_conteudo = document.getElementById("error_conteudo");
     setTimeout(() => {
@@ -114,9 +133,11 @@
       if (error > 0) {
 
         setTimeout(() => {
-          error_titulo.innerText = "";
+          error_desafio.innerText = "";
           error_conteudo.innerText = "";
+          error_link.innerText = "";
         }, 5000);
+        
         return;
       }
       form_desafio.submit();

@@ -11,8 +11,13 @@ class DesafioModel
     if (empty($dados["desafio"])) {
       $erros[] = "Preencha o campo do título do desafio!";
     }
+
     if (empty($dados["conteudo"])) {
       $erros[] = "Escreva uma descrição para o desafio!";
+    }
+
+    if (empty($dados["link"])) {
+      $erros[] = "Cole o link do discord de seu desafio!";
     }
 
     if (!empty($erros)) {
@@ -22,16 +27,18 @@ class DesafioModel
 
     $desafio["desafio"] = $dados["desafio"];
     $desafio["descricao"] = $dados["conteudo"];
+    $desafio["url"] = $dados["link"];
     $desafio["usuario"] = $_SESSION["usuario"]["usu_id"];
 
     require_once __DIR__ . "/../core/Banco.php";
 
     $conexao = new Banco();
-    $query = "INSERT INTO desafios (des_titulo,des_descricao,des_id_usuario) VALUE (:titulo,:descricao,:id_usuario)";
+    $query = "INSERT INTO desafios (des_titulo,des_descricao,des_id_usuario,des_url) VALUE (:titulo,:descricao,:id_usuario,:discord)";
     $cadastrar = $conexao->getConexao()->prepare($query);
 
     $cadastrar->bindParam(":titulo", $desafio["desafio"], PDO::PARAM_STR);
     $cadastrar->bindParam(":descricao", $desafio["descricao"], PDO::PARAM_STR);
+    $cadastrar->bindParam(":discord", $desafio["url"], PDO::PARAM_STR);
     $cadastrar->bindParam(":id_usuario", $_SESSION["usuario"]["usu_id"], PDO::PARAM_INT);
 
     $cadastrar->execute();
