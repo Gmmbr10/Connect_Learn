@@ -2,17 +2,6 @@ create database connect_learn;
 
 use connect_learn;
 
-# arquivos
-
-create table arquivos (
-  arq_id int auto_increment not null,
-  arq_id_usuario int not null,
-  arq_caminho varchar(255) not null,
-  primary key(arq_id),
-  foreign key(arq_id_usuario) references usuarios(usu_id) ON DELETE CASCADE
-);
-
-# fim arquivos
 # usuarios
 
 create table usuarios (
@@ -23,11 +12,24 @@ create table usuarios (
   usu_tipo tinyint not null default(1),
   usu_tel varchar(50),
   usu_id_foto int,
-  primary key(usu_id),
-  foreign key(usu_id_foto) references arquivos(arq_id)
+  primary key(usu_id)
+  -- foreign key(usu_id_foto) references arquivos(arq_id)
 );
 
 # fim usuarios
+# arquivos
+
+create table arquivos (
+  arq_id int auto_increment not null,
+  arq_id_usuario int not null,
+  arq_caminho varchar(255) not null,
+  primary key(arq_id),
+  foreign key(arq_id_usuario) references usuarios(usu_id) ON DELETE CASCADE
+);
+
+alter table usuarios add foreign key(usu_id_foto) references arquivos(arq_id) ON DELETE CASCADE;
+
+# fim arquivos
 # conteudos
 
 create table cursos (

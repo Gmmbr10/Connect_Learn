@@ -36,7 +36,7 @@ class FileModel
           $caminhoImagem = "{include_path}src/view/fotos/" . $nomeImagem;
           require_once __DIR__ . "/../core/Banco.php";
           $banco = new Banco();
-          $query = "INSERT INTO arquivos ( arq_id_usuario , arq_caminho ) VALUES ( :usuario , :caminho )";
+          $query = "INSERT INTO arquivos ( arq_id_usuario, arq_caminho ) VALUES ( :usuario, :caminho )";
           $cadastrar = $banco->getConexao()->prepare($query);
 
           $cadastrar->bindParam(":usuario",$_SESSION["usuario"]["usu_id"],PDO::PARAM_INT);
