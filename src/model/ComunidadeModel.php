@@ -26,11 +26,11 @@ class ComunidadeModel
 
     require_once __DIR__ . "/../core/Banco.php";
     $banco = new Banco();
-    $query = "INSERT INTO comunidades ( com_nome , com_link , com_id_fundador ) VALUES ( :nome , :com_link , :id )";
+    $query = "INSERT INTO comunidades ( com_nome , com_url , com_id_fundador ) VALUES ( :nome , :com_url , :id )";
     $cadastrar = $banco->getConexao()->prepare($query);
 
     $cadastrar->bindParam(":nome", $dados["comunidade"], PDO::PARAM_STR);
-    $cadastrar->bindParam(":com_link", $dados["link"], PDO::PARAM_STR);
+    $cadastrar->bindParam(":com_url", $dados["link"], PDO::PARAM_STR);
     $cadastrar->bindParam(":id", $_SESSION["usuario"]["usu_id"], PDO::PARAM_INT);
 
     $cadastrar->execute();
@@ -89,7 +89,7 @@ class ComunidadeModel
             </header>
             <main>
               <span>
-                <a href="' . $linha["com_link"] . '" class="btn" target="__blank">Entrar</a>
+                <a href="' . $linha["com_url"] . '" class="btn" target="__blank">Entrar</a>
               </span>
             </main>
           </section>
@@ -102,8 +102,10 @@ class ComunidadeModel
       return "Nenhuma comunidade registrada";
     }
 
-    $query = "SELECT * FROM comunidades INNER JOIN usuarios ON comunidades.com_id_fundador = usuarios.usu_id";
+    $query = "SELECT * FROM comunidades WHERE com_id_fundador = :usuario";
     $buscar = $banco->getConexao()->prepare($query);
+
+    $buscar->bindParam(":usuario",$_SESSION["usuario"]["usu_id"],PDO::PARAM_INT);
 
     $buscar->execute();
 
@@ -120,7 +122,7 @@ class ComunidadeModel
         </header>
         <main>
           <span>
-            <a href="' . $linha["com_link"] . '" class="btn" target="__blank">Abrir comunidade</a>
+            <a href="' . $linha["com_url"] . '" class="btn" target="__blank">Abrir comunidade</a>
           </span>
           <span>
             <a href="{include_path}teacher/comunidades?action=editar&comunidade=' . $linha["com_id"] . '" class="btn">Editar</a>
@@ -136,7 +138,7 @@ class ComunidadeModel
       return $string;
     }
 
-    return "Nenhuma comunidade registrada";
+    return "Você não cadastrou nenhuma comunidade!";
   }
 
   public function path()
@@ -159,7 +161,7 @@ class ComunidadeModel
 
     require_once __DIR__ . "/../core/Banco.php";
     $banco = new Banco();
-    $query = "UPDATE comunidades SET com_nome = :nome , com_link = :link WHERE com_id = :comunidade AND com_id_fundador = :usuario";
+    $query = "UPDATE comunidades SET com_nome = :nome , com_url = :link WHERE com_id = :comunidade AND com_id_fundador = :usuario";
     $atualizar = $banco->getConexao()->prepare($query);
 
     $atualizar->bindParam(":nome", $dados["comunidade"], PDO::PARAM_STR);

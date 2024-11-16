@@ -82,8 +82,38 @@ class DesafioModel
       return false;
     }
 
-    $query = "SELECT * FROM desafios INNER JOIN usuarios ON desafios.des_id_usuario = usuarios.usu_id INNER JOIN arquivos ON desafios.des_id_foto = arquivos.arq_id";
+    if ($_SESSION["usuario"]["usu_tipo"] == 1) {
+
+      $query = "SELECT * FROM desafios INNER JOIN usuarios ON desafios.des_id_usuario = usuarios.usu_id INNER JOIN arquivos ON desafios.des_id_foto = arquivos.arq_id";
+      $buscar = $conexao->getConexao()->prepare($query);
+
+      $buscar->execute();
+
+      if ($buscar->rowCount()) {
+
+        $string = "";
+
+        while ($linha = $buscar->fetch(PDO::FETCH_ASSOC)) {
+          $string .= '<a href="desafios?action=visualizar&desafio=' . $linha["des_id"] . '" class="box-2">
+        <header>
+          <img src="' . $linha["arq_caminho"] . '">
+        </header>
+        <main>
+          ' . $linha["des_titulo"] . '
+        </main>
+      </a>';
+        }
+
+        return $string;
+      }
+
+      return "Nenhum desafio encontrado :(";
+    }
+
+    $query = "SELECT * FROM desafios INNER JOIN usuarios ON desafios.des_id_usuario = usuarios.usu_id INNER JOIN arquivos ON desafios.des_id_foto = arquivos.arq_id WHERE des_id_usuario = :usuario";
     $buscar = $conexao->getConexao()->prepare($query);
+
+    $buscar->bindParam(":usuario",$_SESSION["usuario"]["usu_id"],PDO::PARAM_INT);
 
     $buscar->execute();
 
@@ -92,12 +122,12 @@ class DesafioModel
       $string = "";
 
       while ($linha = $buscar->fetch(PDO::FETCH_ASSOC)) {
-        $string .= '<a href="desafios?action=visualizar&desafio='. $linha["des_id"] .'" class="box-2">
+        $string .= '<a href="desafios?action=visualizar&desafio=' . $linha["des_id"] . '" class="box-2">
         <header>
-          <img src="'. $linha["arq_caminho"] .'">
+          <img src="' . $linha["arq_caminho"] . '">
         </header>
         <main>
-          '. $linha["des_titulo"] .'
+          ' . $linha["des_titulo"] . '
         </main>
       </a>';
       }
@@ -105,35 +135,32 @@ class DesafioModel
       return $string;
     }
 
-    return false;
+    return "Você não cadastrou nenhum desafio!";
   }
 
   public function path()
   {
 
-    $id_desafio = filter_input(INPUT_GET,"desafio",FILTER_DEFAULT);
-    $dados = filter_input_array(INPUT_POST,FILTER_DEFAULT);
+    $id_desafio = filter_input(INPUT_GET, "desafio", FILTER_DEFAULT);
+    $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
     $erros = [];
 
-    if ( empty($dados["desafio"]) ) {
+    if (empty($dados["desafio"])) {
 
       $erros[] = "Escreva o título do desafio";
-
     }
 
-    if ( empty($dados["conteudo"]) ) {
+    if (empty($dados["conteudo"])) {
 
       $erros[] = "Escreva a descrição do desafio";
-
     }
 
-    if ( empty($dados["link"]) ) {
+    if (empty($dados["link"])) {
 
       $erros[] = "Cole o link do discord";
-
     }
 
-    if ( !empty($erros) ) {
+    if (!empty($erros)) {
 
       return $erros;
     }
@@ -143,38 +170,37 @@ class DesafioModel
     $query = "UPDATE desafios SET des_titulo = :titulo,des_descricao = :descricao,des_url = :discord WHERE des_id = :id_desafio AND des_id_usuario = :id_usuario";
     $atualizar = $banco->getConexao()->prepare($query);
 
-    $atualizar->bindParam(":titulo",$dados["desafio"],PDO::PARAM_STR);
-    $atualizar->bindParam(":descricao",$dados["conteudo"],PDO::PARAM_STR);
-    $atualizar->bindParam(":discord",$dados["link"],PDO::PARAM_STR);
-    $atualizar->bindParam(":id_desafio",$id_desafio,PDO::PARAM_INT);
-    $atualizar->bindParam(":id_usuario",$_SESSION["usuario"]["usu_id"],PDO::PARAM_INT);
+    $atualizar->bindParam(":titulo", $dados["desafio"], PDO::PARAM_STR);
+    $atualizar->bindParam(":descricao", $dados["conteudo"], PDO::PARAM_STR);
+    $atualizar->bindParam(":discord", $dados["link"], PDO::PARAM_STR);
+    $atualizar->bindParam(":id_desafio", $id_desafio, PDO::PARAM_INT);
+    $atualizar->bindParam(":id_usuario", $_SESSION["usuario"]["usu_id"], PDO::PARAM_INT);
 
     $atualizar->execute();
 
-    if ( $atualizar->rowCount() ) {
+    if ($atualizar->rowCount()) {
 
       return true;
     }
 
     return "Houve um erro durante o processo :(";
-    
   }
 
   public function delete($id_desafio)
   {
 
-    if ( empty($id_desafio) ) {
+    if (empty($id_desafio)) {
 
       return "Selecione o desafio";
     }
-    
+
     require_once __DIR__ . "/../core/Banco.php";
     $banco = new Banco();
     $query = "DELETE FROM desafios WHERE des_id = :id_desafio AND des_id_usuario = :id_usuario";
     $deletar = $banco->getConexao()->prepare($query);
 
-    $deletar->bindParam(":id_desafio",$id_desafio,PDO::PARAM_INT);
-    $deletar->bindParam(":id_usuario",$_SESSION["usuario"]["usu_id"],PDO::PARAM_INT);
+    $deletar->bindParam(":id_desafio", $id_desafio, PDO::PARAM_INT);
+    $deletar->bindParam(":id_usuario", $_SESSION["usuario"]["usu_id"], PDO::PARAM_INT);
 
     $deletar->execute();
 
