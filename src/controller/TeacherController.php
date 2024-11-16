@@ -59,44 +59,6 @@ class TeacherController extends Controller
 			header("location: ./duvidas");
 		}
 
-		if ($url_model[0] == "conteudos") {
-
-			if (isset($_POST["curso"])) {
-
-				$model = $this->model("CursoModel")->post();
-
-				header("location: ./conteudos?action=criar conteudo");
-			}
-
-			if (isset($_POST["modulo"])) {
-
-				$model = $this->model("ModuloModel")->post();
-
-				header("location: ./conteudos?action=criar conteudo");
-			}
-
-			if (isset($_POST["titulo"])) {
-
-				$model = $this->model("AulaModel")->post();
-
-				header("location: ./conteudos?action=criar conteudo");
-			}
-
-			if (isset($_GET["action"]) && $_GET["action"] == "criar conteudo") {
-
-				$modulos = $this->model("ModuloModel")->getCursos();
-				$cursos = $this->model("ModuloModel")->get();
-
-				$this->view("teacher.conteudos", ["cursos" => $cursos, "modulos" => $modulos]);
-				return;
-			}
-
-			$model = $this->model("CursoModel")->get();
-
-			$this->view("teacher.conteudos", $model);
-			return;
-		}
-
 		if ($url_model[0] == "desafios") {
 			if (isset($_GET["action"]) && $_GET["action"] == "criar" && isset($_POST["desafio"])) {
 
