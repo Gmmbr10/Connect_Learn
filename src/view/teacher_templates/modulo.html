@@ -1,0 +1,276 @@
+{header}
+
+<main id="content">
+
+  <nav class="sidebar" id="sidebar">
+
+    {navbar}
+
+  </nav>
+
+  <section class="container p-3">
+
+    <nav class="row gap-1 align-center">
+
+      <a href="{include_path}teacher/conteudos" class="row gap-1 align-center">Conteúdos</a>
+      
+      <i class="fa-solid fa-angle-right display-5"></i>
+
+      <a href="{include_path}teacher/conteudos?action=visualizar&curso={id_curso}" class="row gap-1 align-center">{titulo}</a>
+
+      <span class="row gap-1 align-center">
+        <i class="fa-solid fa-angle-right display-5"></i>{titulo_modulo}
+      </span>
+
+    </nav>
+
+    <h2>Curso - {titulo} - {titulo_modulo}</h2>
+
+    <section class="row gap-2">
+
+      <section class="col column gap-2">
+
+        <h2>Aulas</h2>
+        
+        {aulas}
+      </section>
+      <section class="col column gap-2">
+
+        <form action="#" method="POST" id="form_aula" class="column gap-1">
+
+          <h2>Adicionar aula</h2>
+
+          <input type="hidden" name="id_modulo" value="{id_modulo}">
+
+          <section class="input-box">
+
+            <label for="titulo">Título da aula</label>
+
+            <input type="text" name="titulo" id="input_titulo">
+
+            <span class="error" id="error_titulo"></span>
+            
+          </section>
+          <section class="input-box">
+
+            <label for="conteudo">Escreva sua aula</label>
+  
+            <section>
+              <textarea name="conteudo" id="editor"></textarea>
+            </section>
+  
+            <span class="error" id="error_conteudo"></span>
+  
+          </section>
+          <section class="input-box">
+
+            <label for="link">Link do vídeo do youtube (opcional)</label>
+  
+            <input type="text" name="link" id="input_link">
+  
+            <span class="error" id="error_link"></span>
+  
+          </section>
+          
+          <button type="submit" class="btn">Adicionar aula</button>
+          
+        </form>
+
+        <form action="#" method="POST" id="form_editar" class="column gap-1">
+
+          <h2>Editar</h2>
+          
+          <input type="hidden" name="id_curso" value="{id_curso}"> 
+          <input type="hidden" name="id_modulo" value="{id_modulo}"> 
+
+          <section class="input-box">
+
+            <label for="modulo">Nome do módulo</label>
+
+            <input type="text" name="modulo" id="input_modulo" value="{modulo_nome}">
+            
+            <span class="error" id="error_modulo"></span>
+            
+          </section>
+
+          <button type="submit" class="btn">Atualizar módulo</button>
+          
+        </form>
+
+        <span class="btn btn-error text-center" id="open_deletar_modal">
+          Deletar módulo
+        </span>
+
+      </section>
+
+    </section>
+
+  </section>
+
+</main>
+
+<footer class="container p-2 row justify-between align-center">
+
+  <img src="{logo_header}">
+
+  <nav class="navbar">
+
+    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#"><i class="fa-solid fa-envelope"></i></a>
+
+  </nav>
+
+</footer>
+
+<dialog id="deletar_modal">
+
+  <header class="row justify-between align-center bg-primary p-2">
+
+    <h2>Deletar módulo</h2>
+
+    <span class="close_deletar_modal cursor">
+      <i class="fa-solid fa-close"></i>
+    </span>
+
+  </header>
+
+  <main class="p-2">
+
+    <p>
+      Você tem certeza de que deseja excluir este módulo?
+    </p>
+
+  </main>
+
+  <footer class="p-2 row justify-end">
+
+    <a href="./conteudos?action=deletar&modulo={id_modulo}" class="btn btn-error">
+      Sim, deletar
+    </a>
+
+    <span class="close_deletar_modal btn cursor">
+      Cancelar
+    </span>
+
+  </footer>
+
+</dialog>
+
+<script>
+
+  const open_deletar = document.getElementById("open_deletar_modal");
+  const deletar_modal = document.getElementById("deletar_modal");
+  const close_deletar = document.getElementsByClassName("close_deletar_modal");
+
+  open_deletar.addEventListener("click", () => {
+    deletar_modal.showModal();
+    deletar_modal.style.display = "grid";
+  })
+
+  for (let i = 0; i < close_deletar.length; i++) {
+
+    close_deletar[i].addEventListener("click", () => {
+      deletar_modal.style.display = "none";
+      deletar_modal.close();
+    });
+
+  }
+
+  const open_sidebar = document.getElementById("open_sidebar");
+  const sidebar = document.getElementById("sidebar");
+
+  open_sidebar.addEventListener("click", () => {
+    sidebar.classList.toggle("left-0");
+  });
+
+  const form_aula = document.getElementById("form_aula");
+
+  form_aula.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let error = 0;
+
+    const titulo = document.getElementById("input_titulo").value;
+    const error_titulo = document.getElementById("error_titulo");
+
+    if ( !titulo ) {
+      error_titulo.innerText = "Escreva o nome da aula";
+      error++;
+    }
+
+    let conteudo;
+    const error_conteudo = document.getElementById("error_conteudo");
+    setTimeout(() => {
+      conteudo = document.getElementById("editor");
+      if (!conteudo.value) {
+
+        error_conteudo.innerText = "Escreva o conteúdo da aula";
+        error++;
+      }
+
+      if (error > 0) {
+
+        setTimeout(() => {
+          error_titulo.innerText = "";
+          error_conteudo.innerText = "";
+        }, 5000);
+
+        return;
+      }
+      form_aula.submit();
+    }, 200);
+    
+  });
+
+  const form_editar = document.getElementById("form_editar");
+
+  form_editar.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let error = 0;
+
+    const modulo = document.getElementById("input_modulo").value;
+    const error_modulo = document.getElementById("error_modulo");
+
+    if ( !modulo ) {
+      error_modulo.innerText = "Escreva o nome do modulo";
+      error++;
+    }
+
+    if ( error > 0 ) {
+
+      setTimeout(()=>{
+        error_modulo.innerText = "";
+      },5000);
+      return;
+    }
+
+    form_editar.submit();
+
+  });
+
+</script>
+<script type="module">
+  import {
+    ClassicEditor,
+    Essentials,
+    Bold,
+    Italic,
+    Font,
+    Paragraph,
+    Subscript,
+    Superscript
+  } from 'ckeditor5';
+
+  ClassicEditor
+    .create(document.querySelector('#editor'), {
+      plugins: [Essentials, Bold, Italic, Font, Paragraph,Subscript,Superscript],
+      toolbar: [
+        'bold', 'italic', '|',
+        'subscript', 'superscript', '|',
+        'fontColor', 'fontBackgroundColor'
+      ]
+    })
+    .then( /* ... */)
+    .catch( /* ... */);
+</script>

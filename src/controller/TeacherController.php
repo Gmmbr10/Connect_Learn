@@ -229,6 +229,89 @@ class TeacherController extends Controller
 			return;
 		}
 
+		if ( $url_model[0] == "conteudos" ) {
+
+			if ( isset($_GET["action"]) ) {
+
+				if ( $_GET["action"] == "deletar" && isset($_GET["curso"]) ) {
+
+					$model = $this->model("CursoModel")->delete($_GET["curso"]);
+
+					header("location: ./conteudos");
+
+				}
+				
+				if ( $_GET["action"] == "deletar" && isset($_GET["modulo"]) ) {
+
+					$model = $this->model("ModuloModel")->delete($_GET["modulo"]);
+
+					header("location: ./conteudos");
+
+				}
+				
+				if ( $_GET["action"] == "criar" && isset($_POST["curso"]) ) {
+
+					$model = $this->model("CursoModel")->post();
+
+					header("location: ./conteudos");
+				}
+
+				if ( $_GET["action"] == "visualizar" ) {
+
+					if ( isset($_GET["modulo"]) && isset($_POST["modulo"]) ) {
+
+						$model = $this->model("ModuloModel")->path();
+
+						header("location: ./conteudos?action=visualizar&modulo=" . $_GET["modulo"]);
+						return;
+
+					}
+					
+					if ( isset($_POST["modulo"]) ) {
+
+						$model = $this->model("ModuloModel")->post();
+
+						header("location: ./conteudos?action=visualizar&curso=" . $_GET["curso"]);
+					}
+
+					if ( isset($_GET["modulo"]) ) {
+
+						$modulo = $this->model("ModuloModel")->getModulo($_GET["modulo"]);
+	
+						$this->view("teacher.conteudos",["modulo" => $modulo]);
+						return;
+
+					}
+
+					if ( isset($_POST["curso"]) ) {
+
+						$model = $this->model("CursoModel")->path();
+
+						header("location: ./conteudos?action=visualizar&curso=" . $_GET["curso"]);
+					}
+
+					$model = $this->model("CursoModel")->get($_GET["curso"]);
+
+					if ( $model == false ) {
+
+						header("location: ./conteudos");
+					}
+
+					$curso = $this->model("CursoModel")->get($_GET["curso"]);
+					$modulo = $this->model("ModuloModel")->get($_GET["curso"]);
+
+					$this->view("teacher.conteudos",["curso" => $curso,"modulo" => $modulo]);
+					return;
+				}
+
+			}
+			
+			$model = $this->model("CursoModel")->get();
+			
+			$this->view("teacher.conteudos",$model);
+			return;
+		}
+
 		$this->view("teacher.home");
 		return;
 	}
