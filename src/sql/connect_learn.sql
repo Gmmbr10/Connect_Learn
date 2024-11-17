@@ -52,7 +52,7 @@ create table aulas (
   aul_id int auto_increment not null,
   aul_titulo varchar(255) not null,
   aul_conteudo text not null,
-  aul_url varchar(255) not null,
+  aul_url varchar(255),
   aul_id_modulo int not null,
   primary key(aul_id),
   foreign key(aul_id_modulo) references modulos(mod_id) ON DELETE CASCADE

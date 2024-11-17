@@ -248,6 +248,12 @@ class TeacherController extends Controller
 					header("location: ./conteudos");
 
 				}
+
+				if ( $_GET["action"] == "deletar" && isset($_GET["aula"]) ) {
+					$model = $this->model("AulaModel")->delete($_GET["aula"]);
+
+					header("location: ./conteudos");
+				}
 				
 				if ( $_GET["action"] == "criar" && isset($_POST["curso"]) ) {
 
@@ -258,6 +264,12 @@ class TeacherController extends Controller
 
 				if ( $_GET["action"] == "visualizar" ) {
 
+					if ( isset($_GET["modulo"]) && isset($_POST["titulo"]) ) {
+						$model = $this->model("AulaModel")->post();
+
+						header("location: ./conteudos?action=visualizar&modulo=" . $_GET["modulo"]);
+					}
+					
 					if ( isset($_GET["modulo"]) && isset($_POST["modulo"]) ) {
 
 						$model = $this->model("ModuloModel")->path();
@@ -267,18 +279,39 @@ class TeacherController extends Controller
 
 					}
 					
-					if ( isset($_POST["modulo"]) ) {
+					if ( isset($_GET["curso"]) && isset($_POST["modulo"]) ) {
 
 						$model = $this->model("ModuloModel")->post();
 
 						header("location: ./conteudos?action=visualizar&curso=" . $_GET["curso"]);
 					}
 
+					if ( isset($_GET["aula"]) ) {
+
+						if ( isset($_POST["titulo"]) ) {
+
+							$model = $this->model("AulaModel")->path();
+
+							header("location: ./conteudos?action=visualizar&aula=" . $_GET["aula"]);
+						}
+
+						$aula = $this->model("AulaModel")->getAula($_GET["aula"]);
+						
+						$this->view("teacher.conteudos",$aula);
+						return;
+					}
+					
 					if ( isset($_GET["modulo"]) ) {
 
 						$modulo = $this->model("ModuloModel")->getModulo($_GET["modulo"]);
-	
-						$this->view("teacher.conteudos",["modulo" => $modulo]);
+						$aula = $this->model("AulaModel")->get($_GET["modulo"]);
+
+						if ($aula == false || $modulo == false) {
+
+							header("location: ./conteudos");
+						}
+
+						$this->view("teacher.conteudos",["modulo" => $modulo , "aulas" => $aula ]);
 						return;
 
 					}
