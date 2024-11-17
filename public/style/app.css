@@ -129,6 +129,20 @@ body>footer {
   >* {
     border-radius: 7px;
   }
+
+  >.box,>.box-2 {
+    width: 75% !important;
+    aspect-ratio: 4/3 !important;
+
+    >header {
+      padding: 0 !important;
+
+      >img {
+        width: 100%;
+        object-fit: fill;
+      }
+    }
+  }
 }
 
 .p-1 {
