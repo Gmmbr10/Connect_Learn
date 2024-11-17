@@ -13,7 +13,6 @@ create table usuarios (
   usu_tel varchar(50),
   usu_id_foto int,
   primary key(usu_id)
-  -- foreign key(usu_id_foto) references arquivos(arq_id)
 );
 
 # fim usuarios
