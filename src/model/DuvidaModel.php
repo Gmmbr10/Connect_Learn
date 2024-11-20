@@ -122,7 +122,6 @@ class DuvidaModel
         $outras_duvidas .= '<a href="duvidas?action=responder&duvida=' . $linha["duv_id"] . '" class="box">
 
         <header class="bg-primary row gap-1 align-center">
-          <i class="fa-solid fa-user profile"></i>
           <p class="bold">' . $linha["usu_nome"] . '</p>
         </header>
 

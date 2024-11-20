@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "afacad";
-  src: url("../fonts/Afacad-VariableFont_wght.ttf");
+  font-family: "montserrat";
+  src: url("../fonts/Montserrat-VariableFont_wght.ttf");
 }
 
 * {
@@ -8,7 +8,7 @@
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
-  font-family: "afacad";
+  font-family: "montserrat";
 }
 
 html,
