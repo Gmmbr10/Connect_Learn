@@ -130,7 +130,7 @@ body>footer {
     border-radius: 7px;
   }
 
-  >.box,>.box-2 {
+  /* >.box,>.box-2 {
     width: 75% !important;
     aspect-ratio: 4/3 !important;
 
@@ -142,7 +142,7 @@ body>footer {
         object-fit: fill;
       }
     }
-  }
+  } */
 }
 
 .p-1 {

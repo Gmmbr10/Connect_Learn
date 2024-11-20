@@ -74,7 +74,7 @@ class CursoModel {
 
       while ( $linha = $buscar->fetch(PDO::FETCH_ASSOC) ) {
         
-        $string .= '<a class="box-2" href="{include_path}teacher/conteudos?action=visualizar&curso='. $linha["cur_id"] .'">'. $linha["cur_nome"] .'</a>';
+        $string .= '<a class="box-2 flex justify-center align-center" href="{include_path}teacher/conteudos?action=visualizar&curso='. $linha["cur_id"] .'">'. $linha["cur_nome"] .'</a>';
         
       }
 
