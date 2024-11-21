@@ -60,7 +60,7 @@ class ModuloModel
         
         while ($linha = $buscar->fetch(PDO::FETCH_ASSOC)) {
           
-          $string .= '<a href="./conteudos?action=visualizar&modulo='. $linha["mod_id"] .'" class="box">
+          $string .= '<a href="./conteudos?action=visualizar&modulo='. $linha["mod_id"] .'" class="box flex align-center rounded p-2">
             <p>'. $linha["mod_nome"] .'</p>
           </a>';
         }

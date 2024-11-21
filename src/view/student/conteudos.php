@@ -19,6 +19,25 @@ if (isset($_GET["action"]) && $_GET["action"] == "lista") {
   $html = str_replace("{cursos}", $data, $html);
 }
 
+if ( isset($_GET["action"]) && $_GET["action"] == "visualizar" ) {
+
+  $html = file_get_contents("src/view/student_templates/curso.html");
+
+  if ($data["curso"]["cur_tema"] == 1) {
+
+    $html = str_replace("{nucleo}", "Biológicas", $html);
+  } else if ($data["curso"]["cur_tema"] == 2) {
+    $html = str_replace("{nucleo}", "Exatas", $html);
+  } else if ($data["curso"]["cur_tema"] == 3) {
+    $html = str_replace("{nucleo}", "Humanas", $html);
+  }
+  
+  $html = str_replace("{tema}",$data["curso"]["cur_tema"],$html);
+  $html = str_replace("{titulo}",$data["curso"]["cur_nome"],$html);
+  $html = str_replace("{modulo}",$data["modulo"],$html);
+
+}
+
 $header = file_get_contents("src/view/student_templates/header.html");
 $html = str_replace("{header}",$header,$html);
 

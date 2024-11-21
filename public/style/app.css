@@ -28,10 +28,10 @@ body {
   --btn-bg-primary: #6E2CF2; */
   --text-primary: #222;
   --secondary: #F3F6FF;
-  --bg-secondary: #F3F6FF;
+  --bg-secondary: #efefef;
   --link-secondary: #F3F6FF;
   --text-secondary: #fff;
-  --btn-bg-secondary: #F3F6FF;
+  --btn-bg-secondary: #efefef;
 }
 
 body {
@@ -52,7 +52,7 @@ body>header {
   img {
     width: 90px;
   }
-  
+
   i {
     font-size: 16px;
   }
@@ -69,9 +69,11 @@ body>header {
 
 body>footer {
   background-color: #222;
+
   img {
     width: 90px;
   }
+
   * {
     color: #fff
   }
@@ -590,13 +592,13 @@ dialog {
   >header {
     display: grid;
     place-content: center;
-    
+
     img {
       height: 200px;
       object-fit: cover;
       border-radius: 7px;
     }
-    
+
     border-bottom: 1px solid #222 !important;
   }
 }
@@ -697,4 +699,32 @@ main {
 
 .w-50 {
   width: 75%;
+}
+
+details {
+  width: 100%;
+  border-radius: 7px;
+  overflow: hidden;
+  border: 1px solid #222;
+
+  >summary {
+    cursor: pointer;
+    padding: 1rem;
+  }
+
+  >section {
+    padding: 0 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    >* {
+      border: none;
+      border-radius: 7px;
+      width: 100%;
+      border: 1px solid #222;
+      padding: 1rem;
+    }
+  }
+
 }

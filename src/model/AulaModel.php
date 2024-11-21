@@ -64,7 +64,7 @@ class AulaModel
 
         while ($linha = $buscar->fetch(PDO::FETCH_ASSOC)) {
 
-          $string .= '<a href="./conteudos?action=visualizar&aula=' . $linha["aul_id"] . '" class="box">' . $linha["aul_titulo"] . '</a>';
+          $string .= '<a href="./conteudos?action=visualizar&aula=' . $linha["aul_id"] . '" class="box flex align-center rounded p-2">' . $linha["aul_titulo"] . '</a>';
         }
 
         return $string;

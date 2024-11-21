@@ -61,16 +61,24 @@ class StudentController extends Controller
 
 		if ($url_model[0] == "conteudos") {
 
+			if ( isset($_GET["action"]) && $_GET["action"] == "visualizar" && isset($_GET["curso"]) && !empty($_GET["curso"]) ) {
+
+				$model = $this->model("ConteudoModel")->getCurso($_GET["curso"]);
+
+				$this->view("student.conteudos", $model);
+				return;
+			}
+			
 			if (isset($_GET["nucleo"])) {
 				if ($_GET["nucleo"] == 1) {
 
-					$model = $this->model("CursoModel")->get($_GET["nucleo"]);
+					$model = $this->model("ConteudoModel")->getCursos($_GET["nucleo"]);
 				} else if ($_GET["nucleo"] == 2) {
 
-					$model = $this->model("CursoModel")->get($_GET["nucleo"]);
+					$model = $this->model("ConteudoModel")->getCursos($_GET["nucleo"]);
 				} else if ($_GET["nucleo"] == 3) {
 
-					$model = $this->model("CursoModel")->get($_GET["nucleo"]);
+					$model = $this->model("ConteudoModel")->getCursos($_GET["nucleo"]);
 				} else {
 
 					$this->view("student.conteudos");
