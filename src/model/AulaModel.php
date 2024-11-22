@@ -163,10 +163,11 @@ class AulaModel
 
     require_once __DIR__ . "/../core/Banco.php";
     $banco = new Banco();
-    $query = "DELETE FROM aulas WHERE aul_id = :aula";
+    $query = "DELETE aulas FROM aulas INNER JOIN modulos ON aulas.aul_id_modulo = modulos.mod_id INNER JOIN cursos ON modulos.mod_id_curso = cursos.cur_id WHERE aul_id = :aula AND cursos.cur_id_usuario = :usuario";
     $deletar = $banco->getConexao()->prepare($query);
 
     $deletar->bindParam(":aula",$id_aula,PDO::PARAM_INT);
+    $deletar->bindParam(":usuario",$_SESSION["usuario"]["usu_id"],PDO::PARAM_INT);
 
     $deletar->execute();
 

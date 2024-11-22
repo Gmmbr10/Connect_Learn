@@ -181,10 +181,11 @@ class ModuloModel
 
     require_once __DIR__ . "/../core/Banco.php";
     $banco = new Banco();
-    $query = "DELETE FROM modulos WHERE mod_id = :modulo";
+    $query = "DELETE modulos FROM modulos INNER JOIN cursos ON modulos.mod_id_curso = cursos.cur_id WHERE mod_id = :modulo AND cursos.cur_id_usuario = :usuario";
     $deletar = $banco->getConexao()->prepare($query);
 
     $deletar->bindParam(":modulo",$id_modulo,PDO::PARAM_INT);
+    $deletar->bindParam(":usuario",$_SESSION["usuario"]["usu_id"],PDO::PARAM_INT);
 
     $deletar->execute();
 
