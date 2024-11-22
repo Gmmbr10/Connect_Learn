@@ -90,6 +90,11 @@ class TeacherController extends Controller
 
 				$dados = $this->model("DesafioModel")->get(filter_input(INPUT_GET, "desafio", FILTER_DEFAULT));
 
+				if ( $dados == false ) {
+					header("location: ./desafios");
+					return;
+				}
+
 				$this->view("teacher.desafios", ["desafio" => $dados]);
 				return;
 			}
@@ -123,6 +128,11 @@ class TeacherController extends Controller
 
 				$model = $this->model("DuvidaModel")->get($_GET["duvida"]);
 
+				if ( $model == false ) {
+					header("location: ./duvidas");
+					return;
+				}
+				
 				$this->view("teacher.duvidas", $model);
 				return;
 			}

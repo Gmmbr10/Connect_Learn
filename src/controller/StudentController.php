@@ -114,29 +114,12 @@ class StudentController extends Controller
 
 			if (isset($_GET["desafio"]) && !empty($_GET["desafio"])) {
 
-				if (isset($_POST["equipe"])) {
+				$dados = $this->model("DesafioModel")->get(filter_input(INPUT_GET, "desafio", FILTER_DEFAULT));
 
-					$model = $this->model("GrupoModel")->post();
-
+				if ( $dados == false ) {
 					header("location: ./desafios");
-				}
-
-				if (isset($_GET["action"]) && $_GET["action"] == "juntar equipe" && isset($_POST["id_equipe"])) {
-
-					$model = $this->model("GrupoModel")->juntar();
-
-					header("location: ./desafios");
-				}
-
-				if (isset($_GET["desafio"]) && $_GET["action"] == "juntar equipe") {
-
-					$dados = $this->model("DesafioModel")->get(filter_input(INPUT_GET, "desafio", FILTER_DEFAULT));
-					$model = $this->model("GrupoModel")->get();
-
-					$this->view("student.desafios", ["desafios" => $dados, "desafio" => $model]);
 					return;
 				}
-				$dados = $this->model("DesafioModel")->get(filter_input(INPUT_GET, "desafio", FILTER_DEFAULT));
 
 				$this->view("student.desafios", ["desafio" => $dados]);
 				return;
@@ -188,6 +171,11 @@ class StudentController extends Controller
 
 				$model = $this->model("DuvidaModel")->get($_GET["duvida"]);
 
+				if ( $model == false ) {
+					header("location: ./duvidas");
+					return;
+				}
+
 				$this->view("student.duvidas", $model);
 				return;
 			}
@@ -200,6 +188,11 @@ class StudentController extends Controller
 
 				$model = $this->model("DuvidaModel")->get($_GET["duvida"]);
 
+				if ( $model == false ) {
+					header("location: ./duvidas");
+					return;
+				}
+				
 				$this->view("student.duvidas", $model);
 				return;
 			}
