@@ -19,7 +19,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "lista") {
   $html = str_replace("{cursos}", $data, $html);
 }
 
-if ( isset($_GET["action"]) && $_GET["action"] == "visualizar" ) {
+if ( isset($_GET["action"]) && $_GET["action"] == "visualizar" && isset($_GET["curso"])) {
 
   $html = file_get_contents("src/view/student_templates/curso.html");
 
@@ -35,6 +35,33 @@ if ( isset($_GET["action"]) && $_GET["action"] == "visualizar" ) {
   $html = str_replace("{tema}",$data["curso"]["cur_tema"],$html);
   $html = str_replace("{titulo}",$data["curso"]["cur_nome"],$html);
   $html = str_replace("{modulo}",$data["modulo"],$html);
+
+} else if ( isset($_GET["action"]) && $_GET["action"] == "visualizar" && isset($_GET["aula"]) ) {
+
+  $html = file_get_contents("src/view/student_templates/aula.html");
+  $html = str_replace("{id_curso}",$data["cur_id"],$html);
+  $html = str_replace("{id_modulo}",$data["mod_id"],$html);
+  $html = str_replace("{id_aula}",$data["aul_id"],$html);
+  $html = str_replace("{titulo_curso}",$data["cur_nome"],$html);
+  $html = str_replace("{titulo_modulo}",$data["mod_nome"],$html);
+  $html = str_replace("{titulo}",$data["aul_titulo"],$html);
+  $html = str_replace("{conteudo}",$data["aul_conteudo"],$html);
+
+  $html = str_replace("{tema}",$data["cur_tema"],$html);
+
+  if ($data["cur_tema"] == 1) {
+    $html = str_replace("{nucleo}", "Biológicas", $html);
+  } else if ($data["cur_tema"] == 2) {
+    $html = str_replace("{nucleo}", "Exatas", $html);
+  } else if ($data["cur_tema"] == 3) {
+    $html = str_replace("{nucleo}", "Humanas", $html);
+  }
+
+  if ( $data["aul_url"] != null ) {
+    $html = str_replace("{video}",$data["aul_url"],$html);
+  } else {
+    $html = str_replace("{video}","",$html);
+  }
 
 }
 

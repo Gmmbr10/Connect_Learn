@@ -76,7 +76,7 @@ class ConteudoModel
             
             while( $linhaAula = $buscarAula->fetch(PDO::FETCH_ASSOC) ){
 
-              $string["modulo"] .= '<p class="p-2">'. $linhaAula["aul_titulo"] .'</p>';
+              $string["modulo"] .= '<a href="./conteudos?action=visualizar&aula='. $linhaAula["aul_id"] .'" class="p-2">'. $linhaAula["aul_titulo"] .'</a>';
               
             }
 
@@ -97,6 +97,28 @@ class ConteudoModel
       return $string;
     }
 
-    return ["modulo"=>"Nenhum módulo encontrado"];
+    return false;
+  }
+
+  public function getAula($id_aula)
+  {
+
+    require_once __DIR__ . "/../core/Banco.php";
+    $banco = new Banco();
+
+    $query = "SELECT * FROM aulas INNER JOIN modulos ON aulas.aul_id_modulo = modulos.mod_id INNER JOIN cursos ON modulos.mod_id_curso = cursos.cur_id WHERE aulas.aul_id = :aula";
+    $buscar = $banco->getConexao()->prepare($query);
+
+    $buscar->bindParam(":aula",$id_aula,PDO::PARAM_INT);
+
+    $buscar->execute();
+
+    if ( $buscar->rowCount() ) {
+
+      return $buscar->fetch(PDO::FETCH_ASSOC);
+    }
+
+    return false;
+    
   }
 }
