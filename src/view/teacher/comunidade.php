@@ -13,7 +13,7 @@ if ( isset($_GET["action"]) && $_GET["action"] == "editar" ) {
   $html = file_get_contents("src/view/teacher_templates/editar_comunidade.html");
   $html = str_replace("{id}",$data["com_id"],$html);
   $html = str_replace("{nome}",$data["com_nome"],$html);
-  $html = str_replace("{link}",$data["com_link"],$html);
+  $html = str_replace("{link}",$data["com_url"],$html);
 }
 
 $header = file_get_contents("src/view/teacher_templates/header.html");
