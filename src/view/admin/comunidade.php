@@ -16,10 +16,8 @@ if ( $_SESSION["usuario"]["usu_id_foto"] != null ) {
   $html = str_replace("{style_perfil}","bg-secondary profile",$html);
 }
 
-if ( !isset($_GET["action"]) ) {
-
-  $html = str_replace("{comunidades}",$data,$html);
-}
+$html = str_replace("{aprovar_comunidades}",$data["aprovar"],$html);
+$html = str_replace("{comunidades_aprovada}",$data["aprovada"],$html);
 
 $html = str_replace("{logo_header}","{include_path}public/default/images/logo.png",$html);
 $html = str_replace("{navbar}",$navbar,$html);

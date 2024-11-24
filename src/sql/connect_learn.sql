@@ -105,8 +105,12 @@ create table comunidades (
   com_nome varchar(150) not null,
   com_url varchar(255) not null,
   com_id_fundador int not null,
+  com_aprovada boolean not null default(false),
   primary key(com_id),
   foreign key(com_id_fundador) references usuarios(usu_id) ON DELETE CASCADE
 );
 
 # fim comunidades
+# adicionando o admin
+# senha = admin
+insert into usuarios ( usu_nome , usu_email , usu_senha , usu_tipo ) values ( 'admin' , 'admin@gmail.com' , '$2y$10$cyIqoyqC/sSMZ9swhUK0ueLI8ESgYvGH1sqWBku3eojgIDE8zCyo.' , 3 );

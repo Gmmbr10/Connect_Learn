@@ -34,20 +34,12 @@ class AdminController extends Controller
 
 		if ($url_model[0] == "comunidades") {
 
-			if ( isset($_POST["comunidade"]) && $_GET["action"] == "editar" ) {
+			if ( isset($_GET["action"]) && $_GET["action"] == "aprovar" ) {
 
-				$model = $this->model("ComunidadeModel")->path();
+				$model = $this->model("ComunidadeModel")->aprovar($_GET["comunidade"]);
 
 				header("location: ./comunidades");
 
-			}
-
-			if (isset($_GET["action"]) && $_GET["action"] == "editar") {
-
-				$model = $this->model("ComunidadeModel")->get($_GET["comunidade"]);
-
-				$this->view("admin.comunidade", $model);
-				return;
 			}
 
 			$model = $this->model("ComunidadeModel")->get();

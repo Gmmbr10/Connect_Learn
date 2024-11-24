@@ -71,7 +71,7 @@ class ComunidadeModel
 
     if ($_SESSION["usuario"]["usu_tipo"] == 1) {
 
-      $query = "SELECT * FROM comunidades INNER JOIN usuarios ON comunidades.com_id_fundador = usuarios.usu_id";
+      $query = "SELECT * FROM comunidades INNER JOIN usuarios ON comunidades.com_id_fundador = usuarios.usu_id WHERE NOT com_aprovada = 0";
       $buscar = $banco->getConexao()->prepare($query);
 
       $buscar->execute();
@@ -102,6 +102,77 @@ class ComunidadeModel
       return "Nenhuma comunidade registrada";
     }
 
+    if ($_SESSION["usuario"]["usu_tipo"] == 3) {
+
+      $query = "SELECT * FROM comunidades INNER JOIN usuarios ON comunidades.com_id_fundador = usuarios.usu_id WHERE com_aprovada = 0";
+      $buscar = $banco->getConexao()->prepare($query);
+
+      $buscar->execute();
+
+      $string = [];
+
+      $string["aprovar"] = "";
+      
+      if ($buscar->rowCount()) {
+
+        while ($linha = $buscar->fetch(PDO::FETCH_ASSOC)) {
+
+          $string["aprovar"] .= '
+            <section class="box">
+            <header>
+              <p>' . $linha["com_nome"] . '</p>
+            </header>
+            <main>
+              <span>
+                <a href="' . $linha["com_url"] . '" class="btn" target="__blank">Abrir</a>
+              </span>
+              <span>
+                <a href="./comunidades?action=aprovar&comunidade='. $linha["com_id"] .'" class="btn">Aprovar</a>
+              </span>
+            </main>
+          </section>
+          ';
+        }
+
+      } else {
+
+        $string["aprovar"] = "Não há comunidades que precisem ser aprovadas.";
+      }
+
+      $query = "SELECT * FROM comunidades INNER JOIN usuarios ON comunidades.com_id_fundador = usuarios.usu_id WHERE NOT com_aprovada = 0";
+      $buscar = $banco->getConexao()->prepare($query);
+
+      $buscar->execute();
+
+      $string["aprovada"] = "";
+      
+      if ($buscar->rowCount()) {
+
+        while ($linha = $buscar->fetch(PDO::FETCH_ASSOC)) {
+
+          $string["aprovada"] .= '
+            <section class="box">
+            <header>
+              <p>' . $linha["com_nome"] . '</p>
+            </header>
+            <main>
+              <span>
+                <a href="' . $linha["com_url"] . '" class="btn" target="__blank">Abrir</a>
+              </span>
+            </main>
+          </section>
+          ';
+        }
+
+      } else {
+
+        $string["aprovada"] = "Não há comunidades aprovadas";
+      }
+
+      return $string;
+
+    }
+
     $query = "SELECT * FROM comunidades WHERE com_id_fundador = :usuario";
     $buscar = $banco->getConexao()->prepare($query);
 
@@ -115,10 +186,16 @@ class ComunidadeModel
 
       while ($linha = $buscar->fetch(PDO::FETCH_ASSOC)) {
 
+        $aprovada = $linha["com_aprovada"] == 0 ? "A aprovar" : "Aprovada";
+
         $string .= '
         <section class="box">
         <header class="row gap-2">
+          <p>
           ' . $linha["com_nome"] . '
+          -
+          ' . $aprovada  . '
+          </p>
         </header>
         <main>
           <span>
@@ -202,5 +279,25 @@ class ComunidadeModel
     }
 
     return "Houve um erro durante o processo :(";
+  }
+
+  public function aprovar($id_comunidade)
+  {
+    require_once __DIR__ . "/../core/Banco.php";
+    $banco = new Banco();
+
+    $query = "UPDATE comunidades SET com_aprovada = 1 WHERE com_id = :comunidade";
+    $atualizar = $banco->getConexao()->prepare($query);
+
+    $atualizar->bindParam(":comunidade",$id_comunidade,PDO::PARAM_INT);
+
+    $atualizar->execute();
+
+    if ( $atualizar->rowCount() ) {
+      
+      return true;
+    }
+
+    return false;
   }
 }
