@@ -1,0 +1,38 @@
+<center>
+  <img src="./public/default/images/logo.png" width="200">
+</center>
+<h1 align="center">Connect Learn</h1>
+
+<p align="center">
+	<a href="#tecnologias">Tecnologias</a>&nbsp;&nbsp;&#124;&nbsp;&nbsp;
+	<a href="#executar-o-app">Executar o app</a>&nbsp;&nbsp;&#124;&nbsp;&nbsp;
+	<a href="#autores">Autores</a>&nbsp;&nbsp;
+</p>
+
+## Tecnologias
+
+Esse app foi desenvolvido com as seguintes tecnologias:
+
+- CSS
+- Docker
+- HTML
+- JavaScript
+- Mysql
+- PHP
+
+## Executar o app
+
+É necessário ter o [Docker](https://docs.docker.com/desktop/)  e [Docker Compose](https://docs.docker.com/compose/install/) instalado.
+
+Navegue até a pasta deste projeto e execute o seguinte código ´docker compose up´ ou ´docker-compose up´
+
+## Autores
+
+<ul>
+	<li>Beatriz Santana Pedros</li>
+	<li>Giovanne Monteiro de Melo</li>
+	<li>Guilherme Santos Fernandes</li>
+	<li>Lara Moraes Ximenes</li>
+	<li>Nicolly Cristine Ribeiro dos Santos</li>
+	<li>Tobias Soares Mascarenhas Rodrigues</li>
+</ul>
