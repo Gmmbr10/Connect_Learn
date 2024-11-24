@@ -1,5 +1,5 @@
 <p aling="center">
-  <img src="./public/default/images/logo.png" width="200">
+  <img src="./public/default/images/logo.png">
 </p>
 <h1 align="center">Connect Learn</h1>
 
