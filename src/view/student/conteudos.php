@@ -58,7 +58,9 @@ if ( isset($_GET["action"]) && $_GET["action"] == "visualizar" && isset($_GET["c
   }
 
   if ( $data["aul_url"] != null ) {
-    $html = str_replace("{video}",$data["aul_url"],$html);
+    $html = str_replace("{video}",'
+      <iframe class="col rounded" height="315px" src="'. $data["aul_url"] .'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    ',$html);
   } else {
     $html = str_replace("{video}","",$html);
   }
