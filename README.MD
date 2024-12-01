@@ -24,7 +24,11 @@ Esse app foi desenvolvido com as seguintes tecnologias:
 
 É necessário ter o [Docker](https://docs.docker.com/desktop/)  e [Docker Compose](https://docs.docker.com/compose/install/) instalado.
 
-Navegue até a pasta deste projeto e execute o seguinte código ´docker compose up´ ou ´docker-compose up´
+Navegue até a pasta deste projeto e execute o seguinte código `docker compose up` ou `docker-compose up`.
+
+Após este processo, copie e cole os scripts do arquivo `src/sql/connect_learn.sql` no container do banco de dados.
+
+Com isso, todo o setup deve estar configurado e pronto para usar na url [localhost:8888](http://localhost:8888).
 
 ## Autores
 
